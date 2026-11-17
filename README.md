@@ -1,0 +1,102 @@
+# ME · My Earth
+
+**Turn the places you care about into an interactive globe you can share.**
+
+ME turns a list, a ranking or a field notebook into a globe you can explore. Pick a country, open a marker, and see why that place is on the map — with the original source one tap away.
+
+**Where are the world’s top-ranked universities? Pick a country and explore.**
+
+<a href="https://6afc360699e893e455c29a00--me-interest-globe.netlify.app/?map=wuG7XmEFa1IUbCI5tIn9feYf&lang=en&welcome=0">
+  <img src="assets/qs-2027-cover.png" alt="ME globe cover for QS 2027 World University Top 100, showing university counts by country">
+</a>
+
+**[Explore the QS 2027 globe →](https://6afc360699e893e455c29a00--me-interest-globe.netlify.app/?map=wuG7XmEFa1IUbCI5tIn9feYf&lang=en&welcome=0)** · **Live preview**
+
+This is a user-built **QS 2027 top-100 map**, separate from the built-in QS 2027 top-50 topic on the site. It has **100 map records** covering **102 universities in 23 countries and regions**; two tied records each group two schools so the top-100 line stays within the 100-record limit. Pick a country to see its schools, then open a record to read the rank, score and QS source.
+
+## Explore more maps
+
+<a href="https://6afc360699e893e455c29a00--me-interest-globe.netlify.app/?map=0rbCDSfP_OyKwkvhMI6yza9D&lang=en&welcome=0">
+  <img src="assets/ski-resorts-thumb.png" alt="ME globe cover for ski resorts around the world, with resort counts in twelve countries">
+</a>
+
+**Ski resorts around the world** — twelve resort bases in twelve countries, from Chamonix to Thredbo and Coronet Peak. The points are placed at resort bases, not at the nearest big city.  
+**[Explore the ski map →](https://6afc360699e893e455c29a00--me-interest-globe.netlify.app/?map=0rbCDSfP_OyKwkvhMI6yza9D&lang=en&welcome=0)** · **Live preview**
+
+<a href="https://6afc360699e893e455c29a00--me-interest-globe.netlify.app/?map=nMaS9Wsvb0h6-CYdJ9iXUZ3E&lang=en&welcome=0">
+  <img src="assets/oil-regions-thumb.png" alt="ME globe cover for oil-producing regions around the world, with country counts">
+</a>
+
+**Oil-producing regions around the world** — eight geographic entries, including onshore fields, offshore basins, oil sands and a UK–Norway North Sea record linked at country level. It is a geographic guide, not a production ranking.  
+**[Explore the oil map →](https://6afc360699e893e455c29a00--me-interest-globe.netlify.app/?map=nMaS9Wsvb0h6-CYdJ9iXUZ3E&lang=en&welcome=0)** · **Live preview**
+
+## Make your first map
+
+Start with the five Japanese vintage guitar shops in [`examples/guitar-five.json`](examples/guitar-five.json). The file is public and small enough to inspect.
+
+**[Download the sample JSON](https://raw.githubusercontent.com/junyisunme/me-my-earth/main/examples/guitar-five.json)** · [Open the create page](https://6afc360699e893e455c29a00--me-interest-globe.netlify.app/?welcome=0&lang=en) and choose **Create map**.
+
+1. **Upload** the JSON.
+2. **Create** the map.
+3. **Get a cover and a share link** — the expected result is **3 shops in Tokyo** and **2 in Osaka**.
+
+<a href="https://6afc360699e893e455c29a00--me-interest-globe.netlify.app/?welcome=0&lang=en">
+  <img src="assets/guitar-five-thumb.png" alt="Generated cover for the five Japanese guitar shop sample, showing 3 shops in Tokyo and 2 in Osaka">
+</a>
+
+The sample uses the same public `POST /api/maps` contract as every other map. You can edit the JSON, replace the events and keep the structure.
+
+## For agents
+
+A text-based agent can submit the same public file without a browser:
+
+```bash
+curl -L -o guitar-five.json \
+  https://raw.githubusercontent.com/junyisunme/me-my-earth/main/examples/guitar-five.json
+
+curl -X POST "https://6afc360699e893e455c29a00--me-interest-globe.netlify.app/api/maps" \
+  -H "Content-Type: application/json" \
+  --data-binary @guitar-five.json
+```
+
+The response contains:
+
+```json
+{
+  "mapId": "…",
+  "shareUrl": "https://…/?map=…",
+  "eventCount": 5,
+  "countryCount": 1,
+  "cityCount": 2,
+  "previewImageUrl": "https://…/api/covers/….png",
+  "coverStatus": "ready"
+}
+```
+
+- **`shareUrl`** is the interactive map. It always works even if the cover fails.
+- **`previewImageUrl`** is a public 1200×630 PNG that can be shown directly in a chat reply.
+- If `coverStatus` is `"failed"`, show the map link instead of a broken image; the map has already been saved. Do not resubmit and create a duplicate.
+- A chat assistant that can only produce a file can hand the JSON to the user and use the [web upload page](https://6afc360699e893e455c29a00--me-interest-globe.netlify.app/?welcome=0&lang=en).
+
+**[Full API fields and sample →](docs/API.md)**
+
+## About
+
+**Created by Sun Junyi.** Product design, data representation and acceptance testing. Built with assistance from DeepSeek Harness for implementation and testing.
+
+ME is meant to make a small, personal collection of places feel like a globe rather than a spreadsheet: one marker, one reason, one source, one shareable link.
+
+Have a question, found a bad location or want to suggest the next map? **[Open a GitHub Issue →](https://github.com/junyisunme/me-my-earth/issues)**
+
+## What is inside this repository
+
+This is the public product page: the live map links, covers, the downloadable first-map example and the public API guide. The application source, data pipeline and internal test suite are maintained separately.
+
+- [QS 2027 map](https://6afc360699e893e455c29a00--me-interest-globe.netlify.app/?map=wuG7XmEFa1IUbCI5tIn9feYf&lang=en&welcome=0)
+- [Ski resorts map](https://6afc360699e893e455c29a00--me-interest-globe.netlify.app/?map=0rbCDSfP_OyKwkvhMI6yza9D&lang=en&welcome=0)
+- [Oil regions map](https://6afc360699e893e455c29a00--me-interest-globe.netlify.app/?map=nMaS9Wsvb0h6-CYdJ9iXUZ3E&lang=en&welcome=0)
+- [Public API guide](docs/API.md)
+- [Downloadable guitar-shop sample](examples/guitar-five.json)
+- [Issues and feedback](https://github.com/junyisunme/me-my-earth/issues)
+
+The live preview is a Deploy Preview, not the stable production site. The stable site currently hosts an earlier version.

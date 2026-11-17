@@ -1,0 +1,116 @@
+{
+  "schemaVersion": 1,
+  "title": "日本中古电吉他店 5 选（东京・大阪）",
+  "events": [
+    {
+      "id": "kurosawa-gclub-tokyo",
+      "title": "クロサワ楽器 G-CLUB TOKYO（御茶ノ水・神田小川町）",
+      "summary": "四层楼里同时摆着 1959/1962 ES-330、1971 Flying V 和 vintage Fender Strat，号称世界最大规模的 Gibson 取扱店，想一次看全 Burst、Goldtop 与半空心就来这里。",
+      "publishedDate": null,
+      "eventDate": null,
+      "source": {
+        "name": "クロサワ楽器店 G-CLUB TOKYO",
+        "url": "https://www.kurosawagakki.com/sh_g_club/index.html"
+      },
+      "locations": [
+        {
+          "countryId": "JPN",
+          "precision": "city",
+          "label": "东京 · 御茶ノ水（神田小川町3-8）",
+          "reason": "G-CLUB TOKYO 店址在东京千代田区神田小川町，属于御茶ノ水乐器街。",
+          "placeId": "jpn-tokyo",
+          "lat": 35.658327,
+          "lng": 139.718789
+        }
+      ]
+    },
+    {
+      "id": "ishibashi-finest-guitars",
+      "title": "イシバシ楽器 御茶ノ水本店 FINEST GUITARS",
+      "summary": "只做 Gibson / Fender Custom Shop 与元年琴的两层小店，常设 Vintage 专区并办过 Finest Vintage Guitar Show，适合把 1960s Strat 和复刻版摆在一起对比手感。",
+      "publishedDate": null,
+      "eventDate": null,
+      "source": {
+        "name": "イシバシ楽器 御茶ノ水本店 FINEST GUITARS",
+        "url": "https://www.ishibashi.co.jp/store/ochanomizu-finestguitars.html"
+      },
+      "locations": [
+        {
+          "countryId": "JPN",
+          "precision": "city",
+          "label": "东京 · 御茶ノ水（神田駿河台1-8-6 丸善ビル）",
+          "reason": "FINEST GUITARS 在东京千代田区神田駿河台，距 JR 御茶ノ水站步行约 3 分钟。",
+          "placeId": "jpn-tokyo",
+          "lat": 35.658327,
+          "lng": 139.718789
+        }
+      ]
+    },
+    {
+      "id": "shimokura-ochanomizu",
+      "title": "下倉楽器 御茶ノ水本店・二手店",
+      "summary": "创业八十多年的御茶ノ水老铺，本店加对面两家二手店常备上千支琴，1970s Fender Strat、Les Paul 按年份与状态分区，价格带比纯 vintage 店宽得多。",
+      "publishedDate": null,
+      "eventDate": null,
+      "source": {
+        "name": "下倉楽器（御茶ノ水）",
+        "url": "https://www.shimokura-gakki.com/"
+      },
+      "locations": [
+        {
+          "countryId": "JPN",
+          "precision": "city",
+          "label": "东京 · 御茶ノ水（JR御茶ノ水站步行1分钟）",
+          "reason": "下倉楽器本店与两家二手店都在东京千代田区御茶ノ水站周边。",
+          "placeId": "jpn-tokyo",
+          "lat": 35.658327,
+          "lng": 139.718789
+        }
+      ]
+    },
+    {
+      "id": "miki-americamura",
+      "title": "三木楽器 アメリカ村店（大阪・心斎橋）",
+      "summary": "整栋四层按品牌分层：2F 全是 Fender、3F 全是 Gibson、4F 才是 Vintage 与稀有高阶琴，可以先在同层把同年代 Strat 和 Les Paul 并排试完再上四楼。",
+      "publishedDate": null,
+      "eventDate": null,
+      "source": {
+        "name": "三木楽器 アメリカ村店",
+        "url": "https://maido.mikigakki.com/shop/amemura/"
+      },
+      "locations": [
+        {
+          "countryId": "JPN",
+          "precision": "city",
+          "label": "大阪 · アメリカ村（西心斎橋1-7-18）",
+          "reason": "三木楽器アメリカ村店在大阪市中央区西心斎橋，距心斎橋站步行约 5 分钟。",
+          "placeId": "jpn-osaka",
+          "lat": 34.66929,
+          "lng": 135.517727
+        }
+      ]
+    },
+    {
+      "id": "guitar-tribe-osaka",
+      "title": "GUITAR TRIBE（大阪・南堀江）",
+      "summary": "开在南堀江地下一层的美国 vintage 专门店，店内正挂着 1959/1960 Les Paul Junior、1961 Jazzmaster 这类元年琴，主打「能直接上台」的状态而不只是供收藏。",
+      "publishedDate": null,
+      "eventDate": null,
+      "source": {
+        "name": "GUITAR TRIBE",
+        "url": "https://guitar-tribe.com/"
+      },
+      "locations": [
+        {
+          "countryId": "JPN",
+          "precision": "city",
+          "label": "大阪 · 南堀江（西区南堀江3-11-21）",
+          "reason": "GUITAR TRIBE 位于大阪市西区南堀江，西長堀站 6 号出口步行约 3–5 分钟。",
+          "placeId": "jpn-osaka",
+          "lat": 34.66929,
+          "lng": 135.517727
+        }
+      ]
+    }
+  ]
+}
