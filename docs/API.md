@@ -39,6 +39,7 @@ A successful response is `201 Created`:
 
 - `shareUrl` is the interactive map.
 - `previewImageUrl` is a public 1200×630 PNG, readable without a cookie or login.
+- `countryCount` is the number of raw source countries/regions in the snapshot. The display hierarchy may group China into one entry: the QS 2027 source snapshot has 23 source countries/regions, 21 display countries and 12 China records.
 - If the map was saved but the cover could not be generated, the response is still `201` with a usable `shareUrl`, but `previewImageUrl` is `null`, `coverStatus` is `"failed"`, and `coverError` explains the cover state. Do not resubmit: the map already exists.
 
 ## Read a map
