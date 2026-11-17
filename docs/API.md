@@ -171,6 +171,10 @@ showLink(map.shareUrl, "Open interactive globe");
 
 Text-only clients should show `shareUrl`. If the cover failed, keep the link and skip the image.
 
+## Reusing the API examples
+
+You may copy and modify the original API call examples in this repository to connect to ME. This permission applies only to those original call examples.
+
 ## First screen
 
 A whole-map link with no `country`, `place`, `entry` or `loc` chooses its first view once:

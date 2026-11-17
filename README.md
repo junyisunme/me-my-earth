@@ -10,9 +10,11 @@ ME turns a list, a ranking or a field notebook into a globe you can explore. Pic
   <img src="assets/qs-2027-cover.png" alt="ME globe cover for QS 2027 World University Top 100, showing university counts by country">
 </a>
 
-**[Explore the QS 2027 globe →](https://6afc360699e893e455c29a00--me-interest-globe.netlify.app/?map=wuG7XmEFa1IUbCI5tIn9feYf&lang=en&welcome=0)** · **Live preview**
+**[Explore the QS 2027 globe →](https://6afc360699e893e455c29a00--me-interest-globe.netlify.app/?map=wuG7XmEFa1IUbCI5tIn9feYf&lang=en&welcome=0)** · **Live preview** · **[Create a map with your agent →](#for-agents)**
 
 This is a user-built **QS 2027 top-100 map**, separate from the built-in QS 2027 top-50 topic on the site. It has **100 map records** covering **102 universities in 23 countries and regions**; two tied records each group two schools so the top-100 line stays within the 100-record limit. Pick a country to see its schools, then open a record to read the rank, score and QS source.
+
+**Data source:** [QS World University Rankings 2027 — official ranking](https://www.topuniversities.com/world-university-rankings). This is a user-built visualization, not an official QS product.
 
 ## Explore more maps
 
@@ -48,6 +50,15 @@ The sample uses the same public `POST /api/maps` contract as every other map. Yo
 
 ## For agents
 
+Copy this prompt into an agent that can browse and call HTTP APIs:
+
+```text
+Use https://github.com/junyisunme/me-my-earth to build a map for me.
+Theme: five vintage guitar shops in Japan.
+Follow the repository's "For agents" instructions and create the map from the public sample JSON. The expected result is 5 shops, with 3 in Tokyo and 2 in Osaka.
+Return the cover image and the share link. If you cannot submit directly, give me a downloadable JSON file I can upload myself.
+```
+
 A text-based agent can submit the same public file without a browser:
 
 ```bash
@@ -79,6 +90,10 @@ The response contains:
 - A chat assistant that can only produce a file can hand the JSON to the user and use the [web upload page](https://6afc360699e893e455c29a00--me-interest-globe.netlify.app/?welcome=0&lang=en).
 
 **[Full API fields and sample →](docs/API.md)**
+
+### Reusing the API examples
+
+You may copy and modify the original API call examples in this repository to connect to ME. This permission applies only to those original call examples.
 
 ## About
 
