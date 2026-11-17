@@ -2,7 +2,7 @@
 
 Create and read shareable maps with the same JSON contract used by the ME web uploader. No account, cookie or API key is required on the live preview.
 
-> Preview base: `https://6afc360699e893e455c29a00--me-interest-globe.netlify.app`  
+> Preview base: `https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app`  
 > This is a Deploy Preview. The stable site may run an older version.
 
 ## Create a map
@@ -18,7 +18,7 @@ Download the working example first:
 curl -L -o guitar-five.json \
   https://raw.githubusercontent.com/junyisunme/me-my-earth/main/examples/guitar-five.json
 
-curl -X POST "https://6afc360699e893e455c29a00--me-interest-globe.netlify.app/api/maps" \
+curl -X POST "https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/api/maps" \
   -H "Content-Type: application/json" \
   --data-binary @guitar-five.json
 ```
@@ -32,7 +32,7 @@ A successful response is `201 Created`:
   "eventCount": 5,
   "countryCount": 1,
   "cityCount": 2,
-  "previewImageUrl": "https://…/api/covers/PL5oOcNN_ai4OFXx0zq9tpCT.png",
+  "previewImageUrl": "https://…/api/covers/v2/PL5oOcNN_ai4OFXx0zq9tpCT.png",
   "coverStatus": "ready"
 }
 ```
@@ -50,10 +50,10 @@ GET /api/maps/<mapId>
 Returns the stored snapshot, including `mapId` and `createdAt`.
 
 ```http
-GET /api/covers/<mapId>.png
+GET /api/covers/v2/<mapId>.png
 ```
 
-Returns the generated cover PNG. A missing cover returns `404` JSON.
+Returns the current display-country cover PNG. The legacy `GET /api/covers/<mapId>.png` remains available for old share links. A missing cover returns `404` JSON.
 
 ## Minimal JSON
 
