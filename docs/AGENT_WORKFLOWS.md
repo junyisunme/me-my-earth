@@ -28,16 +28,19 @@
 
 ## 2. 把地图放到桌面
 
-### 2.1 网页参数
+### 2.1 完整链接
+
+**桌面壁纸请直接使用下方完整链接。`display=wallpaper` 需要部署版本支持。**
 
 ```text
-/?map=<mapId>&lang=en&welcome=0&display=wallpaper
+https://6afd84eacabd8cf0c94443a1--me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0&display=wallpaper
 ```
 
 - 极简 dock：Board map / Satellite / Index。
 - 3 秒空闲暂停；指针/滚轮/键盘/切主题/resize 唤醒。
 - 拖动松手后 300 ms 内忽略误触，避免拖地球后误进国家。
-- 普通分享链接（不带 `display`）行为不变。
+- 普通分享链接（不带 `display`）行为不变；旧版 `6afc8b58…` 上的普通互动地图仍用于网页分享和演示。
+- **不要**在旧版 `6afc8b58…` 链接后手动拼接 `&display=wallpaper`；旧版没有本轮的壁纸布局。
 
 **本次确认支持壁纸模式的固定 Deploy Preview（试用地址，不是生产站）**：
 

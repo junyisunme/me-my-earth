@@ -36,7 +36,7 @@ This is a user-built **QS 2027 top-100 map**, separate from the built-in QS 2027
 
 ## Desktop wallpaper
 
-Add `&display=wallpaper` to a normal share link. The page hides the header, legend and large panels, keeps only a minimal **Board map / Satellite / Index** dock, pauses after 3 seconds of idle, wakes on pointer/wheel/keyboard/theme/resize, and ignores the accidental click produced by releasing a globe drag for 300 ms. Normal share links are unchanged.
+For desktop wallpaper, use the full link below. `display=wallpaper` requires a deployment that supports it. The page hides the header, legend and large panels, keeps only a minimal **Board map / Satellite / Index** dock, pauses after 3 seconds of idle, wakes on pointer/wheel/keyboard/theme/resize, and ignores the accidental click produced by releasing a globe drag for 300 ms. Normal share links are unchanged; the older `6afc8b58…` deployment is still the normal interactive map for web sharing and the presentation deck.
 
 **Fixed Deploy Preview (trial address, not the production site):**
 
