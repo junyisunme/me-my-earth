@@ -184,7 +184,8 @@ curl -X POST "https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/ap
 | 项目 | 结果 | 备注 |
 | --- | --- | --- |
 | 公开地图 QS / Ski / Oil | 已实测 | 公网 Deploy Preview |
-| 三张示例地图 + 吉他 JSON 下载/重传 | 已实测 | [`examples/`](../examples)；重传走公开 `POST /api/maps`，封面 1200×630 |
+| 四张示例地图 + 吉他 JSON 下载/重传 | 已实测 | [`examples/`](../examples)；重传走公开 `POST /api/maps`，封面 1200×630 |
+| `earth` skill — 固定提交 / 同名文件 / 草稿与发布 | 通过（API 侧） | 官方样例 SHA 一致；两个同名诱饵未变；草稿 0 次 POST，发布 1 次 |
 | `earth` skill — Claude Code 技能校验 | 通过 | `claude plugin validate .claude/skills`（2.1.327） |
 | `earth` skill — Claude Code 发现与 `/earth` 调用 | 通过（本地桩模型） | 2.1.327；真实模型调用待账号 |
 | `earth` skill — Cursor | **待客户端** | 本机未安装 Cursor；共用 `.claude/skills/` 路径见 Cursor 官方兼容列表 |

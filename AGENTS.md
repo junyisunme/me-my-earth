@@ -1,6 +1,6 @@
 # Agent 入口
 
-这是 **ME · My Earth 的公开产品页仓库**：包含可直接打开的地图、三张示例地图、桌面壁纸导入物、演示下载、公开 API 示例、QS 2027 封面与首屏动图，以及 Claude Code / Cursor 的 `earth` 建图技能；不包含应用源码、构建脚本或内部验收记录。
+这是 **ME · My Earth 的公开产品页仓库**：包含可直接打开的地图、四张示例地图、桌面壁纸导入物、演示下载、公开 API 示例、QS 2027 封面与首屏动图，以及 Claude Code / Cursor 的 `earth` 建图技能；不包含应用源码、构建脚本或内部验收记录。
 
 第一次接触，先读 [`docs/AGENT_WORKFLOWS.md`](docs/AGENT_WORKFLOWS.md)。按用户意图选一条：
 
