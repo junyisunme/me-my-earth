@@ -212,7 +212,7 @@ please include the use case and scope.
 
 Public components keep their existing terms: the original API call examples may be copied and
 modified under the permission in [Reusing the API examples](#reusing-the-api-examples), the
-art-pack example is CC0 as stated in its [`SOURCE.md`](examples/art-packs/qs-warm-paper/SOURCE.md),
+art-pack example’s icon is CC0 as stated in its [`SOURCE.md`](examples/art-packs/qs-warm-paper/SOURCE.md),
 and the DSH plugin is MIT in its [own repository](https://github.com/junyisunme/dsh-plugin-my-earth).
 Data sources and linked pages keep their own attribution and terms.
 
