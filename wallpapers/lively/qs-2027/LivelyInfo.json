@@ -1,0 +1,14 @@
+{
+  "AppVersion": "2.0.0.0",
+  "Title": "ME · My Earth — QS 2027",
+  "Thumbnail": "thumbnail.png",
+  "Preview": null,
+  "Desc": "Interactive QS 2027 university map (same public share URL, wallpaper layout).",
+  "Author": "ME · My Earth",
+  "License": "See project repository",
+  "Contact": "https://github.com/junyisunme/me-my-earth",
+  "Type": 1,
+  "FileName": "index.html",
+  "Arguments": null,
+  "IsAbsolutePath": false
+}

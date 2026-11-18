@@ -4,6 +4,8 @@
 
 ME turns a list, a ranking or a field notebook into a globe you can explore. Pick a country, open a marker, and see why that place is on the map — with the original source one tap away.
 
+**[Agent workflows](docs/AGENT_WORKFLOWS.md)** · **[Desktop wallpaper](#desktop-wallpaper)** · **[Presentation](#presentation)**
+
 **Where are the world’s top-ranked universities? Pick a country and explore.**
 
 <a href="https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0">
@@ -32,6 +34,34 @@ This is a user-built **QS 2027 top-100 map**, separate from the built-in QS 2027
 **Oil-producing regions around the world** — eight geographic entries, including onshore fields, offshore basins, oil sands and a UK–Norway North Sea record linked at country level. It is a geographic guide, not a production ranking.  
 **[Explore the oil map →](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=nMaS9Wsvb0h6-CYdJ9iXUZ3E&lang=en&welcome=0)** · **Live preview**
 
+## Desktop wallpaper
+
+Add `&display=wallpaper` to a normal share link. The page hides the header, legend and large panels, keeps only a minimal **Board map / Satellite / Index** dock, pauses after 3 seconds of idle, wakes on pointer/wheel/keyboard/theme/resize, and ignores the accidental click produced by releasing a globe drag for 300 ms. Normal share links are unchanged.
+
+**Fixed Deploy Preview (trial address, not the production site):**
+
+<https://6afd84eacabd8cf0c94443a1--me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0&display=wallpaper>
+
+- **Lively Wallpaper**: import [`wallpapers/lively/qs-2027/`](wallpapers/lively/qs-2027) — `index.html` keeps the full query string, `LivelyInfo.json` and a thumbnail are included. Do not paste the URL into Lively’s URL field; it drops the query string.
+- **Wallpaper Engine 2.8.42**: import [`wallpapers/wallpaper-engine/qs-2027/`](wallpapers/wallpaper-engine/qs-2027) — `index.html` redirects at the top level, `project.json` carries `type: web` and `general.mousehighlight: true`. Use **Open wallpaper** → `project.json`, or the editor with `index.html`; if the preview is blank, use **View → Restart preview**.
+- **Plash (Mac)**: use the same full URL as a web wallpaper and allow interaction. **Native Safari and Plash remain untested on a real Mac.**
+
+Windows acceptance (Wallpaper Engine 2.8.42, 2560×1440, desktop icons visible): theme switch, real-mouse drag/release, wake after idle, blank-area marquee and test-icon opening passed; **the mouse wheel did not zoom**; Singapore → NUS was opened through the desktop page’s DOM (Accessibility Invoke), not a physical click on the NUS dot. Full report: [`docs/WALLPAPER_ENGINE.md`](docs/WALLPAPER_ENGINE.md). Sanitized evidence: [`wallpaper-engine-globe.png`](assets/wallpaper-engine-globe.png), [`wallpaper-engine-nus.png`](assets/wallpaper-engine-nus.png), [`wallpaper-engine-editor.png`](assets/wallpaper-engine-editor.png).
+
+## Presentation
+
+- [PPTX — QS 2027 demo](downloads/me-my-earth-qs-2027-demo.pptx)
+- [PDF — same deck with URI links](downloads/me-my-earth-qs-2027-demo.pdf)
+- [1200×630 cover PNG](assets/qs-2027-cover-v2.png)
+
+The deck opens the **normal interactive map**, not the wallpaper layout:
+
+<https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0>
+
+**Canva:** upload the PNG as a full-page/cover image, then add the same interactive map link to the image; verify the link inside Canva.
+
+Platform status: the PPTX/PDF link structure is verified (relationships + PDF `/URI` annotations point to the same URL); PowerPoint desktop is not installed here and PowerPoint web was not tested; Canva has no account on this machine, so the PNG + URL are provided but not clicked in Canva. The demo steps are Singapore → NUS (rank 10) or NTU.
+
 ## Make your first map
 
 Start with the five Japanese vintage guitar shops in [`examples/guitar-five.json`](examples/guitar-five.json). The file is public and small enough to inspect.
@@ -47,6 +77,20 @@ Start with the five Japanese vintage guitar shops in [`examples/guitar-five.json
 </a>
 
 The sample uses the same public `POST /api/maps` contract as every other map. You can edit the JSON, replace the events and keep the structure.
+
+## Agent workflows
+
+Read **[docs/AGENT_WORKFLOWS.md](docs/AGENT_WORKFLOWS.md)** first. This repository is the public product page/showcase; it does **not** contain the application source or the local art-pack CLI. Pick one route:
+
+| Intent | Start here | Output |
+| --- | --- | --- |
+| Open/share an existing map | [§1](docs/AGENT_WORKFLOWS.md#1-打开或分享现有地图) | normal map URL |
+| Put a map on the desktop | [§2](docs/AGENT_WORKFLOWS.md#2-把地图放到桌面) | `display=wallpaper`, Lively / Wallpaper Engine imports |
+| Put a map in a deck | [§3](docs/AGENT_WORKFLOWS.md#3-把地图放进演示) | PPTX / PDF / PNG + normal map link |
+| Create a new map | [§4](docs/AGENT_WORKFLOWS.md#4-新建一张用户地图) | `?map=<mapId>` + cover |
+| Change icons/palette | [§5](docs/AGENT_WORKFLOWS.md#5-换图标--配色公开示例) | public `me-art-pack-1` example; local run requires the app source |
+
+The public art-pack example is [`examples/art-packs/qs-warm-paper/`](examples/art-packs/qs-warm-paper); the full local `import → preview → restore → export/re-import → publish` flow runs in the application repository, not this showcase. See [`docs/ART_PACKS.md`](docs/ART_PACKS.md).
 
 ## For agents
 
@@ -105,13 +149,19 @@ Have a question, found a bad location or want to suggest the next map? **[Open a
 
 ## What is inside this repository
 
-This is the public product page: the live map links, covers, the downloadable first-map example and the public API guide. The application source, data pipeline and internal test suite are maintained separately.
+This is the public product page: the live map links, covers, desktop wallpaper imports, presentation downloads, the downloadable first-map example and the public API guide. The application source, data pipeline and internal test suite are maintained separately.
 
 - [QS 2027 map](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0)
 - [Ski resorts map](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=0rbCDSfP_OyKwkvhMI6yza9D&lang=en&welcome=0)
 - [Oil regions map](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=nMaS9Wsvb0h6-CYdJ9iXUZ3E&lang=en&welcome=0)
 - [Public API guide](docs/API.md)
 - [Downloadable guitar-shop sample](examples/guitar-five.json)
+- [Agent workflows](docs/AGENT_WORKFLOWS.md)
+- [Wallpaper Engine trial report](docs/WALLPAPER_ENGINE.md)
+- [Lively wallpaper import](wallpapers/lively/qs-2027)
+- [Wallpaper Engine import](wallpapers/wallpaper-engine/qs-2027)
+- [Presentation downloads](downloads)
+- [Art-pack example](examples/art-packs/qs-warm-paper)
 - [Issues and feedback](https://github.com/junyisunme/me-my-earth/issues)
 
 The live preview is a Deploy Preview, not the stable production site. The stable site currently hosts an earlier version.
