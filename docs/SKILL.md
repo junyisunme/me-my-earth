@@ -1,8 +1,9 @@
 # The `earth` skill
 
-One skill file turns a place list into a ME · My Earth map and returns a public map link
-plus a 1200×630 cover. It uses the public API documented in [`API.md`](API.md) — no account,
-no API key, no private Core checkout, no build step.
+One skill file turns a place list into a ME · My Earth map. A **draft** is a local JSON file;
+a **published map** is a public link plus, when ready, a 1200×630 cover. It uses the public
+API documented in [`API.md`](API.md) — no account, no API key, no private Core checkout, no
+build step.
 
 The skill lives at [`.claude/skills/earth/SKILL.md`](../.claude/skills/earth/SKILL.md).
 
@@ -54,63 +55,162 @@ cp ~/.claude/skills/earth/SKILL.md ~/.cursor/skills/earth/SKILL.md
 
 ```text
 /earth 把这五家日本古董吉他店做成一张地图
-/earth make a map of these five guitar shops
+/earth 整理去年全家去过的三个地方，先给我草稿
+/earth 可以，生成公开分享链接
+/earth make a map of these places
 /earth turn this list into a globe: <paste places, addresses or a ranking>
 ```
 
 The skill also matches a plain request without the slash command, because its description
 names the trigger phrases.
 
+## Draft or publish — the rule
+
+| The user asks | What the skill does | What it must not do |
+| --- | --- | --- |
+| “整理”, “生成草稿”, “给我 JSON”, “先看看”, “make a draft” | Builds the JSON, validates it and saves a local file such as `family-2025.json` | `POST /api/maps` |
+| “生成公开分享链接”, “发布”, “上传”, “make a shareable link” | Builds and validates the same JSON, then posts it **once** and returns `shareUrl` (+ cover when ready) | Post again because the cover failed |
+
+Publishing makes the map public by link. Anything posted can be opened, and its source links
+followed, by anyone who has the URL. The skill must say that when it returns a link and must
+never publish a draft the user only asked to organize.
+
+Example:
+
+> User: 把去年全家去过的 12 个地方整理一下，先给我草稿。
+>
+> Skill: build `family-2025.json` with 12 events, no `POST`, and reply with the path, title
+> and a short preview.
+
+> User: 可以，生成公开分享链接。
+>
+> Skill: post the same file once, then return the map link and the cover if `coverStatus` is
+> `ready`.
+
+Current scope is places, dates, short text and source links. Photos and videos are not
+supported yet.
+
 ## What it does
 
-- **Five guitar shops** — reads [`examples/guitar-five.json`](../examples/guitar-five.json),
-  posts it with `POST /api/maps`, and returns the map link and cover. Expected: 5 events,
-  1 country, 2 places, 3 in Tokyo and 2 in Osaka.
+- **Five guitar shops** — downloads the official sample from a fixed commit into a fresh
+  temporary directory, checks that it is the expected 5-event JSON, posts it once, and
+  removes the temporary directory on exit. It never reads a local `examples/guitar-five.json`
+  or writes `guitar-five.json` into the working directory. Expected: 5 events, 1 country,
+  2 places, 3 in Tokyo and 2 in Osaka.
 - **Your own list** — turns places into the JSON contract in [`API.md`](API.md), using real
-  sources and verifiable locations, then posts it the same way.
+  sources and verifiable locations. Saves a local draft by default; posts only on an explicit
+  publish request.
 - **Cover failure** — if `coverStatus` is `"failed"`, it returns the working map link and does
   not resubmit.
 
 **Generated maps are public by link.** Anyone with the URL can open the map and follow its
-source links. Do not map private addresses or unpublished data.
+source links. Do not map private addresses or unpublished data without the user explicitly
+asking for a public map.
+
+## How the guitar run works
+
+The exact bash block is in the skill. In short:
+
+1. `SAMPLE_SHA=da8a6019dd6ee469e9192e88d10b1e4f67bc7fe8` fixes the sample to the verified
+   commit, so later changes to `main` cannot change what is downloaded.
+2. `mktemp -d` plus `trap 'rm -rf "$WORK"' EXIT` keeps the download out of the working
+   directory and deletes it afterwards.
+3. `curl --fail --silent --show-error --location --retry 3` turns any HTTP error into a
+   non-zero exit instead of submitting an error page.
+4. Python 3, Python or Node parses the file and checks `schemaVersion: 1` with 5 events
+   before the `POST`.
+5. `curl --fail-with-body ... --data-binary "@$WORK/guitar-five.json"` posts the file once to
+   `POST /api/maps`.
+
+### Windows PowerShell
+
+Use `curl.exe` explicitly — in Windows PowerShell, plain `curl` is an alias for
+`Invoke-WebRequest` and does not accept these flags. `-Encoding UTF8` matters on Windows
+PowerShell 5.1: without it, `Get-Content -Raw` decodes the Chinese sample with the local ANSI
+code page and `ConvertFrom-Json` fails.
+
+```powershell
+$ErrorActionPreference = "Stop"
+
+$sha  = "da8a6019dd6ee469e9192e88d10b1e4f67bc7fe8"
+$base = "https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app"
+$work = Join-Path ([System.IO.Path]::GetTempPath()) ("me-earth-" + [guid]::NewGuid().ToString("N"))
+New-Item -ItemType Directory -Path $work | Out-Null
+
+try {
+  $sample = Join-Path $work "guitar-five.json"
+  curl.exe --fail --silent --show-error --location --retry 3 `
+    --output $sample `
+    "https://raw.githubusercontent.com/junyisunme/me-my-earth/$sha/examples/guitar-five.json"
+
+  $doc = Get-Content -LiteralPath $sample -Raw -Encoding UTF8 | ConvertFrom-Json
+  if ($doc.schemaVersion -ne 1 -or $doc.events.Count -ne 5) {
+    throw "Unexpected guitar sample: schemaVersion=$($doc.schemaVersion), events=$($doc.events.Count)"
+  }
+
+  $response = curl.exe --fail-with-body --silent --show-error `
+    --request POST "$base/api/maps" `
+    --header "Content-Type: application/json" `
+    --data-binary "@$sample"
+  $response | ConvertFrom-Json | ConvertTo-Json -Depth 5
+}
+finally {
+  Remove-Item -LiteralPath $work -Recurse -Force
+}
+```
 
 ## Verification status
 
-Checked on 2026-11-18 on Windows 11 with the public Deploy Preview.
+Checked on 2026-11-18 on Windows 11, Windows PowerShell 5.1, Claude Code 2.1.327 and the
+public Deploy Preview.
 
 | Check | Result | Evidence |
 | --- | --- | --- |
-| Claude Code CLI reads the skill file | **Passed** | `claude plugin validate .claude/skills` → `Validation passed` (Claude Code 2.1.327) |
-| Claude Code discovers the project skill | **Passed** | session system-reminder listed `earth` with its description |
-| Claude Code expands `/earth` | **Passed** | `/earth` produced `<command-name>/earth</command-name>` and injected the full SKILL.md body |
-| Claude Code personal install | **Passed** | copied to `~/.claude/skills/earth/`; a run from a non-repo directory reported `Base directory for this skill: …\.claude\skills\earth` |
-| Claude Code with a real model | **Not tested** | no Anthropic credentials on this machine; the runs above used a local stub that answers the API and logs the request |
+| Claude Code reads the skill file | **Passed** | `claude plugin validate .claude/skills` → `Validation passed` |
+| Claude Code discovers the revised skill | **Passed** | the session listing showed `earth: Turn places into a ME · My Earth map…` |
+| Claude Code expands `/earth` | **Passed** | `/earth 整理去年全家去过的三个地方，先给我草稿` produced `<command-name>/earth</command-name>` and injected the revised body, including “Draft or publish?” |
+| Claude Code personal install | **Passed** | the revised file was copied to `~/.claude/skills/earth/`; the run reported that directory as the skill base |
+| Claude Code with a real model | **Not tested** | no Anthropic credentials on this machine; the session above used a local stub that logs the request |
 | Cursor install / discovery / invocation | **Not tested** | Cursor is not installed on this machine; the shared path is taken from Cursor's documented compatibility list |
-| The guitar workflow itself (download → POST → link + cover) | **Passed** | route 1 used the skill's download and POST commands; route 2 used the same `curl -X POST`; responses and covers checked below |
+| Decoy-file regression | **Passed** | unrelated temp dir with `guitar-five.json` and `examples/guitar-five.json`; the mock received the official sample's exact SHA-256 and both decoys were unchanged |
+| Draft / publish split | **Passed** (API side) | draft run sent 0 POSTs; publishing the same draft sent exactly 1 POST |
+| Cover failure | **Passed** | 1 POST, `coverStatus: "failed"`, `previewImageUrl: null`, working `shareUrl`, no resubmit |
+| PowerShell route | **Passed** | Windows PowerShell 5.1, `curl.exe`, UTF-8 read, one POST with the official sample hash (mock API) |
+| Live public API run | **Passed** | map [`UL0F3dsh60WHnMEx6m1aXRK4`](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=UL0F3dsh60WHnMEx6m1aXRK4&lang=en&welcome=0) · 5 events / 1 country / 2 places · cover `ready` |
 
-The two session checks used Claude Code's real binary with `ANTHROPIC_BASE_URL` pointed at a
-localhost stub, so no model was called and no map was created by the model. The skill file,
-its frontmatter, its discovery and its `/earth` expansion were all produced by the real
-client. Everything after the model turn — the `curl` download, the `POST /api/maps`, the
-returned link and the cover — is verified separately against the live public API.
+### Regression evidence
 
-### Workflow evidence
+The decoy test ran from `%TEMP%\unrelated-places-*`, not from this repository:
 
-Run on 2026-11-18 from the skill's own commands (`curl -L` download, `curl -X POST` to the
-public API):
+- Local `guitar-five.json` and `examples/guitar-five.json` both contained titles beginning
+  `DECOY …`. The mock API received the official sample instead, with SHA-256
+  `62a7833a7f60772eede30fbc606952017ab7f125ecd9d6bd147f64dac824e54b`, title
+  `日本中古电吉他店 5 选（东京・大阪）`, 5 events / 1 country / 2 places.
+- Both local files kept their original bytes and hashes.
+- The skill's temporary directory was empty after the run; no `guitar-five.json` appeared in
+  the working directory.
 
-| Route | Result |
-| --- | --- |
-| Route 1 — [`examples/guitar-five.json`](../examples/guitar-five.json) | map [`4eFRrU6yMyvw5H0KfjR6qniH`](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=4eFRrU6yMyvw5H0KfjR6qniH&lang=en&welcome=0) · cover `ready` · 5 events / 1 country / 2 places · map and cover both `200` |
-| Route 2 — a two-place own list built from verified QS records | map [`-3pGClpdZTEuXlSbP2E4keEK`](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=-3pGClpdZTEuXlSbP2E4keEK&lang=en&welcome=0) · cover `ready` · 2 events / 1 country / 1 place |
+The draft/publish and cover-failure checks used the same mock server and counted requests:
+draft = 0 new POSTs, publish = 1 POST, cover failure = 1 POST with the link preserved. These
+are API-path checks; choosing draft vs publish in a real conversation is the pending
+real-model item.
 
-The curated example on the site is a different map with the same guitar JSON:
-<https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=jfAgs96uMi02v65ipLSfCF4l&lang=en&welcome=0>
-(cover: <https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/api/covers/v2/jfAgs96uMi02v65ipLSfCF4l.png>).
-The live example pages are in [`examples/`](../examples).
+### Live example
+
+The live run used the exact skill block and a fixed-commit download. It created a separate
+map rather than reusing the curated example:
+
+- Map: <https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=UL0F3dsh60WHnMEx6m1aXRK4&lang=en&welcome=0>
+- Cover: <https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/api/covers/v2/UL0F3dsh60WHnMEx6m1aXRK4.png>
+
+The curated site example remains
+<https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=jfAgs96uMi02v65ipLSfCF4l&lang=en&welcome=0>.
 
 ## Pending
 
-- A real-model run in Claude Code (needs an authenticated Claude Code session).
-- A Cursor run: install, `/` menu discovery, `/earth` and the guitar prompt.
-- Re-check both clients when the public preview base URL changes.
+- A real-model run in Claude Code (needs an authenticated session): draft vs publish choice,
+  plus the guitar prompt end to end.
+- A Cursor run: install, `/` menu discovery, `/earth` and both prompts.
+- Re-check both clients and the fixed sample URL when the public preview base changes.
+- Photos and videos are not part of the current contract; only places, dates, text and
+  source links are supported.

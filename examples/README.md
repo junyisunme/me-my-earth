@@ -1,6 +1,6 @@
 # Example maps
 
-Three maps built with the public ME API. Every link opens the live globe — no account, no
+Four maps built with the public ME API. Every link opens the live globe — no account, no
 API key, no install. Use them to see what a finished map looks like, or start from the guitar
 JSON and make one of your own.
 
@@ -26,6 +26,16 @@ QS page. This is the flow shown in the README demo GIF.
 Twelve resort bases in twelve countries, from Chamonix to Thredbo and Coronet Peak — placed at
 the resort base, not at the nearest big city.
 **[Open the ski map →](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=0rbCDSfP_OyKwkvhMI6yza9D&lang=en&welcome=0)**
+
+## Oil-producing regions around the world
+
+<a href="https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=nMaS9Wsvb0h6-CYdJ9iXUZ3E&lang=en&welcome=0">
+  <img src="../assets/oil-regions-cover.png" alt="Oil-producing regions globe cover with country counts">
+</a>
+
+Eight geographic entries — onshore fields, offshore basins, oil sands and a UK–Norway North
+Sea record linked at country level. A geographic guide, not a production ranking.
+**[Open the oil map →](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=nMaS9Wsvb0h6-CYdJ9iXUZ3E&lang=en&welcome=0)**
 
 ## Five vintage guitar shops in Japan
 

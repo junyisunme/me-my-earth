@@ -117,7 +117,7 @@ https://6afd84eacabd8cf0c94443a1--me-interest-globe.netlify.app/?map=5_sK-fhDyYp
 
 ## 4. 新建一张用户地图
 
-三张现成示例（QS、滑雪、吉他店）在 [`examples/`](../examples) 一页打开。用公开示例 [`examples/guitar-five.json`](../examples/guitar-five.json) 建图：
+四张现成示例（QS、滑雪、石油、吉他店）在 [`examples/`](../examples) 一页打开。用公开示例 [`examples/guitar-five.json`](../examples/guitar-five.json) 建图：
 
 ```bash
 curl -L -o guitar-five.json \
@@ -143,6 +143,8 @@ curl -X POST "https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/ap
 ```
 
 预期首屏：东京 3 家、大阪 2 家。字段和错误码见 [`docs/API.md`](API.md)。
+
+**用户自己的清单**：只说「整理」「生成草稿」「给我 JSON」时，只写本地 JSON，不调用 `POST /api/maps`；明确说「生成公开分享链接」「发布」时才提交一次。提交后地图按链接公开可访问；封面失败也保留 `shareUrl`，不要重复提交。完整命令和 PowerShell 用法见 [`docs/SKILL.md`](SKILL.md)。
 
 现成吉他店地图：<https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=jfAgs96uMi02v65ipLSfCF4l&lang=en&welcome=0>（同一个 JSON，可下载、修改、重新上传，见示例页）。
 

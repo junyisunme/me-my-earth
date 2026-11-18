@@ -1,22 +1,22 @@
 ---
 name: earth
 description: >-
-  Build a shareable ME · My Earth globe map from a list of places. Use when the user asks
-  to turn places, a ranking or a list into a map ("把这五家日本古董吉他店做成一张地图",
-  "make a map of these places", "put my places on a globe"), or wants a downloadable map
-  JSON. Creates the map through the public ME map API and returns a clickable map link
-  plus a 1200x630 cover.
+  Turn places into a ME · My Earth map. Use when the user asks to organize places, a
+  ranking, a trip or a list into a map ("把这五家日本古董吉他店做成一张地图",
+  "整理去年去过的地方，先给我草稿", "make a map of these places"), wants a downloadable
+  map JSON, or explicitly asks for a public share link. Drafts stay local; only an explicit
+  publish request posts to the public ME API and returns a map link plus a 1200x630 cover.
 ---
 
 # earth — turn places into a shareable globe
 
-Build one ME · My Earth map from the places a user names. The result is a single public
-link; anyone with that link can open the globe — no account, no API key, no local app and
-no private Core checkout.
+Build a ME · My Earth map from the places a user names. A draft is a local JSON file. A
+published map is a public link; anyone with that link can open the globe — no account, no
+API key, no local app and no private Core checkout.
 
-**Maps are public by link.** Anyone who has the URL can open the map and follow its source
-links. Never put private addresses, personal contact details or unpublished data into a
-map.
+**Maps are public by link.** Anything sent to `POST /api/maps` can be opened by anyone who
+has the URL, including its source links. Never publish private addresses, personal contact
+details or unpublished data unless the user explicitly asks for a public map and knows that.
 
 ## Install (a human does this once)
 
@@ -41,10 +41,37 @@ curl -L -o ~/.claude/skills/earth/SKILL.md \
 - **Older Cursor** that only scans its own directory: copy the same file to
   `~/.cursor/skills/earth/SKILL.md`.
 
-Full install notes and the current verification status:
+Full install notes, execution details and the current verification status:
 <https://github.com/junyisunme/me-my-earth/blob/main/docs/SKILL.md>
 
-## What you return
+## Draft or publish?
+
+Default to a draft. These are two different requests:
+
+| The user asks | Do | Do not |
+| --- | --- | --- |
+| “整理”, “生成草稿”, “给我 JSON”, “先看看”, “make a draft” | Build the JSON and save it as a local file (for example `family-2025.json`), then show the path, title and a short preview | Call `POST /api/maps` |
+| “生成公开分享链接”, “发布”, “上传”, “make a shareable link” | Build and validate the JSON, then call `POST /api/maps` **once**; return `shareUrl` and, when ready, the cover | Call `POST` again because the cover failed |
+
+Publishing makes the map **public by link**. Say that with the link. Never publish a draft
+the user only asked to organize, and never turn a private list into a public map on your own.
+
+Example:
+
+> User: 把去年全家去过的 12 个地方整理一下，先给我草稿。
+>
+> You: build `family-2025.json` with 12 events, do **not** call the API, and reply with the
+> file path, the title and a short list of the places.
+
+> User: 可以，生成公开分享链接。
+>
+> You: post that same JSON once, then return the map link and the cover if `coverStatus` is
+> `ready`.
+
+Current scope is places, dates, short text and source links. Photos and videos are not
+supported yet; do not promise them.
+
+## What a publish returns
 
 After `POST /api/maps` the response contains:
 
@@ -64,25 +91,78 @@ say the map is live — **do not resubmit**, the map has already been saved.
 Use this route when the user says something like
 「把这五家日本古董吉他店做成一张地图」 or "make a map of the five guitar shops".
 
-The verified sample is
-[`examples/guitar-five.json`](https://github.com/junyisunme/me-my-earth/blob/main/examples/guitar-five.json)
-in this
-repository. Use the local copy if you have one; otherwise download it.
+The sample always comes from the fixed, verified commit below — never from a local
+`examples/guitar-five.json` and never from a `guitar-five.json` in the working directory.
+The download goes into a fresh temporary directory, is validated as JSON, and the directory
+is removed when the command exits.
 
 ```bash
-# use the repo copy when present
-if [ ! -f examples/guitar-five.json ]; then
-  curl -L -o guitar-five.json \
-    https://raw.githubusercontent.com/junyisunme/me-my-earth/main/examples/guitar-five.json
-  INPUT=guitar-five.json
+set -euo pipefail
+
+SAMPLE_SHA="da8a6019dd6ee469e9192e88d10b1e4f67bc7fe8"
+SAMPLE_URL="https://raw.githubusercontent.com/junyisunme/me-my-earth/${SAMPLE_SHA}/examples/guitar-five.json"
+API_BASE="https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app"
+
+WORK="$(mktemp -d)"
+trap 'rm -rf "$WORK"' EXIT
+
+# --fail makes any HTTP error (404, 500, ...) a non-zero exit.
+curl --fail --silent --show-error --location --retry 3 \
+  --output "$WORK/guitar-five.json" "$SAMPLE_URL"
+
+# Stop before sending if the download is not the expected JSON.
+if command -v python3 >/dev/null 2>&1; then
+  python3 -c 'import json,sys; d=json.load(open(sys.argv[1], encoding="utf-8")); assert d.get("schemaVersion")==1 and len(d.get("events",[]))==5' "$WORK/guitar-five.json"
+elif command -v python >/dev/null 2>&1; then
+  python -c 'import json,sys; d=json.load(open(sys.argv[1], encoding="utf-8")); assert d.get("schemaVersion")==1 and len(d.get("events",[]))==5' "$WORK/guitar-five.json"
+elif command -v node >/dev/null 2>&1; then
+  node -e 'const d=JSON.parse(require("fs").readFileSync(process.argv[1],"utf8")); if(d.schemaVersion!==1||!Array.isArray(d.events)||d.events.length!==5) process.exit(1)' "$WORK/guitar-five.json"
 else
-  INPUT=examples/guitar-five.json
+  echo "Need python3, python or node to validate the JSON" >&2
+  exit 1
 fi
 
-curl -sS -X POST \
-  "https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/api/maps" \
-  -H "Content-Type: application/json" \
-  --data-binary "@$INPUT"
+# Publish once. The response contains shareUrl and the cover fields.
+curl --fail-with-body --silent --show-error \
+  --request POST "$API_BASE/api/maps" \
+  --header "Content-Type: application/json" \
+  --data-binary "@$WORK/guitar-five.json"
+```
+
+### Windows PowerShell
+
+Use `curl.exe` explicitly — in PowerShell, plain `curl` is an alias for `Invoke-WebRequest`
+and does not accept these flags. `ConvertFrom-Json` throws on a truncated or HTML response,
+so it doubles as the JSON check.
+
+```powershell
+$ErrorActionPreference = "Stop"
+
+$sha  = "da8a6019dd6ee469e9192e88d10b1e4f67bc7fe8"
+$base = "https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app"
+$work = Join-Path ([System.IO.Path]::GetTempPath()) ("me-earth-" + [guid]::NewGuid().ToString("N"))
+New-Item -ItemType Directory -Path $work | Out-Null
+
+try {
+  $sample = Join-Path $work "guitar-five.json"
+  curl.exe --fail --silent --show-error --location --retry 3 `
+    --output $sample `
+    "https://raw.githubusercontent.com/junyisunme/me-my-earth/$sha/examples/guitar-five.json"
+
+  $doc = Get-Content -LiteralPath $sample -Raw -Encoding UTF8 | ConvertFrom-Json
+  if ($doc.schemaVersion -ne 1 -or $doc.events.Count -ne 5) {
+    throw "Unexpected guitar sample: schemaVersion=$($doc.schemaVersion), events=$($doc.events.Count)"
+  }
+
+  $response = curl.exe --fail-with-body --silent --show-error `
+    --request POST "$base/api/maps" `
+    --header "Content-Type: application/json" `
+    --data-binary "@$sample"
+  $response | ConvertFrom-Json | ConvertTo-Json -Depth 5
+}
+finally {
+  Remove-Item -LiteralPath $work -Recurse -Force
+}
 ```
 
 Expected: HTTP `201`, `eventCount: 5`, `countryCount: 1`, `cityCount: 2`, cover `ready` at
@@ -94,11 +174,15 @@ edit of the sample.
 
 ## Route 2 — the user's own place list
 
-Turn whatever the user gives you (names, addresses, a ranking, a CSV, notes) into the
-public JSON contract documented in
-[`docs/API.md`](https://github.com/junyisunme/me-my-earth/blob/main/docs/API.md), then POST it
-exactly as
-above. Minimum shape:
+Turn whatever the user gives you (names, addresses, a ranking, a CSV, notes) into the JSON
+contract documented in
+[`docs/API.md`](https://github.com/junyisunme/me-my-earth/blob/main/docs/API.md).
+
+**If the user asked for a draft, stop after writing and validating the local file.** If the
+user explicitly asked for a public share link, post that file once with the command from
+Route 1 (only the input path changes), then return the link.
+
+Minimum shape:
 
 ```json
 {
@@ -150,12 +234,12 @@ Rules that the API enforces:
   named fields and retry.
 
 If a place cannot be verified, ask the user instead of guessing. If the user only wants a
-file, produce the JSON, validate it against the rules above, and hand it over — the same
-file uploads at the web create page.
+file, produce the JSON, validate it against the rules above, and hand over the path — the
+same file uploads at the web create page.
 
 ## Reply format
 
-Keep the reply short and put the link first:
+For a published map, keep the reply short and put the link first:
 
 ```text
 Map:   https://…/?map=…
@@ -165,7 +249,16 @@ Contents: 5 events · 1 country · 2 places (3 Tokyo, 2 Osaka)
 The map is public: anyone with the link can open it.
 ```
 
-If the cover failed:
+For a draft, do not print a map link:
+
+```text
+Draft: ./family-2025.json
+Contents: 12 events · 9 countries · 12 places
+
+No public link was created. Say the word if you want me to publish it.
+```
+
+If the cover failed after a publish:
 
 ```text
 Map: https://…/?map=…

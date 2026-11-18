@@ -22,9 +22,34 @@ This is a user-built **QS 2027 top-100 map**, separate from the built-in QS 2027
 
 ## Example maps
 
-Three maps you can open right now — the QS 2027 globe above, twelve ski resorts, and five vintage guitar shops in Japan. Each one opens from a link; the guitar-shop example also comes with a JSON file you can download, edit and upload again.
+Four maps you can open right now — the QS 2027 globe above, twelve ski resorts, eight
+oil-producing regions, and five vintage guitar shops in Japan. Each cover opens the
+interactive map.
 
-**[See all three example maps →](examples/)**
+<table width="100%">
+  <tr>
+    <td width="50%" valign="top">
+      <a href="https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0"><img src="assets/qs-2027-cover-v2.png" width="100%" alt="QS 2027 globe cover with university counts by country"></a>
+      <sub><b>QS 2027</b> · World University Top 100</sub>
+    </td>
+    <td width="50%" valign="top">
+      <a href="https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=0rbCDSfP_OyKwkvhMI6yza9D&lang=en&welcome=0"><img src="assets/ski-resorts-thumb.png" width="100%" alt="Ski resorts globe cover with counts in twelve countries"></a>
+      <sub><b>Ski resorts</b> · twelve countries</sub>
+    </td>
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
+      <a href="https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=nMaS9Wsvb0h6-CYdJ9iXUZ3E&lang=en&welcome=0"><img src="assets/oil-regions-thumb.png" width="100%" alt="Oil-producing regions globe cover with country counts"></a>
+      <sub><b>Oil regions</b> · eight geographic entries</sub>
+    </td>
+    <td width="50%" valign="top">
+      <a href="https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=jfAgs96uMi02v65ipLSfCF4l&lang=en&welcome=0"><img src="assets/guitar-five-thumb.png" width="100%" alt="Cover for five Japanese vintage guitar shops, 3 in Tokyo and 2 in Osaka"></a>
+      <sub><b>Guitar shops</b> · 3 Tokyo, 2 Osaka</sub>
+    </td>
+  </tr>
+</table>
+
+**[Open the detailed example pages →](examples/)** · **[Download the guitar-shop JSON](https://raw.githubusercontent.com/junyisunme/me-my-earth/main/examples/guitar-five.json)**
 
 ## Desktop wallpaper
 
@@ -85,6 +110,8 @@ The public art-pack example is [`examples/art-packs/qs-warm-paper/`](examples/ar
 
 Install the [`earth` skill](docs/SKILL.md) in Claude Code or Cursor, then ask “把这五家日本古董吉他店做成一张地图” or *“make a map of these places”*. The skill reads the sample JSON, calls the public API, and returns the map link and cover.
 
+For a list of your own places, say “整理成草稿” to get a local JSON draft with **no upload**, or “生成公开分享链接” to publish it **once**. Published maps are public by link; the skill will not publish a draft on its own.
+
 Any agent that can browse and call HTTP APIs can do the same with this prompt:
 
 ```text
@@ -142,7 +169,7 @@ Have a question, found a bad location or want to suggest the next map? **[Open a
 
 This is the public product page: the live map links, covers, desktop wallpaper imports, presentation downloads, the example maps, the downloadable first-map example, the `earth` skill and the public API guide. The application source, data pipeline and internal test suite are maintained separately.
 
-- [Example maps](examples/) — QS 2027, ski resorts, five guitar shops
+- [Example maps](examples/) — QS 2027, ski resorts, oil regions, five guitar shops
 - [QS 2027 map](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0)
 - [Ski resorts map](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=0rbCDSfP_OyKwkvhMI6yza9D&lang=en&welcome=0)
 - [Oil regions map](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=nMaS9Wsvb0h6-CYdJ9iXUZ3E&lang=en&welcome=0)

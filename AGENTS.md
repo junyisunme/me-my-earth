@@ -8,7 +8,7 @@
 - 给 Claude Code / Cursor 装建图技能 → `.claude/skills/earth/SKILL.md`，安装与验收见 [`docs/SKILL.md`](docs/SKILL.md)
 - 放到桌面 → `wallpapers/` 下的 Lively / Wallpaper Engine 导入物，见指南 §2
 - 放进演示 → `downloads/` 的 PPTX / PDF 和 `assets/qs-2027-cover-v2.png`，见指南 §3
-- 新建地图 → `examples/guitar-five.json` + 公开 `POST /api/maps`，见指南 §4
+- 新建地图 → `examples/guitar-five.json` + 公开 `POST /api/maps`；用户自有清单默认只出本地草稿，明确要求公开链接时才提交，见指南 §4
 - 换图标/配色 → 公开的 `examples/art-packs/qs-warm-paper/` 清单格式说明；本地导入/预览需要应用源码，不在本仓库
 
 不要声称本仓库能 `pnpm dev` 或运行本地素材导入；这些能力在应用仓库中。公开预览是 **Deploy Preview**，不是生产站。
