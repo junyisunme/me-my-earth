@@ -4,35 +4,27 @@
 
 ME turns a list, a ranking or a field notebook into a globe you can explore. Pick a country, open a marker, and see why that place is on the map — with the original source one tap away.
 
-**[Agent workflows](docs/AGENT_WORKFLOWS.md)** · **[Desktop wallpaper](#desktop-wallpaper)** · **[Presentation](#presentation)**
-
-**Where are the world’s top-ranked universities? Pick a country and explore.**
+**[Example maps](examples/)** · **[Agent workflows](docs/AGENT_WORKFLOWS.md)** · **[Desktop wallpaper](#desktop-wallpaper)** · **[Presentation](#presentation)**
 
 <a href="https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0">
-  <img src="assets/qs-2027-cover-v2.png" alt="ME globe cover for QS 2027 World University Top 100, showing university counts by country">
+  <img src="assets/qs-2027-demo.gif" width="960" alt="9-second demo of the live QS 2027 map: the globe rotates, Singapore is selected, and the NUS record opens with its QS source">
 </a>
 
-**[Explore the QS 2027 globe →](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0)** · **Live preview** · **[Create a map with your agent →](#for-agents)**
+*9-second demo recorded from the live QS 2027 map on 2026-11-18: rotate the globe → pick Singapore → open NUS. The QS source stays visible in the detail panel.*
+
+**[Try the QS map](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0)** · **[Build a map from your own data](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?welcome=0&lang=en)**
+
+**Claude Code / Cursor:** [install the `earth` skill](docs/SKILL.md) · **DeepSeek Harness:** [install the `dsh-plugin-my-earth` plugin](https://github.com/junyisunme/dsh-plugin-my-earth#安装)
 
 This is a user-built **QS 2027 top-100 map**, separate from the built-in QS 2027 top-50 topic on the site. It has **100 map records** covering **102 universities**. The QS source snapshot names **23 countries and regions**; the globe groups China into one entry, so the display hierarchy has **21 countries and regions**. Two tied records each group two schools so the top-100 line stays within the 100-record limit. Pick a country to see its schools, then open a record to read the rank, score and QS source.
 
 **Data source:** [QS World University Rankings 2027 — official ranking](https://www.topuniversities.com/world-university-rankings). This is a user-built visualization, not an official QS product.
 
-## Explore more maps
+## Example maps
 
-<a href="https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=0rbCDSfP_OyKwkvhMI6yza9D&lang=en&welcome=0">
-  <img src="assets/ski-resorts-thumb.png" alt="ME globe cover for ski resorts around the world, with resort counts in twelve countries">
-</a>
+Three maps you can open right now — the QS 2027 globe above, twelve ski resorts, and five vintage guitar shops in Japan. Each one opens from a link; the guitar-shop example also comes with a JSON file you can download, edit and upload again.
 
-**Ski resorts around the world** — twelve resort bases in twelve countries, from Chamonix to Thredbo and Coronet Peak. The points are placed at resort bases, not at the nearest big city.  
-**[Explore the ski map →](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=0rbCDSfP_OyKwkvhMI6yza9D&lang=en&welcome=0)** · **Live preview**
-
-<a href="https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=nMaS9Wsvb0h6-CYdJ9iXUZ3E&lang=en&welcome=0">
-  <img src="assets/oil-regions-thumb.png" alt="ME globe cover for oil-producing regions around the world, with country counts">
-</a>
-
-**Oil-producing regions around the world** — eight geographic entries, including onshore fields, offshore basins, oil sands and a UK–Norway North Sea record linked at country level. It is a geographic guide, not a production ranking.  
-**[Explore the oil map →](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=nMaS9Wsvb0h6-CYdJ9iXUZ3E&lang=en&welcome=0)** · **Live preview**
+**[See all three example maps →](examples/)**
 
 ## Desktop wallpaper
 
@@ -64,7 +56,7 @@ Platform status: the PPTX/PDF link structure is verified (relationships + PDF `/
 
 ## Make your first map
 
-Start with the five Japanese vintage guitar shops in [`examples/guitar-five.json`](examples/guitar-five.json). The file is public and small enough to inspect.
+Start with the five Japanese vintage guitar shops in [`examples/guitar-five.json`](examples/guitar-five.json). The file is public and small enough to inspect. It is the same JSON behind the guitar map on the [example maps](examples/) page.
 
 **[Download the sample JSON](https://raw.githubusercontent.com/junyisunme/me-my-earth/main/examples/guitar-five.json)** · [Open the create page](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?welcome=0&lang=en) and choose **Create map**.
 
@@ -72,11 +64,7 @@ Start with the five Japanese vintage guitar shops in [`examples/guitar-five.json
 2. **Create** the map.
 3. **Get a cover and a share link** — the expected result is **3 shops in Tokyo** and **2 in Osaka**.
 
-<a href="https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?welcome=0&lang=en">
-  <img src="assets/guitar-five-thumb.png" alt="Generated cover for the five Japanese guitar shop sample, showing 3 shops in Tokyo and 2 in Osaka">
-</a>
-
-The sample uses the same public `POST /api/maps` contract as every other map. You can edit the JSON, replace the events and keep the structure.
+The sample uses the same public `POST /api/maps` contract as every other map. You can edit the JSON, replace the events and keep the structure. [Full example walkthrough →](examples/README.md#download-edit-and-re-upload-the-json)
 
 ## Agent workflows
 
@@ -84,6 +72,7 @@ Read **[docs/AGENT_WORKFLOWS.md](docs/AGENT_WORKFLOWS.md)** first. This reposito
 
 | Intent | Start here | Output |
 | --- | --- | --- |
+| Install a map skill for Claude Code / Cursor | [Install the `earth` skill](docs/SKILL.md) | `/earth` in both clients |
 | Open/share an existing map | [§1](docs/AGENT_WORKFLOWS.md#1-打开或分享现有地图) | normal map URL |
 | Put a map on the desktop | [§2](docs/AGENT_WORKFLOWS.md#2-把地图放到桌面) | `display=wallpaper`, Lively / Wallpaper Engine imports |
 | Put a map in a deck | [§3](docs/AGENT_WORKFLOWS.md#3-把地图放进演示) | PPTX / PDF / PNG + normal map link |
@@ -94,7 +83,9 @@ The public art-pack example is [`examples/art-packs/qs-warm-paper/`](examples/ar
 
 ## For agents
 
-Copy this prompt into an agent that can browse and call HTTP APIs:
+Install the [`earth` skill](docs/SKILL.md) in Claude Code or Cursor, then ask “把这五家日本古董吉他店做成一张地图” or *“make a map of these places”*. The skill reads the sample JSON, calls the public API, and returns the map link and cover.
+
+Any agent that can browse and call HTTP APIs can do the same with this prompt:
 
 ```text
 Use https://github.com/junyisunme/me-my-earth to build a map for me.
@@ -149,11 +140,13 @@ Have a question, found a bad location or want to suggest the next map? **[Open a
 
 ## What is inside this repository
 
-This is the public product page: the live map links, covers, desktop wallpaper imports, presentation downloads, the downloadable first-map example and the public API guide. The application source, data pipeline and internal test suite are maintained separately.
+This is the public product page: the live map links, covers, desktop wallpaper imports, presentation downloads, the example maps, the downloadable first-map example, the `earth` skill and the public API guide. The application source, data pipeline and internal test suite are maintained separately.
 
+- [Example maps](examples/) — QS 2027, ski resorts, five guitar shops
 - [QS 2027 map](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0)
 - [Ski resorts map](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=0rbCDSfP_OyKwkvhMI6yza9D&lang=en&welcome=0)
 - [Oil regions map](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=nMaS9Wsvb0h6-CYdJ9iXUZ3E&lang=en&welcome=0)
+- [`earth` skill for Claude Code and Cursor](docs/SKILL.md)
 - [Public API guide](docs/API.md)
 - [Downloadable guitar-shop sample](examples/guitar-five.json)
 - [Agent workflows](docs/AGENT_WORKFLOWS.md)

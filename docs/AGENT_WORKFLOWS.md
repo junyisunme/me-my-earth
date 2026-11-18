@@ -4,12 +4,27 @@
 
 | 用户意图 | 入口 | 产物 |
 | --- | --- | --- |
+| 给 Claude Code / Cursor 安装建图技能 | [§0](#0-安装-earth-skill) | `/earth` 命令 + 地图链接 |
 | 打开 / 分享一张现成地图 | [§1](#1-打开或分享现有地图) | 普通地图 URL |
 | 把地图放到 Windows / Mac 桌面 | [§2](#2-把地图放到桌面) | `display=wallpaper`、Lively / Wallpaper Engine 导入物 |
 | 把地图放进演示 | [§3](#3-把地图放进演示) | PPTX、PDF、PNG + 普通互动链接 |
 | 新建一张用户地图 | [§4](#4-新建一张用户地图) | `?map=<mapId>` 分享链接 + 封面 |
 | 换图标 / 配色 | [§5](#5-换图标--配色公开示例) | `me-art-pack-1` 示例清单；本地运行需应用源码 |
 | 查看验收状态 | [§6](#6-验收状态) | 通过项与待验项 |
+
+## 0. 安装 earth skill
+
+技能文件只有一份：[`../.claude/skills/earth/SKILL.md`](../.claude/skills/earth/SKILL.md)。Claude Code 和 Cursor 都读这个路径，所以不用维护两份。
+
+```bash
+mkdir -p ~/.claude/skills/earth
+curl -L -o ~/.claude/skills/earth/SKILL.md \
+  https://raw.githubusercontent.com/junyisunme/me-my-earth/main/.claude/skills/earth/SKILL.md
+```
+
+装完在 Claude Code 里 `/skills` 能看到 `earth`，用 `/earth` 调用；Cursor 在 Agent chat 里输入 `/` 选 `earth`。完整安装、验收记录和待测项见 [`docs/SKILL.md`](SKILL.md)。
+
+**边界**：技能只调用公开 `POST /api/maps`，不需要账号、API key 或私有 Core；生成的地图按链接公开可访问。
 
 ## 1. 打开或分享现有地图
 
@@ -102,7 +117,7 @@ https://6afd84eacabd8cf0c94443a1--me-interest-globe.netlify.app/?map=5_sK-fhDyYp
 
 ## 4. 新建一张用户地图
 
-用公开示例 [`examples/guitar-five.json`](../examples/guitar-five.json)：
+三张现成示例（QS、滑雪、吉他店）在 [`examples/`](../examples) 一页打开。用公开示例 [`examples/guitar-five.json`](../examples/guitar-five.json) 建图：
 
 ```bash
 curl -L -o guitar-five.json \
@@ -128,6 +143,8 @@ curl -X POST "https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/ap
 ```
 
 预期首屏：东京 3 家、大阪 2 家。字段和错误码见 [`docs/API.md`](API.md)。
+
+现成吉他店地图：<https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=jfAgs96uMi02v65ipLSfCF4l&lang=en&welcome=0>（同一个 JSON，可下载、修改、重新上传，见示例页）。
 
 **边界**：公开 API 是站点功能；本仓库不包含 `/api` 函数源码，也不负责数据持久化。
 
@@ -165,7 +182,10 @@ curl -X POST "https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/ap
 | 项目 | 结果 | 备注 |
 | --- | --- | --- |
 | 公开地图 QS / Ski / Oil | 已实测 | 公网 Deploy Preview |
-| 公开 API + guitar 示例 | 已实测 | 5 条 / 1 国 / 2 城市；封面 1200×630 |
+| 三张示例地图 + 吉他 JSON 下载/重传 | 已实测 | [`examples/`](../examples)；重传走公开 `POST /api/maps`，封面 1200×630 |
+| `earth` skill — Claude Code 技能校验 | 通过 | `claude plugin validate .claude/skills`（2.1.327） |
+| `earth` skill — Claude Code 发现与 `/earth` 调用 | 通过（本地桩模型） | 2.1.327；真实模型调用待账号 |
+| `earth` skill — Cursor | **待客户端** | 本机未安装 Cursor；共用 `.claude/skills/` 路径见 Cursor 官方兼容列表 |
 | Wallpaper Engine 桌面 | 通过项见 §2.3 | **滚轮未通过**；Singapore → NUS 走 DOM |
 | Lively | 已实测（旧轮次） | 桌面图标层与拖拽竞争；建议隐藏图标后做完整拖动 |
 | Mac Safari / Plash | **待真机** | 本机无 Mac |
