@@ -16,6 +16,44 @@ ME turns a list, a ranking or a field notebook into a globe you can explore. Pic
 
 **Claude Code / Cursor:** [install the `earth` skill](docs/SKILL.md) · **DeepSeek Harness:** [install the `dsh-plugin-my-earth` plugin](https://github.com/junyisunme/dsh-plugin-my-earth#安装)
 
+<details>
+<summary><b>Install <code>/earth</code> — Claude Code / Cursor</b></summary>
+
+Both clients read the same personal skill file. Install it once, then use `/earth` in either client.
+
+**Bash**
+
+```bash
+mkdir -p ~/.claude/skills/earth
+curl -L --fail --silent --show-error \
+  -o ~/.claude/skills/earth/SKILL.md \
+  https://raw.githubusercontent.com/junyisunme/me-my-earth/main/.claude/skills/earth/SKILL.md
+```
+
+**Windows PowerShell**
+
+```powershell
+$ErrorActionPreference = "Stop"
+$dir = Join-Path $env:USERPROFILE ".claude\skills\earth"
+New-Item -ItemType Directory -Force -Path $dir | Out-Null
+$file = Join-Path $dir "SKILL.md"
+curl.exe --fail --silent --show-error --location --output $file `
+  "https://raw.githubusercontent.com/junyisunme/me-my-earth/main/.claude/skills/earth/SKILL.md"
+if ($LASTEXITCODE -ne 0) { throw "Skill download failed (curl exit $LASTEXITCODE)" }
+```
+
+Try it:
+
+```text
+/earth 把这五家日本古董吉他店做成一张地图，并生成公开分享链接
+```
+
+Drafts stay local: ask for “整理成草稿” and the skill writes JSON without publishing. It calls the public API only when you explicitly ask for a share link.
+
+Full install, verification and pending items: [`docs/SKILL.md`](docs/SKILL.md)
+
+</details>
+
 This is a user-built **QS 2027 top-100 map**, separate from the built-in QS 2027 top-50 topic on the site. It has **100 map records** covering **102 universities**. The QS source snapshot names **23 countries and regions**; the globe groups China into one entry, so the display hierarchy has **21 countries and regions**. Two tied records each group two schools so the top-100 line stays within the 100-record limit. Pick a country to see its schools, then open a record to read the rank, score and QS source.
 
 **Data source:** [QS World University Rankings 2027 — official ranking](https://www.topuniversities.com/world-university-rankings). This is a user-built visualization, not an official QS product.
@@ -53,17 +91,23 @@ interactive map.
 
 ## Desktop wallpaper
 
-For desktop wallpaper, use the full link below. `display=wallpaper` requires a deployment that supports it. The page hides the header, legend and large panels, keeps only a minimal **Board map / Satellite / Index** dock, pauses after 3 seconds of idle, wakes on pointer/wheel/keyboard/theme/resize, and ignores the accidental click produced by releasing a globe drag for 300 ms. Normal share links are unchanged; the older `6afc8b58…` deployment is still the normal interactive map for web sharing and the presentation deck.
-
-**Fixed Deploy Preview (trial address, not the production site):**
+**Trial Deploy Preview only.** `display=wallpaper` requires a deployment that supports it.
+Use this full address as-is; a normal share link does not include the wallpaper layout.
 
 <https://6afd84eacabd8cf0c94443a1--me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0&display=wallpaper>
 
-- **Lively Wallpaper**: import [`wallpapers/lively/qs-2027/`](wallpapers/lively/qs-2027) — `index.html` keeps the full query string, `LivelyInfo.json` and a thumbnail are included. Do not paste the URL into Lively’s URL field; it drops the query string.
-- **Wallpaper Engine 2.8.42**: import [`wallpapers/wallpaper-engine/qs-2027/`](wallpapers/wallpaper-engine/qs-2027) — `index.html` redirects at the top level, `project.json` carries `type: web` and `general.mousehighlight: true`. Use **Open wallpaper** → `project.json`, or the editor with `index.html`; if the preview is blank, use **View → Restart preview**.
-- **Plash (Mac)**: use the same full URL as a web wallpaper and allow interaction. **Native Safari and Plash remain untested on a real Mac.**
+- **Lively Wallpaper** — import [`wallpapers/lively/qs-2027/`](wallpapers/lively/qs-2027) and choose `index.html`. Do not paste the URL into Lively’s URL field; it drops the query string.
+- **Wallpaper Engine 2.8.42** — import [`wallpapers/wallpaper-engine/qs-2027/`](wallpapers/wallpaper-engine/qs-2027). Use **Open wallpaper** → `project.json`, or the editor with `index.html`; if the preview is blank, use **View → Restart preview**.
 
-Windows acceptance (Wallpaper Engine 2.8.42, 2560×1440, desktop icons visible): theme switch, real-mouse drag/release, wake after idle, blank-area marquee and test-icon opening passed; **the mouse wheel did not zoom**; Singapore → NUS was opened through the desktop page’s DOM (Accessibility Invoke), not a physical click on the NUS dot. Full report: [`docs/WALLPAPER_ENGINE.md`](docs/WALLPAPER_ENGINE.md). Sanitized evidence: [`wallpaper-engine-globe.png`](assets/wallpaper-engine-globe.png), [`wallpaper-engine-nus.png`](assets/wallpaper-engine-nus.png), [`wallpaper-engine-editor.png`](assets/wallpaper-engine-editor.png).
+<details>
+<summary><b>Known limitations &amp; test report</b></summary>
+
+- The Windows test (Wallpaper Engine 2.8.42, 2560×1440) did not zoom with the mouse wheel.
+- Singapore → NUS was opened through the desktop page’s DOM, not a physical click on the NUS dot.
+- Native Safari and Plash remain untested on a real Mac.
+- Full report: [`docs/WALLPAPER_ENGINE.md`](docs/WALLPAPER_ENGINE.md). Sanitized screenshots: [`wallpaper-engine-globe.png`](assets/wallpaper-engine-globe.png), [`wallpaper-engine-nus.png`](assets/wallpaper-engine-nus.png), [`wallpaper-engine-editor.png`](assets/wallpaper-engine-editor.png).
+
+</details>
 
 ## Presentation
 
@@ -159,11 +203,24 @@ You may copy and modify the original API call examples in this repository to con
 
 ## About
 
-**Created by Sun Junyi.** Product design, data representation and acceptance testing. Built with assistance from DeepSeek Harness for implementation and testing.
+**My Earth is created by Sun Junyi.** The application Core is maintained privately; this
+repository is the public product page, API guide, examples and Agent integrations.
 
-ME is meant to make a small, personal collection of places feel like a globe rather than a spreadsheet: one marker, one reason, one source, one shareable link.
+The public map API is open for agents and tools to build on. Collaborators with a concrete
+plan are welcome to get in touch through the [issue tracker](https://github.com/junyisunme/me-my-earth/issues);
+please include the use case and scope.
 
-Have a question, found a bad location or want to suggest the next map? **[Open a GitHub Issue →](https://github.com/junyisunme/me-my-earth/issues)**
+Public components keep their existing terms: the original API call examples may be copied and
+modified under the permission in [Reusing the API examples](#reusing-the-api-examples), the
+art-pack example is CC0 as stated in its [`SOURCE.md`](examples/art-packs/qs-warm-paper/SOURCE.md),
+and the DSH plugin is MIT in its [own repository](https://github.com/junyisunme/dsh-plugin-my-earth).
+Data sources and linked pages keep their own attribution and terms.
+
+ME is meant to make a small, personal collection of places feel like a globe rather than a
+spreadsheet: one marker, one reason, one source, one shareable link.
+
+Have a question, found a bad location or want to suggest the next map?
+**[Open a GitHub Issue →](https://github.com/junyisunme/me-my-earth/issues)**
 
 ## What is inside this repository
 
