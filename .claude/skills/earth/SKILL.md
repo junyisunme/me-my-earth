@@ -132,8 +132,10 @@ curl --fail-with-body --silent --show-error \
 ### Windows PowerShell
 
 Use `curl.exe` explicitly — in PowerShell, plain `curl` is an alias for `Invoke-WebRequest`
-and does not accept these flags. `ConvertFrom-Json` throws on a truncated or HTML response,
-so it doubles as the JSON check.
+and does not accept these flags. Every `curl.exe` call is followed immediately by a
+`$LASTEXITCODE` check. A non-zero POST exit prints the API body and fails; a zero exit is only
+treated as success when the response contains a usable `shareUrl`. `-Encoding UTF8` is
+required on Windows PowerShell 5.1 for the Chinese sample.
 
 ```powershell
 $ErrorActionPreference = "Stop"
@@ -145,20 +147,47 @@ New-Item -ItemType Directory -Path $work | Out-Null
 
 try {
   $sample = Join-Path $work "guitar-five.json"
-  curl.exe --fail --silent --show-error --location --retry 3 `
-    --output $sample `
-    "https://raw.githubusercontent.com/junyisunme/me-my-earth/$sha/examples/guitar-five.json"
+  $url = "https://raw.githubusercontent.com/junyisunme/me-my-earth/$sha/examples/guitar-five.json"
+
+  $previous = $ErrorActionPreference
+  $ErrorActionPreference = "Continue"
+  $download = & curl.exe --fail --silent --show-error --location --retry 3 `
+    --output $sample $url 2>&1
+  $downloadExit = $LASTEXITCODE
+  $ErrorActionPreference = $previous
+  if ($downloadExit -ne 0) {
+    $detail = ($download | Out-String).Trim()
+    throw "Sample download failed (curl exit $downloadExit). $detail"
+  }
 
   $doc = Get-Content -LiteralPath $sample -Raw -Encoding UTF8 | ConvertFrom-Json
   if ($doc.schemaVersion -ne 1 -or $doc.events.Count -ne 5) {
     throw "Unexpected guitar sample: schemaVersion=$($doc.schemaVersion), events=$($doc.events.Count)"
   }
 
-  $response = curl.exe --fail-with-body --silent --show-error `
+  $previous = $ErrorActionPreference
+  $ErrorActionPreference = "Continue"
+  $response = & curl.exe --fail-with-body --silent --show-error `
     --request POST "$base/api/maps" `
     --header "Content-Type: application/json" `
-    --data-binary "@$sample"
-  $response | ConvertFrom-Json | ConvertTo-Json -Depth 5
+    --data-binary "@$sample" 2>&1
+  $postExit = $LASTEXITCODE
+  $ErrorActionPreference = $previous
+  if ($postExit -ne 0) {
+    $body = ($response | Out-String).Trim()
+    throw "Map creation failed (curl exit $postExit). API response: $body"
+  }
+
+  try {
+    $map = $response | ConvertFrom-Json
+  } catch {
+    throw "Map creation result is unconfirmed: the response was not valid JSON. The map may already be saved; do not POST again automatically."
+  }
+  if ([string]::IsNullOrWhiteSpace([string]$map.shareUrl)) {
+    throw "Map creation result is unconfirmed: no shareUrl. The map may already be saved; do not POST again automatically."
+  }
+
+  $map | ConvertTo-Json -Depth 5
 }
 finally {
   Remove-Item -LiteralPath $work -Recurse -Force

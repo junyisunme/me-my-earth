@@ -125,9 +125,10 @@ The exact bash block is in the skill. In short:
 ### Windows PowerShell
 
 Use `curl.exe` explicitly — in Windows PowerShell, plain `curl` is an alias for
-`Invoke-WebRequest` and does not accept these flags. `-Encoding UTF8` matters on Windows
-PowerShell 5.1: without it, `Get-Content -Raw` decodes the Chinese sample with the local ANSI
-code page and `ConvertFrom-Json` fails.
+`Invoke-WebRequest` and does not accept these flags. Every `curl.exe` call is followed
+immediately by a `$LASTEXITCODE` check. A non-zero POST exit prints the API body and fails; a
+zero exit is only treated as success when the response contains a usable `shareUrl`.
+`-Encoding UTF8` is required on Windows PowerShell 5.1 for the Chinese sample.
 
 ```powershell
 $ErrorActionPreference = "Stop"
@@ -139,20 +140,47 @@ New-Item -ItemType Directory -Path $work | Out-Null
 
 try {
   $sample = Join-Path $work "guitar-five.json"
-  curl.exe --fail --silent --show-error --location --retry 3 `
-    --output $sample `
-    "https://raw.githubusercontent.com/junyisunme/me-my-earth/$sha/examples/guitar-five.json"
+  $url = "https://raw.githubusercontent.com/junyisunme/me-my-earth/$sha/examples/guitar-five.json"
+
+  $previous = $ErrorActionPreference
+  $ErrorActionPreference = "Continue"
+  $download = & curl.exe --fail --silent --show-error --location --retry 3 `
+    --output $sample $url 2>&1
+  $downloadExit = $LASTEXITCODE
+  $ErrorActionPreference = $previous
+  if ($downloadExit -ne 0) {
+    $detail = ($download | Out-String).Trim()
+    throw "Sample download failed (curl exit $downloadExit). $detail"
+  }
 
   $doc = Get-Content -LiteralPath $sample -Raw -Encoding UTF8 | ConvertFrom-Json
   if ($doc.schemaVersion -ne 1 -or $doc.events.Count -ne 5) {
     throw "Unexpected guitar sample: schemaVersion=$($doc.schemaVersion), events=$($doc.events.Count)"
   }
 
-  $response = curl.exe --fail-with-body --silent --show-error `
+  $previous = $ErrorActionPreference
+  $ErrorActionPreference = "Continue"
+  $response = & curl.exe --fail-with-body --silent --show-error `
     --request POST "$base/api/maps" `
     --header "Content-Type: application/json" `
-    --data-binary "@$sample"
-  $response | ConvertFrom-Json | ConvertTo-Json -Depth 5
+    --data-binary "@$sample" 2>&1
+  $postExit = $LASTEXITCODE
+  $ErrorActionPreference = $previous
+  if ($postExit -ne 0) {
+    $body = ($response | Out-String).Trim()
+    throw "Map creation failed (curl exit $postExit). API response: $body"
+  }
+
+  try {
+    $map = $response | ConvertFrom-Json
+  } catch {
+    throw "Map creation result is unconfirmed: the response was not valid JSON. The map may already be saved; do not POST again automatically."
+  }
+  if ([string]::IsNullOrWhiteSpace([string]$map.shareUrl)) {
+    throw "Map creation result is unconfirmed: no shareUrl. The map may already be saved; do not POST again automatically."
+  }
+
+  $map | ConvertTo-Json -Depth 5
 }
 finally {
   Remove-Item -LiteralPath $work -Recurse -Force
@@ -161,8 +189,8 @@ finally {
 
 ## Verification status
 
-Checked on 2026-11-18 on Windows 11, Windows PowerShell 5.1, Claude Code 2.1.327 and the
-public Deploy Preview.
+Checked on 2026-11-18 and 2026-11-19 on Windows 11, Windows PowerShell 5.1, Claude Code
+2.1.327 and the public Deploy Preview.
 
 | Check | Result | Evidence |
 | --- | --- | --- |
@@ -175,7 +203,7 @@ public Deploy Preview.
 | Decoy-file regression | **Passed** | unrelated temp dir with `guitar-five.json` and `examples/guitar-five.json`; the mock received the official sample's exact SHA-256 and both decoys were unchanged |
 | Draft / publish split | **Passed** (API side) | draft run sent 0 POSTs; publishing the same draft sent exactly 1 POST |
 | Cover failure | **Passed** | 1 POST, `coverStatus: "failed"`, `previewImageUrl: null`, working `shareUrl`, no resubmit |
-| PowerShell route | **Passed** | Windows PowerShell 5.1, `curl.exe`, UTF-8 read, one POST with the official sample hash (mock API) |
+| PowerShell route | **Passed** | Windows PowerShell 5.1: download 404 → exit 1 / 0 POST; POST 400 & 429 → exit 1 with the API body; cover ready & failed → exit 0 with `shareUrl` |
 | Live public API run | **Passed** | map [`UL0F3dsh60WHnMEx6m1aXRK4`](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=UL0F3dsh60WHnMEx6m1aXRK4&lang=en&welcome=0) · 5 events / 1 country / 2 places · cover `ready` |
 
 ### Regression evidence
@@ -194,6 +222,23 @@ The draft/publish and cover-failure checks used the same mock server and counted
 draft = 0 new POSTs, publish = 1 POST, cover failure = 1 POST with the link preserved. These
 are API-path checks; choosing draft vs publish in a real conversation is the pending
 real-model item.
+
+### PowerShell regression (2026-11-19)
+
+The PowerShell block from this file ran as-is under Windows PowerShell 5.1. Only `$base` was
+pointed at a counting mock; the download-404 case also replaced `$url` with a missing URL.
+
+| Case | Exit | POSTs | Result |
+| --- | --- | --- | --- |
+| Download 404 | 1 | **0** | Stops with `Sample download failed (curl exit 22)`; never reaches the POST |
+| POST 400 JSON | 1 | 1 | `Map creation failed (curl exit 22)` plus the API body, including the `events[0].summary` field path and `summary is required` |
+| POST 429 JSON | 1 | 1 | Exit 1 with the API body and `Too many maps created` |
+| Cover ready | 0 | 1 | Prints the map JSON; usable `shareUrl` and cover |
+| Cover failed | 0 | 1 | Prints the map JSON; usable `shareUrl`, `previewImageUrl: null`, `coverStatus: "failed"` |
+| 2xx without `shareUrl` | 1 | 1 | `Map creation result is unconfirmed: no shareUrl` and no retry |
+
+The read uses `-Encoding UTF8`; every `curl.exe` call is followed immediately by a
+`$LASTEXITCODE` check, and the temporary directory is removed in `finally`.
 
 ### Live example
 
