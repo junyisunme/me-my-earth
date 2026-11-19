@@ -58,7 +58,7 @@ The current plugin version is verified against DSH `0.2.2-rc.3`; the tool appear
   <img src="assets/me-agent-japan-demo.gif" width="640" alt="11-second demo from the public me-agent 0.4.0 sample: open Japan, enlarge the Kyoto photo, return to the list, then play the Tokyo video on the globe">
 </a>
 
-*11-second demo from the public `me-agent 0.4.0` sample, recorded in the production viewer: open Japan → enlarge the Kyoto photo → back to the list → play the Tokyo video. Only the public sample package is visible; no private media or desktop files.*
+*11-second demo from the public `me-agent 0.4.0` sample, recorded with the public viewer: open Japan → enlarge the Kyoto photo → back to the list → play the Tokyo video. Only the public sample package is visible; no private media or desktop files.*
 
 Travel is one example; the same flow works for any set of places with photos and short video.
 
