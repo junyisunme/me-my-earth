@@ -203,9 +203,9 @@ curl -X POST "https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/ap
 用户给照片、短视频和一句建图请求时，使用独立的本地工具 `me-agent`。它把媒体按 `recordId` 绑定到地点记录，生成 `.mezip`，并从同一份地图导出 16:9 PNG；Windows 上可实际设置 Lively 壁纸。
 
 - 安装与完整说明：[`agent/README.md`](../agent/README.md)
-- 工具下载：[`me-agent-0.2.0.zip`](https://github.com/junyisunme/me-my-earth/releases/download/v0.2.0/me-agent-0.2.0.zip)
+- 工具下载：[`me-agent-0.3.0.zip`](https://github.com/junyisunme/me-my-earth/releases/download/v0.3.0/me-agent-0.3.0.zip)
 - 示例：[`agent/examples/japan-cities/`](../agent/examples/japan-cities)
-- 查看器：<https://6afe58ca24c94fd7200013ee--me-interest-globe.netlify.app/?welcome=0>
+- 查看器：<https://6afedfec73f816580102bd8f--me-interest-globe.netlify.app/?welcome=0>
 
 最短命令：
 

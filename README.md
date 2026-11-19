@@ -6,6 +6,41 @@ ME turns a list, a ranking or a field notebook into a globe you can explore. Pic
 
 **[Example maps](examples/)** · **[Agent workflows](docs/AGENT_WORKFLOWS.md)** · **[Desktop wallpaper](#desktop-wallpaper)** · **[Presentation](#presentation)**
 
+## For Agents
+
+If you are an agent, start with **[Agent workflows](docs/AGENT_WORKFLOWS.md)** and the **[installation and call guide](agent/README.md)**.
+
+- **Public text map** (places, rankings, trips): use the `earth` skill in Claude Code / Cursor, or the `dsh-plugin-my-earth` plugin in DeepSeek Harness. A public link is created only when the user explicitly asks to publish.
+- **Selected photos / video**: use the local `me-agent` tool. It builds a `.mezip`, a 16:9 PNG and a Lively project without uploading the media.
+- **No local execution**: say so and do not pretend a local `.mezip` or wallpaper was created.
+
+The machine-readable delivery contract, privacy rules and DSH commands are in [`agent/README.md`](agent/README.md) and [`docs/AGENT_WORKFLOWS.md`](docs/AGENT_WORKFLOWS.md).
+
+## DeepSeek Harness
+
+Install the public `dsh-plugin-my-earth` plugin, then ask in words — no hand-written API call:
+
+**GUI:** **Plugins → Add plugin** → paste:
+
+```text
+github:junyisunme/dsh-plugin-my-earth#v0.1.1
+```
+
+**CLI:**
+
+```sh
+dsh plugin --profile <profile> add github:junyisunme/dsh-plugin-my-earth#v0.1.1
+```
+
+The plugin exposes `create_map`. It posts to the public ME API only when the user explicitly asks for a public share link; drafts stay local. Example prompt:
+
+```text
+把京都、东京、大阪的五个地点做成一张地图，并生成公开分享链接
+```
+
+The current plugin version is verified against DSH `0.2.2-rc.3`; the tool appears in the next session after installation. Details: <https://github.com/junyisunme/dsh-plugin-my-earth#安装>.
+
+
 <a href="https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0">
   <img src="assets/qs-2027-demo.gif" width="960" alt="9-second demo of the live QS 2027 map: the globe rotates, Singapore is selected, and the NUS record opens with its QS source">
 </a>
@@ -21,14 +56,14 @@ ME turns a list, a ranking or a field notebook into a globe you can explore. Pic
 [`me-agent`](agent/README.md) turns selected photos, a short video and place records into a local `.mezip`, a 16:9 slide PNG, and a Lively wallpaper project. It runs on the user's machine; media is not uploaded, and a public map link is never created unless the user explicitly asks for one.
 
 ```bash
-# download me-agent-0.2.0.zip from Releases, then:
+# download me-agent-0.3.0.zip from Releases, then:
 node me-agent.mjs build --brief examples/japan-cities/japan-cities.json \
   --out-dir out --package-name japan-cities.mezip --slide
 ```
 
-Open the result in the [ME viewer](https://6afe58ca24c94fd7200013ee--me-interest-globe.netlify.app/?welcome=0) with **打开地图包**. Windows users can then run `node me-agent.mjs desktop --package out/japan-cities.mezip --apply` to set the same map as a Lively wallpaper.
+Open the result in the [ME viewer](https://6afedfec73f816580102bd8f--me-interest-globe.netlify.app/?welcome=0) with **打开地图包**. Windows users can then run `node me-agent.mjs desktop --package out/japan-cities.mezip --apply` to set the same map as a Lively wallpaper.
 
-**[Download the release](https://github.com/junyisunme/me-my-earth/releases/download/v0.2.0/me-agent-0.2.0.zip)** · **[Agent instructions](agent/README.md)** · **[Example](agent/examples/japan-cities/)**
+**[Download the release](https://github.com/junyisunme/me-my-earth/releases/download/v0.3.0/me-agent-0.3.0.zip)** · **[Agent instructions](agent/README.md)** · **[Example](agent/examples/japan-cities/)**
 
 
 <details>

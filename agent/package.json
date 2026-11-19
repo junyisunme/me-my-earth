@@ -1,6 +1,6 @@
 {
   "name": "@junyisunme/me-agent",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Create portable .mezip media maps, 16:9 slide PNGs, and Lively wallpaper projects for My Earth.",
   "type": "module",
   "bin": {

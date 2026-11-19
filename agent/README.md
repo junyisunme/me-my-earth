@@ -2,8 +2,8 @@
 
 `me-agent` 把用户选中的照片、短视频和地点记录打包成一个可在 ME 打开的 `.mezip`，并从同一份地图导出 16:9 幻灯片 PNG。它也可以生成并应用 Lively 桌面壁纸项目。
 
-**下载**：[`me-agent-0.2.0.zip`](https://github.com/junyisunme/me-my-earth/releases/download/v0.2.0/me-agent-0.2.0.zip)  
-**查看器**：<https://6afe58ca24c94fd7200013ee--me-interest-globe.netlify.app/?welcome=0>  
+**下载**：[`me-agent-0.3.0.zip`](https://github.com/junyisunme/me-my-earth/releases/download/v0.3.0/me-agent-0.3.0.zip)  
+**查看器**：<https://6afedfec73f816580102bd8f--me-interest-globe.netlify.app/?welcome=0>  
 **示例输入**：[`examples/japan-cities/`](examples/japan-cities/)
 
 这个工具只处理本机文件：照片、视频、地点和备注不会上传到 ME 或任何第三方。公开地图链接仍走 ME 现有的 `POST /api/maps`；本工具不会自动发布。
@@ -16,7 +16,7 @@
 
 ```powershell
 $ErrorActionPreference = "Stop"
-$version = "0.2.0"
+$version = "0.3.0"
 $zip = Join-Path $env:TEMP "me-agent-$version.zip"
 $dest = Join-Path $env:USERPROFILE "me-agent"
 Invoke-WebRequest -Uri "https://github.com/junyisunme/me-my-earth/releases/download/v$version/me-agent-$version.zip" -OutFile $zip
@@ -32,10 +32,10 @@ node "$dest\me-agent.mjs" help
 ### macOS / Linux
 
 ```bash
-curl -L --fail -o /tmp/me-agent-0.2.0.zip \
-  https://github.com/junyisunme/me-my-earth/releases/download/v0.2.0/me-agent-0.2.0.zip
+curl -L --fail -o /tmp/me-agent-0.3.0.zip \
+  https://github.com/junyisunme/me-my-earth/releases/download/v0.3.0/me-agent-0.3.0.zip
 rm -rf "$HOME/me-agent" && mkdir -p "$HOME/me-agent"
-unzip -q /tmp/me-agent-0.2.0.zip -d "$HOME/me-agent"
+unzip -q /tmp/me-agent-0.3.0.zip -d "$HOME/me-agent"
 cd "$HOME/me-agent"
 npm install
 node me-agent.mjs help
@@ -164,7 +164,7 @@ node me-agent.mjs desktop \
       "videoCount": 1,
       "skipped": [],
       "viewer": {
-        "openUrl": "https://6afe58ca24c94fd7200013ee--me-interest-globe.netlify.app/?welcome=0",
+        "openUrl": "https://6afedfec73f816580102bd8f--me-interest-globe.netlify.app/?welcome=0",
         "howToOpen": "Open the viewer, click 打开地图包, choose japan-cities.mezip"
       }
     },
@@ -213,8 +213,37 @@ node me-agent.mjs desktop \
 - 公开查看器只提供程序；打开私人 `.mezip` 时文件仍由浏览器本地读取，不上传。
 - 只有显式调用 ME 的公开建图 API 才会产生公开地图；本工具没有这个调用。
 
+### 包里保留什么
+
+| 数据 | 处理 |
+| --- | --- |
+| 原文件名 | 不写入媒体路径；照片/视频按 `recordId` + 序号命名（如 `kyoto-photo-p1-view.jpg`） |
+| 照片 EXIF/GPS | 导出副本重新编码，移除 EXIF/GPS；不把 EXIF 拍摄时间写进清单 |
+| 照片拍摄时间 | 只使用用户显式写的 `takenAt`；没有就是 `null` |
+| 视频位置/原名/拍摄时间 | 原位清零 `mvhd`/`tkhd` 时间字段和常见 `udta` 元数据（`©xyz`、`©nam`、`©day` 等），不改变字节长度和播放；返回 `stripped[]` |
+| 未知视频元数据 | 工具无法安全删除时，在 `warnings[]` / `videoProcessing.metadata` 明确说明仍随包保留 |
+| 视频编码字节 | 原样保留 H.264/AAC 数据；不做转码 |
+
+如果某个字段清理失败，`warnings[]` 会点名文件；Agent 必须转述，不能只说“已清理”。
+
+### 外发动作
+
+- **把文件交给云端 Agent**：文件会离开本机，进入该 Agent 服务商；这不等同于 ME 上传。没有本机执行能力时，Agent 应直接说明“无法在本机生成 `.mezip`/壁纸”，不要假装完成。
+- **把 PNG 插入在线应用**（Canva、在线 PPT）：PNG 会上传到该应用；这一步与 ME 无关。
+- **发布公开地图**：`POST /api/maps` 只发送地点文字和来源 URL，不发送照片/视频；地图按链接公开。
+- **本工具本身**：不向 ME 或第三方发送媒体；没有公开地图请求。
+
+### 公开 API 的保留、删除和日志
+
+截至当前部署（Netlify Functions + Netlify Blobs，store `me-maps`）：
+
+- 没有删除接口，也没有设置 TTL；地图快照 `me-maps/<mapId>` 和封面 `cover:v2:<mapId>` 会一直保留，直到维护者手动删除 Blob。
+- 没有账号或 Cookie；`GET /api/maps/<mapId>` 按 `mapId` 读取整份快照。
+- 应用日志只在建图/读图/封面失败时写 `mapId` 和错误；`maps-create` 成功时记录 `mapId`、封面尺寸/大小/模式和耗时，不记录访问者 IP 或 UA。平台自身的请求日志保留期以 Netlify 项目设置为准。
+- 统计口径：以 `POST /api/maps` 请求次数和 `201 Created` 成功次数为主；本机 `.mezip`、PNG 和壁纸不产生 ME 侧统计。
+
 ## 版本
 
-- 工具版本：`0.2.0`
-- 查看器：`https://6afe58ca24c94fd7200013ee--me-interest-globe.netlify.app/`
+- 工具版本：`0.3.0`
+- 查看器：`https://6afedfec73f816580102bd8f--me-interest-globe.netlify.app/`
 - 示例：`examples/japan-cities/`（合成照片 + MDN CC0 `flower.mp4`）
