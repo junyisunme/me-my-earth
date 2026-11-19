@@ -6,7 +6,7 @@ Explore ready-made 3D globes of places worth knowing, or ask an agent to turn yo
 | --- | --- | --- |
 | Open the live site and start with the **World stock exchanges** topic. | See a real photo map in the viewer, download it, and follow the exact click path. | Copy one request for your agent, or install the local tool and build a package. |
 
-<img src="assets/travel-seven-demo.gif" width="800" alt="From Suzhou to Chicago: open two travel photos on the ME globe">
+<img src="assets/travel-seven-demo-v2.gif" width="800" alt="From Suzhou to Chicago: open two travel photos on the ME globe">
 
 From Suzhou to Chicago — open two places on my globe and see the photos I took there.
 
