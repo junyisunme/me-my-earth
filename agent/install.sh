@@ -26,7 +26,10 @@ if [[ "$ACTUAL_SHA256" != "$EXPECTED_SHA256" ]]; then
 fi
 echo "SHA-256 verified."
 
-unzip -q "$TMP/me-agent-${VERSION}.zip" -d "$TMP"
+# Some Info-ZIP builds report a warning (and exit 1) for ZIPs produced on
+# Windows even when every entry extracted correctly. Check the real layout
+# below instead of treating that warning as a failed install.
+unzip -q "$TMP/me-agent-${VERSION}.zip" -d "$TMP" || true
 SOURCE="$TMP/me-agent-${VERSION}"
 if [[ ! -f "$SOURCE/me-agent.mjs" ]]; then
   echo "Unexpected ZIP layout: me-agent-${VERSION}/me-agent.mjs was not found." >&2
