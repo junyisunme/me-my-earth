@@ -1,7 +1,7 @@
 # ME Agent · install (Windows)
 
 $ErrorActionPreference = "Stop"
-$version = "0.3.0"
+$version = "0.4.0"
 $zip = Join-Path $env:TEMP "me-agent-$version.zip"
 $root = Join-Path $env:USERPROFILE "me-agent"
 $url = "https://github.com/junyisunme/me-my-earth/releases/download/v$version/me-agent-$version.zip"

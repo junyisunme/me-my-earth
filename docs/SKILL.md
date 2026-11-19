@@ -190,7 +190,7 @@ finally {
 ## Verification status
 
 Checked on 2026-11-18 and 2026-11-19 on Windows 11, Windows PowerShell 5.1, Claude Code
-2.1.327 and the public Deploy Preview.
+2.1.327 and the production site `https://me-interest-globe.netlify.app/`.
 
 | Check | Result | Evidence |
 | --- | --- | --- |
@@ -256,6 +256,6 @@ The curated site example remains
 - A real-model run in Claude Code (needs an authenticated session): draft vs publish choice,
   plus the guitar prompt end to end.
 - A Cursor run: install, `/` menu discovery, `/earth` and both prompts.
-- Re-check both clients and the fixed sample URL when the public preview base changes.
+- Re-check both clients and the fixed sample URL when the public base URL changes.
 - Photos and videos are not part of the current contract; only places, dates, text and
   source links are supported.

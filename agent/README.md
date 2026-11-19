@@ -2,7 +2,7 @@
 
 `me-agent` 把用户选中的照片、短视频和地点记录打包成一个可在 ME 打开的 `.mezip`，并从同一份地图导出 16:9 幻灯片 PNG。它也可以生成并应用 Lively 桌面壁纸项目。
 
-**下载**：[`me-agent-0.3.0.zip`](https://github.com/junyisunme/me-my-earth/releases/download/v0.3.0/me-agent-0.3.0.zip)  
+**下载**：[`me-agent-0.4.0.zip`](https://github.com/junyisunme/me-my-earth/releases/download/v0.4.0/me-agent-0.4.0.zip)
 **查看器**：<https://me-interest-globe.netlify.app/?welcome=0>  
 **示例输入**：[`examples/japan-cities/`](examples/japan-cities/)
 
@@ -16,7 +16,7 @@
 
 ```powershell
 $ErrorActionPreference = "Stop"
-$version = "0.3.0"
+$version = "0.4.0"
 $zip = Join-Path $env:TEMP "me-agent-$version.zip"
 $dest = Join-Path $env:USERPROFILE "me-agent"
 Invoke-WebRequest -Uri "https://github.com/junyisunme/me-my-earth/releases/download/v$version/me-agent-$version.zip" -OutFile $zip
@@ -32,10 +32,10 @@ node "$dest\me-agent.mjs" help
 ### macOS / Linux
 
 ```bash
-curl -L --fail -o /tmp/me-agent-0.3.0.zip \
-  https://github.com/junyisunme/me-my-earth/releases/download/v0.3.0/me-agent-0.3.0.zip
+curl -L --fail -o /tmp/me-agent-0.4.0.zip \
+  https://github.com/junyisunme/me-my-earth/releases/download/v0.4.0/me-agent-0.4.0.zip
 rm -rf "$HOME/me-agent" && mkdir -p "$HOME/me-agent"
-unzip -q /tmp/me-agent-0.3.0.zip -d "$HOME/me-agent"
+unzip -q /tmp/me-agent-0.4.0.zip -d "$HOME/me-agent"
 cd "$HOME/me-agent"
 npm install
 node me-agent.mjs help
@@ -244,6 +244,6 @@ node me-agent.mjs desktop \
 
 ## 版本
 
-- 工具版本：`0.3.0`
+- 工具版本：`0.4.0`；下载 SHA-256：`2a19fe4c062bf1d4886048c2acb1285127d3ce7d2767e931855d16b72db43eed`
 - 查看器：`https://me-interest-globe.netlify.app/`
 - 示例：`examples/japan-cities/`（合成照片 + MDN CC0 `flower.mp4`）

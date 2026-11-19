@@ -314,7 +314,7 @@ cover failed.
 
 - Request body 512 KB; 100 events; 30 locations per event; title 120; event title 300;
   summary 3000; reason 500.
-- The public base URL above is a Deploy Preview, not the production site. If it stops
+- The public base URL above is the production site. If it stops
   responding, report that plainly; do not silently switch to a private deployment.
 - This route uses only the public API. No account, token, private service or application
   source is required.

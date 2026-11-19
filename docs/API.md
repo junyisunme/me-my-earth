@@ -1,9 +1,9 @@
 # ME public map API
 
-Create and read shareable maps with the same JSON contract used by the ME web uploader. No account, cookie or API key is required on the live preview.
+Create and read shareable maps with the same JSON contract used by the ME web uploader. No account, cookie or API key is required on the live production site.
 
 > Production base: `https://me-interest-globe.netlify.app`  
-> This production deploy now includes the create-map and open-package entry points. Old Deploy Preview links remain valid snapshots but are not the canonical address.
+> The production site includes the create-map and open-package entry points. Old Deploy Preview links remain valid snapshots but are not the canonical address.
 
 ## Create a map
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # ME Agent · install (macOS / Linux)
 set -euo pipefail
-VERSION="0.3.0"
+VERSION="0.4.0"
 URL="https://github.com/junyisunme/me-my-earth/releases/download/v${VERSION}/me-agent-${VERSION}.zip"
 DEST="${HOME}/me-agent"
 TMP="$(mktemp -d)"

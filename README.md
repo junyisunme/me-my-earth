@@ -11,7 +11,7 @@ ME turns a list, a ranking or a field notebook into a globe you can explore. Pic
 If you are an agent, start with **[Agent workflows](docs/AGENT_WORKFLOWS.md)** and the **[installation and call guide](agent/README.md)**.
 
 - **Public text map** (places, rankings, trips): use the `earth` skill in Claude Code / Cursor, or the `dsh-plugin-my-earth` plugin in DeepSeek Harness. A public link is created only when the user explicitly asks to publish.
-- **Selected photos / video**: use the local `me-agent` tool. It builds a `.mezip`, a 16:9 PNG and a Lively project without uploading the media.
+- **Selected photos / video**: use the local `me-agent` tool. It builds a `.mezip` and a 16:9 PNG without uploading the media; apply a Lively wallpaper only when the user explicitly asks for the desktop.
 - **No local execution**: say so and do not pretend a local `.mezip` or wallpaper was created.
 
 The machine-readable delivery contract, privacy rules and DSH commands are in [`agent/README.md`](agent/README.md) and [`docs/AGENT_WORKFLOWS.md`](docs/AGENT_WORKFLOWS.md).
@@ -23,13 +23,13 @@ Install the public `dsh-plugin-my-earth` plugin, then ask in words — no hand-w
 **GUI:** **Plugins → Add plugin** → paste:
 
 ```text
-github:junyisunme/dsh-plugin-my-earth#v0.1.1
+github:junyisunme/dsh-plugin-my-earth#v0.1.2
 ```
 
 **CLI:**
 
 ```sh
-dsh plugin --profile <profile> add github:junyisunme/dsh-plugin-my-earth#v0.1.1
+dsh plugin --profile <profile> add github:junyisunme/dsh-plugin-my-earth#v0.1.2
 ```
 
 The plugin exposes `create_map`. It posts to the public ME API only when the user explicitly asks for a public share link; drafts stay local. Example prompt:
@@ -56,14 +56,14 @@ The current plugin version is verified against DSH `0.2.2-rc.3`; the tool appear
 [`me-agent`](agent/README.md) turns selected photos, a short video and place records into a local `.mezip`, a 16:9 slide PNG, and a Lively wallpaper project. It runs on the user's machine; media is not uploaded, and a public map link is never created unless the user explicitly asks for one.
 
 ```bash
-# download me-agent-0.3.0.zip from Releases, then:
+# download me-agent-0.4.0.zip from Releases, then:
 node me-agent.mjs build --brief examples/japan-cities/japan-cities.json \
   --out-dir out --package-name japan-cities.mezip --slide
 ```
 
 Open the result in the [ME viewer](https://me-interest-globe.netlify.app/?welcome=0) with **打开地图包**. Windows users can then run `node me-agent.mjs desktop --package out/japan-cities.mezip --apply` to set the same map as a Lively wallpaper.
 
-**[Download the release](https://github.com/junyisunme/me-my-earth/releases/download/v0.3.0/me-agent-0.3.0.zip)** · **[Agent instructions](agent/README.md)** · **[Example](agent/examples/japan-cities/)**
+**[Download the release](https://github.com/junyisunme/me-my-earth/releases/download/v0.4.0/me-agent-0.4.0.zip)** · **[Agent instructions](agent/README.md)** · **[Example](agent/examples/japan-cities/)**
 
 
 <details>
@@ -141,12 +141,11 @@ interactive map.
 
 ## Desktop wallpaper
 
-**Trial Deploy Preview only.** `display=wallpaper` requires a deployment that supports it.
-Use this full address as-is; a normal share link does not include the wallpaper layout.
+**Production.** The wallpaper layout is part of the production site. Use this full address as-is; a normal share link does not include it.
 
-<https://6afd84eacabd8cf0c94443a1--me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0&display=wallpaper>
+<https://me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0&display=wallpaper>
 
-- **Lively Wallpaper** — import [`wallpapers/lively/qs-2027/`](wallpapers/lively/qs-2027) and choose `index.html`. Do not paste the URL into Lively’s URL field; it drops the query string.
+- **Lively Wallpaper** — import [`wallpapers/lively/qs-2027/`](wallpapers/lively/qs-2027) and choose `index.html`. Do not paste the URL into Lively’s URL field; it drops the query string. If the host takes the wheel or left-drag for Windows, use the dock’s **+ / − / ← / →** buttons; desktop icons stay visible.
 - **Wallpaper Engine 2.8.42** — import [`wallpapers/wallpaper-engine/qs-2027/`](wallpapers/wallpaper-engine/qs-2027). Use **Open wallpaper** → `project.json`, or the editor with `index.html`; if the preview is blank, use **View → Restart preview**.
 
 <details>
@@ -291,4 +290,4 @@ This is the public product page: the live map links, covers, desktop wallpaper i
 - [Art-pack example](examples/art-packs/qs-warm-paper)
 - [Issues and feedback](https://github.com/junyisunme/me-my-earth/issues)
 
-The live preview is a Deploy Preview, not the stable production site. The stable site currently hosts an earlier version.
+The live site is the production site: <https://me-interest-globe.netlify.app/>.

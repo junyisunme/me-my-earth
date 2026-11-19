@@ -49,18 +49,18 @@ curl -L -o ~/.claude/skills/earth/SKILL.md \
 **桌面壁纸请直接使用下方完整链接。`display=wallpaper` 需要部署版本支持。**
 
 ```text
-https://6afd84eacabd8cf0c94443a1--me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0&display=wallpaper
+https://me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0&display=wallpaper
 ```
 
-- 极简 dock：Board map / Satellite / Index。
+- 极简 dock：Board map / Satellite / **+ / − / ← / →** / Index；Lively 把滚轮或左键拖拽留给 Windows 时仍可缩放和转向。
 - 3 秒空闲暂停；指针/滚轮/键盘/切主题/resize 唤醒。
 - 拖动松手后 300 ms 内忽略误触，避免拖地球后误进国家。
 - 普通分享链接（不带 `display`）行为不变；正式站现在同时支持创建地图、打开地图包和旧 QS 分享链接。
 - 旧版 `6afc8b58…` 快照仍可打开，但公开文档和演示统一使用正式站 `https://me-interest-globe.netlify.app/`。
 
-**本次确认支持壁纸模式的固定 Deploy Preview（试用地址，不是生产站）**：
+**正式站壁纸地址**：
 
-<https://6afd84eacabd8cf0c94443a1--me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0&display=wallpaper>
+<https://me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0&display=wallpaper>
 
 ### 2.2 Lively Wallpaper
 
@@ -69,7 +69,7 @@ https://6afd84eacabd8cf0c94443a1--me-interest-globe.netlify.app/?map=5_sK-fhDyYp
 - `index.html` 用 `location.replace` 保留完整查询串；`LivelyInfo.json` 指向同一入口；`thumbnail.png` 为封面。
 - 在 Lively 里添加网页壁纸，选择 `index.html`（或整个文件夹）。
 - **不要用 Lively 的“输入网址”**：它会丢查询串。
-- 桌面图标可见时，Lively 的图标层可能和壁纸拖拽竞争；完整拖动可先隐藏图标。
+- 桌面图标保持可见。Lively 可能把真实滚轮和左键拖球留给 Windows 桌面；此时用 dock 的 **+ / − / ← / →** 点击控件。
 
 ### 2.3 Wallpaper Engine
 
@@ -184,7 +184,7 @@ curl -X POST "https://me-interest-globe.netlify.app/api/maps" \
 
 | 项目 | 结果 | 备注 |
 | --- | --- | --- |
-| 公开地图 QS / Ski / Oil | 已实测 | 公网 Deploy Preview |
+| 公开地图 QS / Ski / Oil | 已实测 | 正式站 |
 | 四张示例地图 + 吉他 JSON 下载/重传 | 已实测 | [`examples/`](../examples)；重传走公开 `POST /api/maps`，封面 1200×630 |
 | `earth` skill — 固定提交 / 同名文件 / 草稿与发布 | 通过（API 侧） | 官方样例 SHA 一致；两个同名诱饵未变；草稿 0 次 POST，发布 1 次 |
 | `earth` skill — Claude Code 技能校验 | 通过 | `claude plugin validate .claude/skills`（2.1.327） |
@@ -196,14 +196,14 @@ curl -X POST "https://me-interest-globe.netlify.app/api/maps" \
 | PowerPoint 桌面版 / 网页版 | **待对应环境** | 链接结构已验证 |
 | Canva | **待账号** | PNG + URL 已提供 |
 
-公开预览是固定 Deploy Preview，不是生产站；生产站仍可能是旧版。链接或部署轮换后需要更新本页和壁纸包装。
+公开链接统一使用正式站；新版本部署后需要复核本页、壁纸包装和示例链接。
 
 ## 7. 照片/视频地图（me-agent）
 
-用户给照片、短视频和一句建图请求时，使用独立的本地工具 `me-agent`。它把媒体按 `recordId` 绑定到地点记录，生成 `.mezip`，并从同一份地图导出 16:9 PNG；Windows 上可实际设置 Lively 壁纸。
+用户给照片、短视频和一句建图请求时，使用独立的本地工具 `me-agent`。它把媒体按 `recordId` 绑定到地点记录，生成 `.mezip`，并从同一份地图导出 16:9 PNG；只有用户明确要求设成桌面时，才在 Windows 上应用 Lively 壁纸。
 
 - 安装与完整说明：[`agent/README.md`](../agent/README.md)
-- 工具下载：[`me-agent-0.3.0.zip`](https://github.com/junyisunme/me-my-earth/releases/download/v0.3.0/me-agent-0.3.0.zip)
+- 工具下载：[`me-agent-0.4.0.zip`](https://github.com/junyisunme/me-my-earth/releases/download/v0.4.0/me-agent-0.4.0.zip)
 - 示例：[`agent/examples/japan-cities/`](../agent/examples/japan-cities)
 - 查看器：<https://me-interest-globe.netlify.app/?welcome=0>
 
@@ -211,6 +211,7 @@ curl -X POST "https://me-interest-globe.netlify.app/api/maps" \
 
 ```bash
 node me-agent.mjs build --brief examples/japan-cities/japan-cities.json --out-dir out --package-name japan-cities.mezip --slide
+# 仅当用户明确要求设成桌面时：
 node me-agent.mjs desktop --package out/japan-cities.mezip --out-dir out --wallpaper-name "日本城市素材示例 · ME" --apply
 ```
 
