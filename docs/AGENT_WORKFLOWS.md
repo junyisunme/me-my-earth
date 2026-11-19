@@ -1,6 +1,6 @@
 # Agent 工作流（公开仓库）
 
-最后核对：2026-11-18。这个仓库是 **ME · My Earth 的公开产品页**，不含应用源码；下面只列本仓库能直接完成或明确不能完成的工作流。
+最后核对：2026-11-20（v0.5.0）。这个仓库是 **ME · My Earth 的公开产品页**，不含应用源码；下面只列本仓库能直接完成或明确不能完成的工作流。
 
 | 用户意图 | 入口 | 产物 |
 | --- | --- | --- |
@@ -31,16 +31,18 @@ curl -L -o ~/.claude/skills/earth/SKILL.md \
 
 ```text
 普通分享：/?map=<mapId>&lang=en&welcome=0
-按专题：  /?topic=qs-2027&welcome=0
+默认专题：/（世界股票交易所）
+按专题：  /?topic=world-exchanges 或 /?topic=ski-resorts
 ```
 
 示例：
 
-- QS 2027：<https://me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0>
-- Ski：<https://me-interest-globe.netlify.app/?map=0rbCDSfP_OyKwkvhMI6yza9D&lang=en&welcome=0>
-- Oil：<https://me-interest-globe.netlify.app/?map=nMaS9Wsvb0h6-CYdJ9iXUZ3E&lang=en&welcome=0>
+- 世界股票交易所：<https://me-interest-globe.netlify.app/?topic=world-exchanges&lang=en&welcome=0>
+- 世界滑雪场：<https://me-interest-globe.netlify.app/?topic=ski-resorts&lang=en&welcome=0>
+- 公开旅行照片样例：<https://github.com/junyisunme/me-my-earth/tree/main/examples/travel-seven>
+- 旧 QS 分享（保留）：<https://me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0>
 
-**边界**：这些是普通互动地图，页头/图例/Index 都在；不是壁纸布局。QS 公开案例是 100 条记录 / 102 所学校 / 21 个展示国家/地区，不是内置 QS 2027 的 50 所专题。
+**边界**：这些是普通互动地图，页头/图例/Index 都在；不是壁纸布局。旧 QS 公开案例是 100 条记录 / 102 所学校 / 21 个展示国家/地区，不是已撤下的内置 QS 专题。
 
 ## 2. 把地图放到桌面
 
@@ -203,7 +205,7 @@ curl -X POST "https://me-interest-globe.netlify.app/api/maps" \
 用户给照片、短视频和一句建图请求时，使用独立的本地工具 `me-agent`。它把媒体按 `recordId` 绑定到地点记录，生成 `.mezip`，并从同一份地图导出 16:9 PNG；只有用户明确要求设成桌面时，才在 Windows 上应用 Lively 壁纸。
 
 - 安装与完整说明：[`agent/README.md`](../agent/README.md)
-- 工具下载：[`me-agent-0.4.0.zip`](https://github.com/junyisunme/me-my-earth/releases/download/v0.4.0/me-agent-0.4.0.zip)
+- 工具下载：[`me-agent-0.5.0.zip`](https://github.com/junyisunme/me-my-earth/releases/download/v0.5.0/me-agent-0.5.0.zip)
 - 示例：[`agent/examples/japan-cities/`](../agent/examples/japan-cities)
 - 查看器：<https://me-interest-globe.netlify.app/?welcome=0>
 

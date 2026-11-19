@@ -2,8 +2,8 @@
 # Installs a versioned copy and never deletes an existing me-agent directory.
 
 $ErrorActionPreference = "Stop"
-$version = "0.4.0"
-$expectedSha256 = "2a19fe4c062bf1d4886048c2acb1285127d3ce7d2767e931855d16b72db43eed"
+$version = "0.5.0"
+$expectedSha256 = "d45d0988aa09f557c46cd65ab895cd0a77ca84d3a083268f68496678a6ba6ba1"
 $dest = Join-Path $env:USERPROFILE "me-agent-$version"
 $zip = Join-Path $env:TEMP "me-agent-$version.zip"
 $url = "https://github.com/junyisunme/me-my-earth/releases/download/v$version/me-agent-$version.zip"
@@ -31,7 +31,13 @@ try {
   New-Item -ItemType Directory -Force -Path $dest | Out-Null
   Copy-Item -Path (Join-Path $source "*") -Destination $dest -Recurse -Force
   Push-Location $dest
-  npm install
+  if (Get-Command npm -ErrorAction SilentlyContinue) {
+    npm install
+  } elseif (Get-Command pnpm -ErrorAction SilentlyContinue) {
+    pnpm install
+  } else {
+    throw "Neither npm nor pnpm was found. Install Node.js 24+ and try again."
+  }
   Pop-Location
 } finally {
   Remove-Item $tmp -Recurse -Force -ErrorAction SilentlyContinue

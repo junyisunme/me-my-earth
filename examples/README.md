@@ -1,8 +1,24 @@
 # Example maps
 
-Four maps built with the public ME API. Every link opens the live globe — no account, no
-API key, no install. Use them to see what a finished map looks like, or start from the guitar
-JSON and make one of your own.
+The v0.5.0 home page has two built-in topics: **World stock exchanges** (18) and **selected ski
+resorts** (12). The public **travel photo example** shows seven author-taken photos in a local
+`.mezip`. The older API map examples are kept below.
+
+## World stock exchanges
+
+18 exchanges or operating companies, official websites and coordinate-precision notes.
+**[Open the exchanges topic →](https://me-interest-globe.netlify.app/?topic=world-exchanges&lang=en&welcome=0)**
+
+## Ski resorts · selected
+
+12 resort/village bases in 12 countries and regions; points are bases, not summits.
+**[Open the ski topic →](https://me-interest-globe.netlify.app/?topic=ski-resorts&lang=en&welcome=0)**
+
+## My travel fragments · 7 photos
+
+Seven processed copies of the author’s own photos; Suzhou and Shanghai carry labelled demo
+dates, the other five records have no date. The two private videos are not included.
+**[Travel example →](travel-seven/)**
 
 ## QS 2027 — World University Top 100
 

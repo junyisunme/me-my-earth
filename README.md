@@ -2,243 +2,127 @@
 
 **Turn the places you care about into an interactive globe you can share.**
 
-ME turns a list, a ranking or a field notebook into a globe you can explore. Pick a country, open a marker, and see why that place is on the map — with the original source one tap away.
+ME is a bilingual 3D interest globe. The v0.5.0 home page opens on **World stock exchanges**; the second built-in topic is **selected ski resorts**. You can also upload your own CSV/JSON, open a local photo/video map package, or ask an agent to build a map.
 
-**[Example maps](examples/)** · **[Photos + video](#photos-video-and-slide-exports)** · **[Agent workflows](docs/AGENT_WORKFLOWS.md)** · **[Desktop wallpaper](#desktop-wallpaper)** · **[Presentation](#presentation)**
+**[Live site](https://me-interest-globe.netlify.app/)** ·
+**[World stock exchanges](https://me-interest-globe.netlify.app/?topic=world-exchanges&lang=en&welcome=0)** ·
+**[Ski resorts](https://me-interest-globe.netlify.app/?topic=ski-resorts&lang=en&welcome=0)** ·
+**[Travel photo example](examples/travel-seven/)** ·
+**[me-agent 0.5.0](#me-agent-050)** ·
+**[Agent workflows](docs/AGENT_WORKFLOWS.md)**
 
-## For Agents
-
-If you are an agent, start with **[Agent workflows](docs/AGENT_WORKFLOWS.md)** and the **[installation and call guide](agent/README.md)**.
-
-- **Public text map** (places, rankings, trips): use the `earth` skill in Claude Code / Cursor, or the `dsh-plugin-my-earth` plugin in DeepSeek Harness. A public link is created only when the user explicitly asks to publish.
-- **Selected photos / video**: use the local `me-agent` tool. It builds a `.mezip` and a 16:9 PNG without uploading the media; apply a Lively wallpaper only when the user explicitly asks for the desktop.
-- **No local execution**: say so and do not pretend a local `.mezip` or wallpaper was created.
-
-The machine-readable delivery contract, privacy rules and DSH commands are in [`agent/README.md`](agent/README.md) and [`docs/AGENT_WORKFLOWS.md`](docs/AGENT_WORKFLOWS.md).
-
-## DeepSeek Harness
-
-Install the public `dsh-plugin-my-earth` plugin, then ask in words — no hand-written API call:
-
-**GUI:** **Plugins → Add plugin** → paste:
-
-```text
-github:junyisunme/dsh-plugin-my-earth#v0.1.2
-```
-
-**CLI:**
-
-```sh
-dsh plugin --profile <profile> add github:junyisunme/dsh-plugin-my-earth#v0.1.2
-```
-
-The plugin exposes `create_map`. It posts to the public ME API only when the user explicitly asks for a public share link; drafts stay local. Example prompt:
-
-```text
-把京都、东京、大阪的五个地点做成一张地图，并生成公开分享链接
-```
-
-The current plugin version is verified against DSH `0.2.2-rc.3`; the tool appears in the next session after installation. Details: <https://github.com/junyisunme/dsh-plugin-my-earth#安装>.
-
-
-<a href="https://me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0">
-  <img src="assets/qs-2027-demo.gif" width="960" alt="9-second demo of the live QS 2027 map: the globe rotates, Singapore is selected, and the NUS record opens with its QS source">
+<a href="https://me-interest-globe.netlify.app/?lang=en&welcome=0">
+  <img src="assets/me-v050-home.png" width="960" alt="ME v0.5.0 home page with the World stock exchanges topic selected">
 </a>
 
-*9-second demo recorded from the live QS 2027 map on 2026-11-18: rotate the globe → pick Singapore → open NUS. The QS source stays visible in the detail panel.*
+*The v0.5.0 home page: 18 exchanges, official sites and coordinate-precision notes. The second topic is 12 ski resorts. Country browsing stays on the same 3D globe.*
 
-**[Try the QS map](https://me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0)** · **[Build a map from your own data](https://me-interest-globe.netlify.app/?welcome=0&lang=en)**
+## Start here
 
-**Claude Code / Cursor:** [install the `earth` skill](docs/SKILL.md) · **DeepSeek Harness:** [install the `dsh-plugin-my-earth` plugin](https://github.com/junyisunme/dsh-plugin-my-earth#安装) · **Photos + video:** [install `me-agent`](agent/README.md)
+| Topic | What is inside | Open |
+| --- | --- | --- |
+| **World stock exchanges** | 18 exchanges or operating companies, 17 city places, official websites, coordinate-precision notes. The default topic. | [Open](https://me-interest-globe.netlify.app/?topic=world-exchanges&lang=en&welcome=0) |
+| **Ski resorts · selected** | 12 resort/village bases in 12 countries and regions; points are bases, not summits. | [Open](https://me-interest-globe.netlify.app/?topic=ski-resorts&lang=en&welcome=0) |
+| **My travel fragments** | 7 author-taken photos: Milwaukee, Chicago, Suzhou, Shanghai, Jinan, Tianjin and Dali. Suzhou and Shanghai carry clearly marked demo dates. | [Travel example](examples/travel-seven/) |
 
-## Photos, video and slide exports
+Country browsing stays on the globe. Click a country, open a record, then click the sea or blank space outside the globe to return to the world view. A drag keeps the current country and rotates the sphere.
 
-<a id="photo-video-demo"></a>
-<a href="https://github.com/junyisunme/me-my-earth/releases/tag/v0.4.0">
-  <img src="assets/me-agent-japan-demo.gif" width="640" alt="11-second demo from the public me-agent 0.4.0 sample: open Japan, enlarge the Kyoto photo, return to the list, then play the Tokyo video on the globe">
-</a>
+## A public travel example, with real photos
 
-*11-second demo from the public `me-agent 0.4.0` sample, recorded with the public viewer: open Japan → enlarge the Kyoto photo → back to the list → play the Tokyo video. Only the public sample package is visible; no private media or desktop files.*
+I am publishing seven processed copies of my own travel photos as a ME example. They are included in the downloadable `.mezip` and on this page. **The two short videos from the same private trip are not published.**
 
-Travel is one example; the same flow works for any set of places with photos and short video.
-
-**Ask your agent:**
-
-> “Turn my Kyoto photos and Tokyo short video into a travel map I can open by place, and give me a 16:9 image for a slide deck.”
-
-**What happens**
-
-1. You choose the photos/videos and the place each belongs to.
-2. The agent runs [`me-agent`](agent/README.md) on your machine and returns an interactive `.mezip` plus a 1600×900 PNG for slides.
-3. The recipient opens the [ME viewer](https://me-interest-globe.netlify.app/?welcome=0), chooses **Open map package**, then the `.mezip`.
-4. ME reads the photos and video locally. A public share link is a separate request; a desktop wallpaper is applied only when you explicitly ask for the desktop.
-
-**Download and setup**
-
-[Download me-agent 0.4.0](https://github.com/junyisunme/me-my-earth/releases/download/v0.4.0/me-agent-0.4.0.zip) · [Agent installation guide](agent/README.md) · [Sample input](agent/examples/japan-cities/)
-
-The guide's versioned installer checks the ZIP SHA-256 and preserves existing outputs; use it rather than the archived installer copy inside the 0.4.0 ZIP.
-
-Already using an agent? Send it the [Agent installation guide](agent/README.md): it contains the brief format, install commands, output contract and privacy rules.
-
-Minimal command after setup (the guide has the full example):
-
-```bash
-node me-agent.mjs build --brief <brief.json> --out-dir out --slide
-```
-
-Open the result in the [ME viewer](https://me-interest-globe.netlify.app/?welcome=0) with **打开地图包**. Only when the user explicitly asks for the desktop, Windows users can run `node me-agent.mjs desktop --package out/japan-cities.mezip --apply` to set the same map as a Lively wallpaper.
-
-
-<details>
-<summary><b>Install <code>/earth</code> — Claude Code / Cursor</b></summary>
-
-Both clients read the same personal skill file. Install it once, then use `/earth` in either client.
-
-**Bash**
-
-```bash
-mkdir -p ~/.claude/skills/earth
-curl -L --fail --silent --show-error \
-  -o ~/.claude/skills/earth/SKILL.md \
-  https://raw.githubusercontent.com/junyisunme/me-my-earth/main/.claude/skills/earth/SKILL.md
-```
-
-**Windows PowerShell**
-
-```powershell
-$ErrorActionPreference = "Stop"
-$dir = Join-Path $env:USERPROFILE ".claude\skills\earth"
-New-Item -ItemType Directory -Force -Path $dir | Out-Null
-$file = Join-Path $dir "SKILL.md"
-curl.exe --fail --silent --show-error --location --output $file `
-  "https://raw.githubusercontent.com/junyisunme/me-my-earth/main/.claude/skills/earth/SKILL.md"
-if ($LASTEXITCODE -ne 0) { throw "Skill download failed (curl exit $LASTEXITCODE)" }
-```
-
-Try it:
-
-```text
-/earth 把这五家日本古董吉他店做成一张地图，并生成公开分享链接
-```
-
-Drafts stay local: ask for “整理成草稿” and the skill writes JSON without publishing. It calls the public API only when you explicitly ask for a share link.
-
-Full install, verification and pending items: [`docs/SKILL.md`](docs/SKILL.md)
-
-</details>
-
-This is a user-built **QS 2027 top-100 map**, separate from the built-in QS 2027 top-50 topic on the site. It has **100 map records** covering **102 universities**. The QS source snapshot names **23 countries and regions**; the globe groups China into one entry, so the display hierarchy has **21 countries and regions**. Two tied records each group two schools so the top-100 line stays within the 100-record limit. Pick a country to see its schools, then open a record to read the rank, score and QS source.
-
-**Data source:** [QS World University Rankings 2027 — official ranking](https://www.topuniversities.com/world-university-rankings). This is a user-built visualization, not an official QS product.
-
-## Example maps
-
-Four maps you can open right now — the QS 2027 globe above, twelve ski resorts, eight
-oil-producing regions, and five vintage guitar shops in Japan. Each cover opens the
-interactive map.
-
-<table width="100%">
+<table>
   <tr>
-    <td width="50%" valign="top">
-      <a href="https://me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0"><img src="assets/qs-2027-cover-v2.png" width="100%" alt="QS 2027 globe cover with university counts by country"></a>
-      <sub><b>QS 2027</b> · World University Top 100</sub>
-    </td>
-    <td width="50%" valign="top">
-      <a href="https://me-interest-globe.netlify.app/?map=0rbCDSfP_OyKwkvhMI6yza9D&lang=en&welcome=0"><img src="assets/ski-resorts-thumb.png" width="100%" alt="Ski resorts globe cover with counts in twelve countries"></a>
-      <sub><b>Ski resorts</b> · twelve countries</sub>
-    </td>
+    <td width="33%"><img src="assets/travel-seven/milwaukee-lake.jpg" alt="Winter Lake Michigan shore in Milwaukee"><br><sub>US · Milwaukee</sub></td>
+    <td width="33%"><img src="assets/travel-seven/chicago-lakefront.jpg" alt="Chicago lakefront trail and skyline"><br><sub>US · Chicago</sub></td>
+    <td width="33%"><img src="assets/travel-seven/suzhou-lake.jpg" alt="Jinji Lake and the Gate of the Orient from the Kempinski entrance"><br><sub>China · Suzhou</sub></td>
   </tr>
   <tr>
-    <td width="50%" valign="top">
-      <a href="https://me-interest-globe.netlify.app/?map=nMaS9Wsvb0h6-CYdJ9iXUZ3E&lang=en&welcome=0"><img src="assets/oil-regions-thumb.png" width="100%" alt="Oil-producing regions globe cover with country counts"></a>
-      <sub><b>Oil regions</b> · eight geographic entries</sub>
-    </td>
-    <td width="50%" valign="top">
-      <a href="https://me-interest-globe.netlify.app/?map=jfAgs96uMi02v65ipLSfCF4l&lang=en&welcome=0"><img src="assets/guitar-five-thumb.png" width="100%" alt="Cover for five Japanese vintage guitar shops, 3 in Tokyo and 2 in Osaka"></a>
-      <sub><b>Guitar shops</b> · 3 Tokyo, 2 Osaka</sub>
-    </td>
+    <td width="33%"><img src="assets/travel-seven/shanghai-view.jpg" alt="View from Shanghai World Financial Center toward Jin Mao Tower"><br><sub>China · Shanghai</sub></td>
+    <td width="33%"><img src="assets/travel-seven/jinan-museum.jpg" alt="Shandong Art Museum exterior"><br><sub>China · Jinan</sub></td>
+    <td width="33%"><img src="assets/travel-seven/tianjin-eye.jpg" alt="Tianjin Eye at night over the Hai River"><br><sub>China · Tianjin</sub></td>
+  </tr>
+  <tr>
+    <td width="33%"><img src="assets/travel-seven/dali-mountain.jpg" alt="Cangshan under clouds, Dali"><br><sub>China · Dali</sub></td>
+    <td width="33%"></td>
+    <td width="33%"></td>
   </tr>
 </table>
 
-**[Open the detailed example pages →](examples/)** · **[Download the guitar-shop JSON](https://raw.githubusercontent.com/junyisunme/me-my-earth/main/examples/guitar-five.json)**
+<img src="assets/travel-seven/suzhou-demo.png" width="960" alt="ME viewer showing the Suzhou record, its photo and the labelled demo date">
 
-## Desktop wallpaper
+*The public package opened in the production viewer: Suzhou photo, confirmed copy and the labelled demo date. The package also includes Shanghai with its own demo date; the other five records have no date.*
 
-**Production.** The wallpaper layout is part of the production site. Use this full address as-is; a normal share link does not include it.
+**Download the example:** [`travel-seven.mezip`](examples/travel-seven/travel-seven.mezip) (7 records / 7 photos / no video)  
+**Open it:** download the `.mezip`, open the [ME viewer](https://me-interest-globe.netlify.app/?welcome=0), choose **Open map package**, then select the file. Photos stay local when the package is opened.
 
-<https://me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0&display=wallpaper>
+- Suzhou is marked at **Suzhou city level**: “Standing at the entrance of Kempinski Hotel Jinji Lake, looking toward the Gate of the Orient.”
+- Shanghai is marked at **Shanghai World Financial Center**: “From the Yue Xuan Chinese restaurant in the Shanghai World Financial Center, looking toward Jin Mao Tower.”
+- Only Suzhou (`2024-05-01`) and Shanghai (`2024-05-02`) carry dates, and both are labelled **demo date**. The other five records have no date. The package intro says: “Photos are the author’s own; the dates shown are for feature demonstration only.”
 
-- **Lively Wallpaper** — import [`wallpapers/lively/qs-2027/`](wallpapers/lively/qs-2027) and choose `index.html`. Do not paste the URL into Lively’s URL field; it drops the query string. If the host takes the wheel or left-drag for Windows, use the dock’s **+ / − / ← / →** buttons; desktop icons stay visible.
-- **Wallpaper Engine 2.8.42** — import [`wallpapers/wallpaper-engine/qs-2027/`](wallpapers/wallpaper-engine/qs-2027). Use **Open wallpaper** → `project.json`, or the editor with `index.html`; if the preview is blank, use **View → Restart preview**.
+**Attribution and permitted use:** photos © 2026 Sun Junyi. These processed copies are published specifically for this ME travel example and may be downloaded with the example `.mezip`. They are **not CC0**, are **not** covered by the API-example permission, and are **not** part of the code licence. The source files, original filenames, EXIF/GPS and the two private videos are not included.
 
-<details>
-<summary><b>Known limitations &amp; test report</b></summary>
+## me-agent 0.5.0
 
-- The Windows test (Wallpaper Engine 2.8.42, 2560×1440) did not zoom with the mouse wheel.
-- Singapore → NUS was opened through the desktop page’s DOM, not a physical click on the NUS dot.
-- Native Safari and Plash remain untested on a real Mac.
-- Full report: [`docs/WALLPAPER_ENGINE.md`](docs/WALLPAPER_ENGINE.md). Sanitized screenshots: [`wallpaper-engine-globe.png`](assets/wallpaper-engine-globe.png), [`wallpaper-engine-nus.png`](assets/wallpaper-engine-nus.png), [`wallpaper-engine-editor.png`](assets/wallpaper-engine-editor.png).
+`me-agent` packs selected photos, short videos and place records into a portable `.mezip`, and can export a 1600×900 PNG for slides. Media stays on your machine; the tool never uploads it.
 
-</details>
+**Download:** [`me-agent-0.5.0.zip`](https://github.com/junyisunme/me-my-earth/releases/download/v0.5.0/me-agent-0.5.0.zip)  
+**SHA-256:** `D45D0988AA09F557C46CD65AB895CD0A77CA84D3A083268F68496678A6BA6BA1`  
+**Viewer:** <https://me-interest-globe.netlify.app/?welcome=0>  
+**Guide:** [agent/README.md](agent/README.md) · **Sample:** [agent/examples/japan-cities/](agent/examples/japan-cities/)
 
-## Presentation
+### Install
 
-- [PPTX — QS 2027 demo](downloads/me-my-earth-qs-2027-demo.pptx)
-- [PDF — same deck with URI links](downloads/me-my-earth-qs-2027-demo.pdf)
-- [1200×630 cover PNG](assets/qs-2027-cover-v2.png)
+Requires **Node.js 24+**. The versioned installer verifies the Release SHA-256 and preserves existing `out/`, `.mezip`, PNG and media files in the version directory.
 
-The deck opens the **normal interactive map**, not the wallpaper layout:
+**Windows**
 
-<https://me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0>
+```powershell
+$ErrorActionPreference = "Stop"
+$installer = Join-Path $env:TEMP "me-agent-install.ps1"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/junyisunme/me-my-earth/main/agent/install.ps1" -OutFile $installer
+& $installer
+```
 
-**Canva:** upload the PNG as a full-page/cover image, then add the same interactive map link to the image; verify the link inside Canva.
+**macOS / Linux**
 
-Platform status: the PPTX/PDF link structure is verified (relationships + PDF `/URI` annotations point to the same URL); PowerPoint desktop is not installed here and PowerPoint web was not tested; Canva has no account on this machine, so the PNG + URL are provided but not clicked in Canva. The demo steps are Singapore → NUS (rank 10) or NTU.
+```bash
+curl -L --fail -o /tmp/me-agent-install.sh \
+  https://raw.githubusercontent.com/junyisunme/me-my-earth/main/agent/install.sh
+bash /tmp/me-agent-install.sh
+```
 
-## Make your first map
+The ZIP installs to `~/me-agent-0.5.0` (`%USERPROFILE%\me-agent-0.5.0` on Windows). The bundled viewer base is `https://me-interest-globe.netlify.app/`; `127.0.0.1` is used only when you explicitly start a local viewer or a Lively wallpaper.
 
-Start with the five Japanese vintage guitar shops in [`examples/guitar-five.json`](examples/guitar-five.json). The file is public and small enough to inspect. It is the same JSON behind the guitar map on the [example maps](examples/) page.
+### Minimal build
 
-**[Download the sample JSON](https://raw.githubusercontent.com/junyisunme/me-my-earth/main/examples/guitar-five.json)** · [Open the create page](https://me-interest-globe.netlify.app/?welcome=0&lang=en) and choose **Create map**.
+```bash
+node me-agent.mjs build \
+  --brief examples/japan-cities/japan-cities.json \
+  --out-dir out \
+  --package-name japan-cities.mezip \
+  --slide
+```
 
-1. **Upload** the JSON.
-2. **Create** the map.
-3. **Get a cover and a share link** — the expected result is **3 shops in Tokyo** and **2 in Osaka**.
+Outputs:
 
-The sample uses the same public `POST /api/maps` contract as every other map. You can edit the JSON, replace the events and keep the structure. [Full example walkthrough →](examples/README.md#download-edit-and-re-upload-the-json)
+```text
+out/japan-cities.mezip
+out/japan-cities-slide-16x9.png
+out/japan-cities-report.json
+```
 
-## Agent workflows
-
-Read **[docs/AGENT_WORKFLOWS.md](docs/AGENT_WORKFLOWS.md)** first. This repository is the public product page/showcase; it does **not** contain the application source or the local art-pack CLI. Pick one route:
-
-| Intent | Start here | Output |
-| --- | --- | --- |
-| Install a map skill for Claude Code / Cursor | [Install the `earth` skill](docs/SKILL.md) | `/earth` in both clients |
-| Open/share an existing map | [§1](docs/AGENT_WORKFLOWS.md#1-打开或分享现有地图) | normal map URL |
-| Put a map on the desktop | [§2](docs/AGENT_WORKFLOWS.md#2-把地图放到桌面) | `display=wallpaper`, Lively / Wallpaper Engine imports |
-| Put a map in a deck | [§3](docs/AGENT_WORKFLOWS.md#3-把地图放进演示) | PPTX / PDF / PNG + normal map link |
-| Create a new map | [§4](docs/AGENT_WORKFLOWS.md#4-新建一张用户地图) | `?map=<mapId>` + cover |
-| Change icons/palette | [§5](docs/AGENT_WORKFLOWS.md#5-换图标--配色公开示例) | public `me-art-pack-1` example; local run requires the app source |
-
-The public art-pack example is [`examples/art-packs/qs-warm-paper/`](examples/art-packs/qs-warm-paper); the full local `import → preview → restore → export/re-import → publish` flow runs in the application repository, not this showcase. See [`docs/ART_PACKS.md`](docs/ART_PACKS.md).
+Open the `.mezip` in the viewer with **Open map package**. The sample uses a synthetic Kyoto photo and the CC0 MDN `flower.mp4` test clip; the video is labelled as a test clip, not as location footage.
 
 ## For agents
 
-Install the [`earth` skill](docs/SKILL.md) in Claude Code or Cursor, then ask “把这五家日本古董吉他店做成一张地图” or *“make a map of these places”*. The skill reads the sample JSON, calls the public API, and returns the map link and cover.
+- **Structured place/ranking/trip maps:** use the public `POST /api/maps` API or the `earth` skill / `dsh-plugin-my-earth` plugin. A public link is created only when the user explicitly asks to publish.
+- **Photos or video:** use the local `me-agent` tool. It builds the `.mezip` and slide PNG without uploading media. If there is no local execution, say so instead of claiming a package was created.
+- **Privacy:** a `.mezip` can contain private media. Do not upload it, attach it to a public map or commit it to a public repository. Only the user decides which media may be published.
 
-For a list of your own places, say “整理成草稿” to get a local JSON draft with **no upload**, or “生成公开分享链接” to publish it **once**. Published maps are public by link; the skill will not publish a draft on its own.
+Start with [Agent workflows](docs/AGENT_WORKFLOWS.md) and the [me-agent guide](agent/README.md).
 
-Any agent that can browse and call HTTP APIs can do the same with this prompt:
-
-```text
-Use https://github.com/junyisunme/me-my-earth to build a map for me.
-Theme: five vintage guitar shops in Japan.
-Follow the repository's "For agents" instructions and create the map from the public sample JSON. The expected result is 5 shops, with 3 in Tokyo and 2 in Osaka.
-Return the cover image and the share link. If you cannot submit directly, give me a downloadable JSON file I can upload myself.
-```
-
-A text-based agent can submit the same public file without a browser:
+### Build a public text map
 
 ```bash
 curl -L -o guitar-five.json \
@@ -249,69 +133,42 @@ curl -X POST "https://me-interest-globe.netlify.app/api/maps" \
   --data-binary @guitar-five.json
 ```
 
-The response contains:
+The response contains `shareUrl`, `eventCount`, `countryCount`, `cityCount`, `previewImageUrl` and `coverStatus`. A failed cover does not invalidate the map; do not resubmit and create a duplicate.
 
-```json
-{
-  "mapId": "…",
-  "shareUrl": "https://…/?map=…",
-  "eventCount": 5,
-  "countryCount": 1,
-  "cityCount": 2,
-  "previewImageUrl": "https://…/api/covers/v2/….png",
-  "coverStatus": "ready"
-}
-```
+**[API fields and sample →](docs/API.md)**
 
-- **`shareUrl`** is the interactive map. It always works even if the cover fails.
-- **`previewImageUrl`** is a public 1200×630 PNG that can be shown directly in a chat reply.
-- If `coverStatus` is `"failed"`, show the map link instead of a broken image; the map has already been saved. Do not resubmit and create a duplicate.
-- A chat assistant that can only produce a file can hand the JSON to the user and use the [web upload page](https://me-interest-globe.netlify.app/?welcome=0&lang=en).
+## Example maps
 
-**[Full API fields and sample →](docs/API.md)**
+| Map | Open |
+| --- | --- |
+| World stock exchanges · 18 | [Open](https://me-interest-globe.netlify.app/?topic=world-exchanges&lang=en&welcome=0) |
+| Ski resorts · 12 | [Open](https://me-interest-globe.netlify.app/?topic=ski-resorts&lang=en&welcome=0) |
+| My travel fragments · 7 photos | [Example page](examples/travel-seven/) |
+| Guitar shops · 5 | [Open](https://me-interest-globe.netlify.app/?map=2FRcS4HqKPwD037cyL63ZK_n&lang=en&welcome=0) |
+| Oil regions · 8 | [Open](https://me-interest-globe.netlify.app/?map=nMaS9Wsvb0h6-CYdJ9iXUZ3E&lang=en&welcome=0) |
+| QS 2027 top 100 · legacy | [Open](https://me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0) |
+| Ski resorts · legacy map | [Open](https://me-interest-globe.netlify.app/?map=0rbCDSfP_OyKwkvhMI6yza9D&lang=en&welcome=0) |
 
-### Reusing the API examples
+The legacy QS map is a user-built top-100 visualization, separate from the retired built-in QS topic. Its old links and wallpaper project are preserved.
 
-You may copy and modify the original API call examples in this repository to connect to ME. This permission applies only to those original call examples.
+## Desktop wallpaper
 
-## About
+The current Lively / Wallpaper Engine QS project is preserved; this release does not re-apply or replace it.
 
-**My Earth is created by Sun Junyi.** The application Core is maintained privately; this
-repository is the public product page, API guide, examples and Agent integrations.
+- [Lively project](wallpapers/lively/qs-2027/)
+- [Wallpaper Engine project](wallpapers/wallpaper-engine/qs-2027/)
+- [Wallpaper test notes](docs/WALLPAPER_ENGINE.md)
 
-The public map API is open for agents and tools to build on. Collaborators with a concrete
-plan are welcome to get in touch through the [issue tracker](https://github.com/junyisunme/me-my-earth/issues);
-please include the use case and scope.
+## Repository contents
 
-Public components keep their existing terms: the original API call examples may be copied and
-modified under the permission in [Reusing the API examples](#reusing-the-api-examples), the
-art-pack example’s icon is CC0 as stated in its [`SOURCE.md`](examples/art-packs/qs-warm-paper/SOURCE.md),
-and the DSH plugin is MIT in its [own repository](https://github.com/junyisunme/dsh-plugin-my-earth).
-Data sources and linked pages keep their own attribution and terms.
+This is the public product page, API guide, examples and Agent integrations. The application source, data pipeline and internal test suite are maintained privately.
 
-ME is meant to make a small, personal collection of places feel like a globe rather than a
-spreadsheet: one marker, one reason, one source, one shareable link.
-
-Have a question, found a bad location or want to suggest the next map?
-**[Open a GitHub Issue →](https://github.com/junyisunme/me-my-earth/issues)**
-
-## What is inside this repository
-
-This is the public product page: the live map links, covers, desktop wallpaper imports, presentation downloads, the example maps, the downloadable first-map example, the `earth` skill and the public API guide. The application source, data pipeline and internal test suite are maintained separately.
-
-- [Example maps](examples/) — QS 2027, ski resorts, oil regions, five guitar shops
-- [QS 2027 map](https://me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0)
-- [Ski resorts map](https://me-interest-globe.netlify.app/?map=0rbCDSfP_OyKwkvhMI6yza9D&lang=en&welcome=0)
-- [Oil regions map](https://me-interest-globe.netlify.app/?map=nMaS9Wsvb0h6-CYdJ9iXUZ3E&lang=en&welcome=0)
-- [`earth` skill for Claude Code and Cursor](docs/SKILL.md)
-- [Public API guide](docs/API.md)
-- [Downloadable guitar-shop sample](examples/guitar-five.json)
+- [Travel example](examples/travel-seven/)
+- [me-agent guide](agent/README.md)
+- [API guide](docs/API.md)
 - [Agent workflows](docs/AGENT_WORKFLOWS.md)
-- [Wallpaper Engine trial report](docs/WALLPAPER_ENGINE.md)
-- [Lively wallpaper import](wallpapers/lively/qs-2027)
-- [Wallpaper Engine import](wallpapers/wallpaper-engine/qs-2027)
-- [Presentation downloads](downloads)
-- [Art-pack example](examples/art-packs/qs-warm-paper)
-- [Issues and feedback](https://github.com/junyisunme/me-my-earth/issues)
+- [earth skill](.claude/skills/earth/SKILL.md)
+- [Wallpaper notes](docs/WALLPAPER_ENGINE.md)
+- [Downloads](downloads/) · [Assets](assets/)
 
-The live site is the production site: <https://me-interest-globe.netlify.app/>.
+**My Earth is created by Sun Junyi.** Data sources and linked pages keep their own attribution and terms.

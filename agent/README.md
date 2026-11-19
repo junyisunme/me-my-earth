@@ -2,7 +2,7 @@
 
 `me-agent` 把用户选中的照片、短视频和地点记录打包成一个可在 ME 打开的 `.mezip`，并从同一份地图导出 16:9 幻灯片 PNG。它也可以生成并应用 Lively 桌面壁纸项目。
 
-**下载**：[`me-agent-0.4.0.zip`](https://github.com/junyisunme/me-my-earth/releases/download/v0.4.0/me-agent-0.4.0.zip)
+**下载**：[`me-agent-0.5.0.zip`](https://github.com/junyisunme/me-my-earth/releases/download/v0.5.0/me-agent-0.5.0.zip)
 **查看器**：<https://me-interest-globe.netlify.app/?welcome=0>  
 **示例输入**：[`examples/japan-cities/`](examples/japan-cities/)
 
@@ -10,9 +10,9 @@
 
 ## 安装
 
-需要 **Node.js 24+**。安装脚本会把程序放到明确的版本目录（例如 `~/me-agent-0.4.0`），先核对公开 ZIP 的 SHA-256，再解压；重复安装不会删除该目录里已有的 `.mezip`、PNG 或素材。
+需要 **Node.js 24+**。安装脚本会把程序放到明确的版本目录（例如 `~/me-agent-0.5.0`），先核对公开 ZIP 的 SHA-256，再解压；重复安装不会删除该目录里已有的 `.mezip`、PNG 或素材。
 
-> `v0.4.0` ZIP 内的 `install.ps1` / `install.sh` 是发布时的旧副本；请使用本页最新的脚本（从 `main` 下载）。ZIP 只作为程序与示例归档。
+> ZIP 只作为程序与示例归档；安装脚本从公开 `main` 下载（`agent/install.ps1` / `agent/install.sh`），并按脚本内的 SHA-256 校验 Release 资产。
 
 ### Windows
 
@@ -31,7 +31,7 @@ curl -L --fail -o /tmp/me-agent-install.sh \
 bash /tmp/me-agent-install.sh
 ```
 
-`v0.4.0` ZIP 的 SHA-256 是 `2a19fe4c062bf1d4886048c2acb1285127d3ce7d2767e931855d16b72db43eed`；两个脚本都会先核对它，再解压 `me-agent-0.4.0/`，所以复制命令后能找到 `me-agent.mjs`。安装完成后进入版本目录再运行示例命令：Windows 为 `%USERPROFILE%\me-agent-0.4.0`，macOS / Linux 为 `~/me-agent-0.4.0`。
+公开安装脚本会先核对 Release 资产的 SHA-256，再解压 `me-agent-0.5.0/`，所以复制命令后能找到 `me-agent.mjs`。安装完成后进入版本目录再运行示例命令：Windows 为 `%USERPROFILE%\me-agent-0.5.0`，macOS / Linux 为 `~/me-agent-0.5.0`。
 
 `npm install` 会安装 `sharp`、`@zip.js/zip.js` 和 `exifr`。不需要 ME 账号、API key 或 ME 私有源码。
 
@@ -130,6 +130,7 @@ node me-agent.mjs desktop \
 - `file` / `cover` 相对 brief 文件所在目录，也可以给绝对路径。
 - `id` 成为媒体绑定的 `recordId`；同一地点的两条记录可以各带自己的媒体。
 - 日期、备注、`reason`、`placeId` 都可选；`countryId` 和 `label` 必填。`precision` 省略时按 `placeId`/坐标推断。
+- 如果日期是虚构演示值，在 brief 顶层写 `"demoDates": true`；详情显示「演示日期」。普通真实日期不要写这个字段。
 - 顶层扁平写法：`"media": [{ "recordId": "kyoto-photo", "kind": "photo", "file": "..." }]`。**扁平写法必须带 `recordId`**；缺了会返回 `media_mapping_missing` 和候选记录列表。
 
 ## 支持的媒体
@@ -236,6 +237,6 @@ node me-agent.mjs desktop \
 
 ## 版本
 
-- 工具版本：`0.4.0`；下载 SHA-256：`2a19fe4c062bf1d4886048c2acb1285127d3ce7d2767e931855d16b72db43eed`
-- 查看器：`https://me-interest-globe.netlify.app/`
+- 工具版本：`0.5.0`
+- 查看器：`https://me-interest-globe.netlify.app/`（随包 `viewer-base.txt` 也指向这里）
 - 示例：`examples/japan-cities/`（合成照片 + MDN CC0 `flower.mp4`）

@@ -3,8 +3,8 @@
 # Installs a versioned copy and never deletes an existing me-agent directory.
 set -euo pipefail
 
-VERSION="0.4.0"
-EXPECTED_SHA256="2a19fe4c062bf1d4886048c2acb1285127d3ce7d2767e931855d16b72db43eed"
+VERSION="0.5.0"
+EXPECTED_SHA256="d45d0988aa09f557c46cd65ab895cd0a77ca84d3a083268f68496678a6ba6ba1"
 URL="https://github.com/junyisunme/me-my-earth/releases/download/v${VERSION}/me-agent-${VERSION}.zip"
 DEST="${HOME}/me-agent-${VERSION}"
 TMP="$(mktemp -d)"
@@ -40,7 +40,14 @@ fi
 mkdir -p "$DEST"
 cp -R "$SOURCE/." "$DEST/"
 cd "$DEST"
-npm install
+if command -v npm >/dev/null 2>&1; then
+  npm install
+elif command -v pnpm >/dev/null 2>&1; then
+  pnpm install
+else
+  echo "Neither npm nor pnpm was found. Install Node.js 24+ and try again." >&2
+  exit 1
+fi
 
 printf 'Installed to %s\n' "$DEST"
 printf 'Existing files in %s (including .mezip, PNG and media) were not deleted.\n' "$DEST"
