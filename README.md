@@ -1,81 +1,56 @@
 # ME · My Earth
 
-**Turn the places you care about into an interactive globe you can share.**
+Explore ready-made 3D globes of places worth knowing, or ask an agent to turn your own places, photos and short videos into an interactive map package that stays on your machine and exports a slide-ready image.
 
-ME is a bilingual 3D interest globe. The v0.5.0 home page opens on **World stock exchanges**; the second built-in topic is **selected ski resorts**. You can also upload your own CSV/JSON, open a local photo/video map package, or ask an agent to build a map.
-
-**[Live site](https://me-interest-globe.netlify.app/)** ·
-**[World stock exchanges](https://me-interest-globe.netlify.app/?topic=world-exchanges&lang=en&welcome=0)** ·
-**[Ski resorts](https://me-interest-globe.netlify.app/?topic=ski-resorts&lang=en&welcome=0)** ·
-**[Travel photo example](examples/travel-seven/)** ·
-**[me-agent 0.5.0](#me-agent-050)** ·
-**[Agent workflows](docs/AGENT_WORKFLOWS.md)**
-
-<a href="https://me-interest-globe.netlify.app/?lang=en&welcome=0">
-  <img src="assets/me-v050-home.png" width="960" alt="ME v0.5.0 home page with the World stock exchanges topic selected">
-</a>
-
-*The v0.5.0 home page: 18 exchanges, official sites and coordinate-precision notes. The second topic is 12 ski resorts. Country browsing stays on the same 3D globe.*
-
-## Start here
-
-| Topic | What is inside | Open |
+| **[Explore the globe →](https://me-interest-globe.netlify.app/?lang=en&welcome=0)** | **[Try the travel photo map →](#try-the-travel-photo-map)** | **[Make one with your agent →](#make-one-with-your-agent)** |
 | --- | --- | --- |
-| **World stock exchanges** | 18 exchanges or operating companies, 17 city places, official websites, coordinate-precision notes. The default topic. | [Open](https://me-interest-globe.netlify.app/?topic=world-exchanges&lang=en&welcome=0) |
-| **Ski resorts · selected** | 12 resort/village bases in 12 countries and regions; points are bases, not summits. | [Open](https://me-interest-globe.netlify.app/?topic=ski-resorts&lang=en&welcome=0) |
-| **My travel fragments** | 7 author-taken photos: Milwaukee, Chicago, Suzhou, Shanghai, Jinan, Tianjin and Dali. Suzhou and Shanghai carry clearly marked demo dates. | [Travel example](examples/travel-seven/) |
+| Open the live site and start with the **World stock exchanges** topic. | See a real photo map in the viewer, download it, and follow the exact click path. | Copy one request for your agent, or install the local tool and build a package. |
 
-Country browsing stays on the globe. Click a country, open a record, then click the sea or blank space outside the globe to return to the world view. A drag keeps the current country and rotates the sphere.
+## Explore the globe
 
-## A public travel example, with real photos
+The **v0.5.0** home page opens on **World stock exchanges**: **18** exchanges or operating companies across **17** city places, each with an official website and a coordinate-precision note (headquarters/trading floor or city level, stated per record). The second built-in topic is **Ski resorts · selected**: **12** resort/village bases in **12** countries and regions, placed at the base rather than the summit.
 
-I am publishing seven processed copies of my own travel photos as a ME example. They are included in the downloadable `.mezip` and on this page. **The two short videos from the same private trip are not published.**
+- [Open World stock exchanges](https://me-interest-globe.netlify.app/?topic=world-exchanges&lang=en&welcome=0)
+- [Open Ski resorts](https://me-interest-globe.netlify.app/?topic=ski-resorts&lang=en&welcome=0)
 
-<table>
-  <tr>
-    <td width="33%"><img src="assets/travel-seven/milwaukee-lake.jpg" alt="Winter Lake Michigan shore in Milwaukee"><br><sub>US · Milwaukee</sub></td>
-    <td width="33%"><img src="assets/travel-seven/chicago-lakefront.jpg" alt="Chicago lakefront trail and skyline"><br><sub>US · Chicago</sub></td>
-    <td width="33%"><img src="assets/travel-seven/suzhou-lake.jpg" alt="Jinji Lake and the Gate of the Orient from the Kempinski entrance"><br><sub>China · Suzhou</sub></td>
-  </tr>
-  <tr>
-    <td width="33%"><img src="assets/travel-seven/shanghai-view.jpg" alt="View from Shanghai World Financial Center toward Jin Mao Tower"><br><sub>China · Shanghai</sub></td>
-    <td width="33%"><img src="assets/travel-seven/jinan-museum.jpg" alt="Shandong Art Museum exterior"><br><sub>China · Jinan</sub></td>
-    <td width="33%"><img src="assets/travel-seven/tianjin-eye.jpg" alt="Tianjin Eye at night over the Hai River"><br><sub>China · Tianjin</sub></td>
-  </tr>
-  <tr>
-    <td width="33%"><img src="assets/travel-seven/dali-mountain.jpg" alt="Cangshan under clouds, Dali"><br><sub>China · Dali</sub></td>
-    <td width="33%"></td>
-    <td width="33%"></td>
-  </tr>
-</table>
+Country browsing stays on the 3D globe. Click a country, open a record, then click the sea or blank space outside the globe to return to the world view; drag to keep the current country and rotate the sphere. The header has a **中文 / EN** switch.
+
+## Try the travel photo map
 
 <img src="assets/travel-seven/suzhou-demo.png" width="960" alt="ME viewer showing the Suzhou record, its photo and the labelled demo date">
 
-*The public package opened in the production viewer: Suzhou photo, confirmed copy and the labelled demo date. The package also includes Shanghai with its own demo date; the other five records have no date.*
+*This is the public travel package opened in the ME viewer: the Suzhou photo, the confirmed caption, and the demo date. The package also contains Shanghai, with its own demo date; the other five records have no date.*
 
-**Download the example:** [`travel-seven.mezip`](examples/travel-seven/travel-seven.mezip) (7 records / 7 photos / no video)  
-**Open it:** download the `.mezip`, open the [ME viewer](https://me-interest-globe.netlify.app/?welcome=0), choose **Open map package**, then select the file. Photos stay local when the package is opened.
+**1. Download the seven-photo map**  
+[Download `travel-seven.mezip`](https://github.com/junyisunme/me-my-earth/raw/main/examples/travel-seven/travel-seven.mezip) — 7 records / 7 photos / no video.
 
-- Suzhou is marked at **Suzhou city level**: “Standing at the entrance of Kempinski Hotel Jinji Lake, looking toward the Gate of the Orient.”
-- Shanghai is marked at **Shanghai World Financial Center**: “From the Yue Xuan Chinese restaurant in the Shanghai World Financial Center, looking toward Jin Mao Tower.”
-- Only Suzhou (`2024-05-01`) and Shanghai (`2024-05-02`) carry dates, and both are labelled **demo date**. The other five records have no date. The package intro says: “Photos are the author’s own; the dates shown are for feature demonstration only.”
+**2. Open the ME viewer**  
+Open the [English ME viewer](https://me-interest-globe.netlify.app/?welcome=0&lang=en), click **Open map package**, and choose the file you just downloaded. Then click **China** → **Suzhou** → the photo thumbnail.
 
-**Attribution and permitted use:** photos © 2026 Sun Junyi. These processed copies are published specifically for this ME travel example and may be downloaded with the example `.mezip`. They are **not CC0**, are **not** covered by the API-example permission, and are **not** part of the code licence. The source files, original filenames, EXIF/GPS and the two private videos are not included.
+Viewing this example needs only a browser — **no Node.js and no agent**. Photos are read locally by the browser; opening the package does not upload media to ME.
 
-## me-agent 0.5.0
+The Suzhou photo is the view from the entrance of Kempinski Hotel Jinji Lake toward the Gate of the Orient. The Shanghai photo looks from Shanghai World Financial Center toward Jin Mao Tower. Suzhou (`2024-05-01`) and Shanghai (`2024-05-02`) carry clearly labelled **demo dates**; the other five records are undated. Photos © 2026 Sun Junyi — these processed copies are used for this ME example, are not CC0 and are not covered by the API-example or code licence. [Full photos, city notes and dates →](examples/travel-seven/)
 
-`me-agent` packs selected photos, short videos and place records into a portable `.mezip`, and can export a 1600×900 PNG for slides. Media stays on your machine; the tool never uploads it.
+## Make one with your agent
 
-**Download:** [`me-agent-0.5.0.zip`](https://github.com/junyisunme/me-my-earth/releases/download/v0.5.0/me-agent-0.5.0.zip)  
-**SHA-256:** `9247314717631B70484213D4AD147403842391D149886FDA033AED7549AF5525`  
-**Viewer:** <https://me-interest-globe.netlify.app/?welcome=0>  
-**Guide:** [agent/README.md](agent/README.md) · **Sample:** [agent/examples/japan-cities/](agent/examples/japan-cities/)
+Your agent needs two things: access to the **selected local files**, and the **place each photo or video belongs to**. ME does **not** identify where a photo was taken. If the place mapping is missing, the agent should ask for it instead of guessing.
 
-### Install
+Copy this request and the guide link to an agent that can read those local files and run commands:
 
-Requires **Node.js 24+**. The versioned installer verifies the Release SHA-256 and preserves existing `out/`, `.mezip`, PNG and media files in the version directory.
+```text
+Use the ME guide at https://github.com/junyisunme/me-my-earth/blob/main/agent/README.md to turn my selected photos and short videos into an interactive globe, grouped by place. Give me a .mezip file I can open and a 16:9 PNG for my slides. Process the media locally.
+```
 
-**Windows**
+Guide: [agent/README.md](agent/README.md) · Download: [`me-agent-0.5.0.zip`](https://github.com/junyisunme/me-my-earth/releases/download/v0.5.0/me-agent-0.5.0.zip)  
+SHA-256: `9247314717631B70484213D4AD147403842391D149886FDA033AED7549AF5525` · Viewer: <https://me-interest-globe.netlify.app/?welcome=0>
+
+The agent does **not** need the `earth` skill installed for this local media workflow; the public guide is the complete contract. It does need to be able to read the selected files and run `node`.
+
+### Install me-agent 0.5.0
+
+Requires **Node.js 24+**. The versioned installer verifies the Release SHA-256, installs to `me-agent-0.5.0`, and preserves existing `out/`, `.mezip`, PNG and media files in that directory.
+
+**Windows (PowerShell)**
 
 ```powershell
 $ErrorActionPreference = "Stop"
@@ -84,27 +59,24 @@ Invoke-WebRequest -Uri "https://raw.githubusercontent.com/junyisunme/me-my-earth
 & $installer
 ```
 
+Then, in the same PowerShell window:
+
+```powershell
+Set-Location "$HOME\me-agent-0.5.0"
+node .\me-agent.mjs build --brief .\examples\japan-cities\japan-cities.json --out-dir .\out --package-name japan-cities.mezip --slide
+```
+
 **macOS / Linux**
 
 ```bash
 curl -L --fail -o /tmp/me-agent-install.sh \
   https://raw.githubusercontent.com/junyisunme/me-my-earth/main/agent/install.sh
 bash /tmp/me-agent-install.sh
+cd ~/me-agent-0.5.0
+node me-agent.mjs build --brief examples/japan-cities/japan-cities.json --out-dir out --package-name japan-cities.mezip --slide
 ```
 
-The ZIP installs to `~/me-agent-0.5.0` (`%USERPROFILE%\me-agent-0.5.0` on Windows). The bundled viewer base is `https://me-interest-globe.netlify.app/`; `127.0.0.1` is used only when you explicitly start a local viewer or a Lively wallpaper.
-
-### Minimal build
-
-```bash
-node me-agent.mjs build \
-  --brief examples/japan-cities/japan-cities.json \
-  --out-dir out \
-  --package-name japan-cities.mezip \
-  --slide
-```
-
-Outputs:
+Either platform produces the same files:
 
 ```text
 out/japan-cities.mezip
@@ -112,17 +84,33 @@ out/japan-cities-slide-16x9.png
 out/japan-cities-report.json
 ```
 
-Open the `.mezip` in the viewer with **Open map package**. The sample uses a synthetic Kyoto photo and the CC0 MDN `flower.mp4` test clip; the video is labelled as a test clip, not as location footage.
+Open `out/japan-cities.mezip` in the [ME viewer](https://me-interest-globe.netlify.app/?welcome=0) with **Open map package**. The Japan sample is only a build test: it has a synthetic Kyoto photo and the CC0 MDN `flower.mp4` test clip (labelled as a test video), not travel footage. The seven-photo `travel-seven.mezip` above is a finished map and needs no build.
 
-## For agents
+## API and agent workflows
 
-- **Structured place/ranking/trip maps:** use the public `POST /api/maps` API or the `earth` skill / `dsh-plugin-my-earth` plugin. A public link is created only when the user explicitly asks to publish.
-- **Photos or video:** use the local `me-agent` tool. It builds the `.mezip` and slide PNG without uploading media. If there is no local execution, say so instead of claiming a package was created.
-- **Privacy:** a `.mezip` can contain private media. Do not upload it, attach it to a public map or commit it to a public repository. Only the user decides which media may be published.
+- **Public text maps** (places, rankings, trips) use `POST /api/maps`; a public link is created only on an explicit publish request. See the [API guide](docs/API.md) and [Agent workflows](docs/AGENT_WORKFLOWS.md).
+- **Photos or video** go through the local `me-agent` tool above. A `.mezip` can contain private media: do not upload it, attach it to a public map, or commit it to a public repository without the user’s permission.
 
-Start with [Agent workflows](docs/AGENT_WORKFLOWS.md) and the [me-agent guide](agent/README.md).
+## More example maps
 
-### Build a public text map
+| Map | Open |
+| --- | --- |
+| Guitar shops · 5 | [Open](https://me-interest-globe.netlify.app/?map=2FRcS4HqKPwD037cyL63ZK_n&lang=en&welcome=0) |
+| Oil regions · 8 | [Open](https://me-interest-globe.netlify.app/?map=nMaS9Wsvb0h6-CYdJ9iXUZ3E&lang=en&welcome=0) |
+| QS 2027 top 100 · legacy | [Open](https://me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0) |
+| Ski resorts · legacy map | [Open](https://me-interest-globe.netlify.app/?map=0rbCDSfP_OyKwkvhMI6yza9D&lang=en&welcome=0) |
+
+The legacy QS map is a user-built top-100 visualization, separate from the retired built-in QS topic. Its old links and wallpaper project are preserved.
+
+## Desktop wallpaper
+
+Already made a globe? Ask your agent to set it as your Windows desktop wallpaper.
+
+The [Lively project](wallpapers/lively/qs-2027/) and [Wallpaper Engine project](wallpapers/wallpaper-engine/qs-2027/) remain available. Apply a wallpaper only when the user explicitly asks; see the [wallpaper notes](docs/WALLPAPER_ENGINE.md).
+
+## Make a public text map
+
+Start with the five Japanese guitar shops in [`examples/guitar-five.json`](examples/guitar-five.json). Upload it at the [create page](https://me-interest-globe.netlify.app/?welcome=0&lang=en), or post the same file:
 
 ```bash
 curl -L -o guitar-five.json \
@@ -134,30 +122,6 @@ curl -X POST "https://me-interest-globe.netlify.app/api/maps" \
 ```
 
 The response contains `shareUrl`, `eventCount`, `countryCount`, `cityCount`, `previewImageUrl` and `coverStatus`. A failed cover does not invalidate the map; do not resubmit and create a duplicate.
-
-**[API fields and sample →](docs/API.md)**
-
-## Example maps
-
-| Map | Open |
-| --- | --- |
-| World stock exchanges · 18 | [Open](https://me-interest-globe.netlify.app/?topic=world-exchanges&lang=en&welcome=0) |
-| Ski resorts · 12 | [Open](https://me-interest-globe.netlify.app/?topic=ski-resorts&lang=en&welcome=0) |
-| My travel fragments · 7 photos | [Example page](examples/travel-seven/) |
-| Guitar shops · 5 | [Open](https://me-interest-globe.netlify.app/?map=2FRcS4HqKPwD037cyL63ZK_n&lang=en&welcome=0) |
-| Oil regions · 8 | [Open](https://me-interest-globe.netlify.app/?map=nMaS9Wsvb0h6-CYdJ9iXUZ3E&lang=en&welcome=0) |
-| QS 2027 top 100 · legacy | [Open](https://me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0) |
-| Ski resorts · legacy map | [Open](https://me-interest-globe.netlify.app/?map=0rbCDSfP_OyKwkvhMI6yza9D&lang=en&welcome=0) |
-
-The legacy QS map is a user-built top-100 visualization, separate from the retired built-in QS topic. Its old links and wallpaper project are preserved.
-
-## Desktop wallpaper
-
-The current Lively / Wallpaper Engine QS project is preserved; this release does not re-apply or replace it.
-
-- [Lively project](wallpapers/lively/qs-2027/)
-- [Wallpaper Engine project](wallpapers/wallpaper-engine/qs-2027/)
-- [Wallpaper test notes](docs/WALLPAPER_ENGINE.md)
 
 ## Repository contents
 

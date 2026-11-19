@@ -18,6 +18,18 @@ This is a seven-record ME map package made from seven processed copies of the au
 
 The package contains only processed JPEG copies. It has no original ZIP, original WhatsApp filenames, local paths, EXIF/GPS or capture dates. The two private videos are deliberately absent.
 
+## Places and dates
+
+| Record | Map placement | Date |
+| --- | --- | --- |
+| US · Milwaukee | City-level point on the Lake Michigan shore | none |
+| US · Chicago | City-level point on the Lake Michigan lakefront trail | none |
+| China · Suzhou | Suzhou city level, Jinji Lake area | `2024-05-01` · demo date |
+| China · Shanghai | Shanghai World Financial Center | `2024-05-02` · demo date |
+| China · Jinan | Shandong Art Museum | none |
+| China · Tianjin | Tianjin Eye | none |
+| China · Dali | Cangshan scenic-area point | none |
+
 ## Photos and attribution
 
 Photos © 2026 Sun Junyi. These processed copies are published specifically for this ME example and may be downloaded together with `travel-seven.mezip`. They are **not CC0**, are **not** covered by the API-example permission, and are **not** part of the code licence.
