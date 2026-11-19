@@ -1,11 +1,13 @@
 ---
 name: earth
 description: >-
-  Turn places into a ME · My Earth map. Use when the user asks to organize places, a
-  ranking, a trip or a list into a map ("把这五家日本古董吉他店做成一张地图",
-  "整理去年去过的地方，先给我草稿", "make a map of these places"), wants a downloadable
-  map JSON, or explicitly asks for a public share link. Drafts stay local; only an explicit
-  publish request posts to the public ME API and returns a map link plus a 1200x630 cover.
+  Turn places into a ME · My Earth interactive globe. Use when the user asks to organize
+  places, a ranking, a trip or a list into a map ("把这五家日本古董吉他店做成一张地图",
+  "整理去年去过的地方，先给我草稿", "make a map of these places"), or asks to put selected
+  photos and a short video at two places on a globe ("把我给的照片和视频做成互动地球").
+  For places plus local photos/videos, use the local me-agent tool and keep media on the
+  machine. Drafts stay local; only an explicit publish request posts text places to the
+  public ME API and returns a map link plus a 1200x630 cover.
 ---
 
 # earth — turn places into a shareable globe
@@ -13,6 +15,15 @@ description: >-
 Build a ME · My Earth map from the places a user names. A draft is a local JSON file. A
 published map is a public link; anyone with that link can open the globe — no account, no
 API key, no local app and no private Core checkout.
+
+## Photos and videos
+
+If the user selected photos or a short video and wants them on the map, do **not** send
+those files to `POST /api/maps`. Use the local `me-agent` tool described in
+<https://github.com/junyisunme/me-my-earth/blob/main/agent/README.md>. It produces a `.mezip` that opens with **打开地图包**,
+a 1600×900 PNG for slides, and an optional Lively wallpaper project. Media stays on the
+user's machine; if you have no local execution ability, say so instead of claiming a
+package was created.
 
 **Maps are public by link.** Anything sent to `POST /api/maps` can be opened by anyone who
 has the URL, including its source links. Never publish private addresses, personal contact
@@ -101,7 +112,7 @@ set -euo pipefail
 
 SAMPLE_SHA="da8a6019dd6ee469e9192e88d10b1e4f67bc7fe8"
 SAMPLE_URL="https://raw.githubusercontent.com/junyisunme/me-my-earth/${SAMPLE_SHA}/examples/guitar-five.json"
-API_BASE="https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app"
+API_BASE="https://me-interest-globe.netlify.app"
 
 WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT
@@ -141,7 +152,7 @@ required on Windows PowerShell 5.1 for the Chinese sample.
 $ErrorActionPreference = "Stop"
 
 $sha  = "da8a6019dd6ee469e9192e88d10b1e4f67bc7fe8"
-$base = "https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app"
+$base = "https://me-interest-globe.netlify.app"
 $work = Join-Path ([System.IO.Path]::GetTempPath()) ("me-earth-" + [guid]::NewGuid().ToString("N"))
 New-Item -ItemType Directory -Path $work | Out-Null
 
@@ -303,7 +314,7 @@ cover failed.
 
 - Request body 512 KB; 100 events; 30 locations per event; title 120; event title 300;
   summary 3000; reason 500.
-- The public base URL above is a Deploy Preview, not the production site. If it stops
+- The public base URL above is the production site. If it stops
   responding, report that plainly; do not silently switch to a private deployment.
 - This route uses only the public API. No account, token, private service or application
   source is required.

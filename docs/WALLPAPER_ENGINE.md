@@ -13,10 +13,10 @@
 | [`index.html`](../wallpapers/wallpaper-engine/qs-2027/index.html) | 顶层跳转到完整 QS URL；保留 `map` / `lang` / `welcome` / `display=wallpaper` |
 | [`project.json`](../wallpapers/wallpaper-engine/qs-2027/project.json) | `type: web`、`general.mousehighlight: true`、标题 |
 
-固定 Deploy Preview（**试用地址，不是生产站**）：
+正式站地址：
 
 ```text
-https://6afd84eacabd8cf0c94443a1--me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0&display=wallpaper
+https://me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0&display=wallpaper
 ```
 
 ## 2. 导入步骤
