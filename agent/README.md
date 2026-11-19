@@ -12,6 +12,8 @@
 
 需要 **Node.js 24+**。安装脚本会把程序放到明确的版本目录（例如 `~/me-agent-0.4.0`），先核对公开 ZIP 的 SHA-256，再解压；重复安装不会删除该目录里已有的 `.mezip`、PNG 或素材。
 
+> `v0.4.0` ZIP 内的 `install.ps1` / `install.sh` 是发布时的旧副本；请使用本页最新的脚本（从 `main` 下载）。ZIP 只作为程序与示例归档。
+
 ### Windows
 
 ```powershell
