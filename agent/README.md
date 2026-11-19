@@ -29,7 +29,7 @@ curl -L --fail -o /tmp/me-agent-install.sh \
 bash /tmp/me-agent-install.sh
 ```
 
-`v0.4.0` ZIP 的 SHA-256 是 `2a19fe4c062bf1d4886048c2acb1285127d3ce7d2767e931855d16b72db43eed`；两个脚本都会先核对它，再解压 `me-agent-0.4.0/`，所以复制命令后能找到 `me-agent.mjs`。
+`v0.4.0` ZIP 的 SHA-256 是 `2a19fe4c062bf1d4886048c2acb1285127d3ce7d2767e931855d16b72db43eed`；两个脚本都会先核对它，再解压 `me-agent-0.4.0/`，所以复制命令后能找到 `me-agent.mjs`。安装完成后进入版本目录再运行示例命令：Windows 为 `%USERPROFILE%\me-agent-0.4.0`，macOS / Linux 为 `~/me-agent-0.4.0`。
 
 `npm install` 会安装 `sharp`、`@zip.js/zip.js` 和 `exifr`。不需要 ME 账号、API key 或 ME 私有源码。
 
