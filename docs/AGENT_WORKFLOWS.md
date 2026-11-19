@@ -9,6 +9,7 @@
 | 把地图放到 Windows / Mac 桌面 | [§2](#2-把地图放到桌面) | `display=wallpaper`、Lively / Wallpaper Engine 导入物 |
 | 把地图放进演示 | [§3](#3-把地图放进演示) | PPTX、PDF、PNG + 普通互动链接 |
 | 新建一张用户地图 | [§4](#4-新建一张用户地图) | `?map=<mapId>` 分享链接 + 封面 |
+| 用照片/视频做本地地图 | [§7](#7-照片视频地图me-agent) | `.mezip` + 16:9 PNG + Lively 项目 |
 | 换图标 / 配色 | [§5](#5-换图标--配色公开示例) | `me-art-pack-1` 示例清单；本地运行需应用源码 |
 | 查看验收状态 | [§6](#6-验收状态) | 通过项与待验项 |
 
@@ -196,3 +197,21 @@ curl -X POST "https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/ap
 | Canva | **待账号** | PNG + URL 已提供 |
 
 公开预览是固定 Deploy Preview，不是生产站；生产站仍可能是旧版。链接或部署轮换后需要更新本页和壁纸包装。
+
+## 7. 照片/视频地图（me-agent）
+
+用户给照片、短视频和一句建图请求时，使用独立的本地工具 `me-agent`。它把媒体按 `recordId` 绑定到地点记录，生成 `.mezip`，并从同一份地图导出 16:9 PNG；Windows 上可实际设置 Lively 壁纸。
+
+- 安装与完整说明：[`agent/README.md`](../agent/README.md)
+- 工具下载：[`me-agent-0.2.0.zip`](https://github.com/junyisunme/me-my-earth/releases/download/v0.2.0/me-agent-0.2.0.zip)
+- 示例：[`agent/examples/japan-cities/`](../agent/examples/japan-cities)
+- 查看器：<https://6afe58ca24c94fd7200013ee--me-interest-globe.netlify.app/?welcome=0>
+
+最短命令：
+
+```bash
+node me-agent.mjs build --brief examples/japan-cities/japan-cities.json --out-dir out --package-name japan-cities.mezip --slide
+node me-agent.mjs desktop --package out/japan-cities.mezip --out-dir out --wallpaper-name "日本城市素材示例 · ME" --apply
+```
+
+**边界**：`.mezip` 默认只在本机；本工具不会调用公开 `POST /api/maps`，也不会自动发布。只有用户明确要求公开链接时，才继续用 §4 的公开建图流程。桌面模式依赖 `127.0.0.1` 本地查看器；退出 Lively 可恢复原静态壁纸。

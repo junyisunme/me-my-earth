@@ -14,7 +14,22 @@ ME turns a list, a ranking or a field notebook into a globe you can explore. Pic
 
 **[Try the QS map](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0)** · **[Build a map from your own data](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?welcome=0&lang=en)**
 
-**Claude Code / Cursor:** [install the `earth` skill](docs/SKILL.md) · **DeepSeek Harness:** [install the `dsh-plugin-my-earth` plugin](https://github.com/junyisunme/dsh-plugin-my-earth#安装)
+**Claude Code / Cursor:** [install the `earth` skill](docs/SKILL.md) · **DeepSeek Harness:** [install the `dsh-plugin-my-earth` plugin](https://github.com/junyisunme/dsh-plugin-my-earth#安装) · **Photos + video:** [install `me-agent`](agent/README.md)
+
+## Photos, video and slide exports
+
+[`me-agent`](agent/README.md) turns selected photos, a short video and place records into a local `.mezip`, a 16:9 slide PNG, and a Lively wallpaper project. It runs on the user's machine; media is not uploaded, and a public map link is never created unless the user explicitly asks for one.
+
+```bash
+# download me-agent-0.2.0.zip from Releases, then:
+node me-agent.mjs build --brief examples/japan-cities/japan-cities.json \
+  --out-dir out --package-name japan-cities.mezip --slide
+```
+
+Open the result in the [ME viewer](https://6afe58ca24c94fd7200013ee--me-interest-globe.netlify.app/?welcome=0) with **打开地图包**. Windows users can then run `node me-agent.mjs desktop --package out/japan-cities.mezip --apply` to set the same map as a Lively wallpaper.
+
+**[Download the release](https://github.com/junyisunme/me-my-earth/releases/download/v0.2.0/me-agent-0.2.0.zip)** · **[Agent instructions](agent/README.md)** · **[Example](agent/examples/japan-cities/)**
+
 
 <details>
 <summary><b>Install <code>/earth</code> — Claude Code / Cursor</b></summary>

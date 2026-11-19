@@ -1,0 +1,49 @@
+{
+  "schema": "me-map-package-input-1",
+  "title": "日本城市素材示例",
+  "records": [
+    {
+      "id": "japan-kyoto-photo",
+      "title": "京都 · 灯笼小巷",
+      "note": "用户提供的照片，绑定到京都记录。",
+      "date": "2026-11-18",
+      "locations": [
+        {
+          "countryId": "JPN",
+          "precision": "city",
+          "placeId": "jpn-kyoto",
+          "label": "京都 · 先斗町",
+          "reason": "照片来自京都行程，先放在先斗町附近。"
+        }
+      ],
+      "photos": [
+        {
+          "file": "photos/kyoto-day2.jpg",
+          "caption": "京都 · 灯笼小巷"
+        }
+      ]
+    },
+    {
+      "id": "japan-tokyo-video",
+      "title": "东京 · 街头短片",
+      "note": "用户提供的短视频，绑定到东京记录；短片是公开 CC0 测试片段。",
+      "date": "2026-11-18",
+      "locations": [
+        {
+          "countryId": "JPN",
+          "precision": "city",
+          "placeId": "jpn-tokyo",
+          "label": "东京 · 御茶之水",
+          "reason": "短视频放在东京记录，用于验证桌面播放。"
+        }
+      ],
+      "videos": [
+        {
+          "file": "video/test-clip.mp4",
+          "cover": "photos/tokyo-video-cover.jpg",
+          "caption": "东京记录 · 测试短片（CC0）"
+        }
+      ]
+    }
+  ]
+}
