@@ -61,7 +61,7 @@ node me-agent.mjs build --brief examples/japan-cities/japan-cities.json \
   --out-dir out --package-name japan-cities.mezip --slide
 ```
 
-Open the result in the [ME viewer](https://me-interest-globe.netlify.app/?welcome=0) with **打开地图包**. Windows users can then run `node me-agent.mjs desktop --package out/japan-cities.mezip --apply` to set the same map as a Lively wallpaper.
+Open the result in the [ME viewer](https://me-interest-globe.netlify.app/?welcome=0) with **打开地图包**. Only when the user explicitly asks for the desktop, Windows users can run `node me-agent.mjs desktop --package out/japan-cities.mezip --apply` to set the same map as a Lively wallpaper.
 
 **[Download the release](https://github.com/junyisunme/me-my-earth/releases/download/v0.4.0/me-agent-0.4.0.zip)** · **[Agent instructions](agent/README.md)** · **[Example](agent/examples/japan-cities/)**
 
