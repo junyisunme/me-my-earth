@@ -137,10 +137,10 @@ node me-agent.mjs desktop \
 | 媒体 | 输入 | 处理 |
 | --- | --- | --- |
 | 照片 | JPEG、PNG | EXIF 朝向转正；480 px 缩略图 + 1600 px 查看图；导出副本移除 EXIF/GPS |
-| 视频 | MP4（H.264 + AAC，或无音轨） | 原样复制；可选封面；容器元数据不剥离，检测到 `udta`/`©xyz` 会写入 warning |
+| 视频 | MP4（H.264 + AAC，或无音轨） | 原位清零容器时间与常见 `udta` 元数据（字节长度不变）；可选封面 |
 | 封面 | JPEG、PNG | 生成 640–800 px JPEG |
 
-其他格式（HEIC、MOV、WebM、HEVC）会返回具体跳过原因，不阻断已能用的地图。超大视频（>512 MB）或照片处理失败也会记录在 `skipped[]`。
+其他格式（GIF、HEIC、MOV、WebM、HEVC）会返回具体跳过原因，不阻断已能用的地图。超大视频（>512 MB）或照片处理失败也会记录在 `skipped[]`。
 
 ## 返回结果
 
