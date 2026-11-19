@@ -77,6 +77,8 @@ Travel is one example; the same flow works for any set of places with photos and
 
 [Download me-agent 0.4.0](https://github.com/junyisunme/me-my-earth/releases/download/v0.4.0/me-agent-0.4.0.zip) · [Agent installation guide](agent/README.md) · [Sample input](agent/examples/japan-cities/)
 
+The guide's versioned installer checks the ZIP SHA-256 and preserves existing outputs; use it rather than the archived installer copy inside the 0.4.0 ZIP.
+
 Already using an agent? Send it the [Agent installation guide](agent/README.md): it contains the brief format, install commands, output contract and privacy rules.
 
 Minimal command after setup (the guide has the full example):
