@@ -112,7 +112,7 @@ set -euo pipefail
 
 SAMPLE_SHA="da8a6019dd6ee469e9192e88d10b1e4f67bc7fe8"
 SAMPLE_URL="https://raw.githubusercontent.com/junyisunme/me-my-earth/${SAMPLE_SHA}/examples/guitar-five.json"
-API_BASE="https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app"
+API_BASE="https://me-interest-globe.netlify.app"
 
 WORK="$(mktemp -d)"
 trap 'rm -rf "$WORK"' EXIT
@@ -152,7 +152,7 @@ required on Windows PowerShell 5.1 for the Chinese sample.
 $ErrorActionPreference = "Stop"
 
 $sha  = "da8a6019dd6ee469e9192e88d10b1e4f67bc7fe8"
-$base = "https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app"
+$base = "https://me-interest-globe.netlify.app"
 $work = Join-Path ([System.IO.Path]::GetTempPath()) ("me-earth-" + [guid]::NewGuid().ToString("N"))
 New-Item -ItemType Directory -Path $work | Out-Null
 

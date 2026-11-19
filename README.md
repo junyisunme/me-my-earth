@@ -41,13 +41,13 @@ The plugin exposes `create_map`. It posts to the public ME API only when the use
 The current plugin version is verified against DSH `0.2.2-rc.3`; the tool appears in the next session after installation. Details: <https://github.com/junyisunme/dsh-plugin-my-earth#安装>.
 
 
-<a href="https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0">
+<a href="https://me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0">
   <img src="assets/qs-2027-demo.gif" width="960" alt="9-second demo of the live QS 2027 map: the globe rotates, Singapore is selected, and the NUS record opens with its QS source">
 </a>
 
 *9-second demo recorded from the live QS 2027 map on 2026-11-18: rotate the globe → pick Singapore → open NUS. The QS source stays visible in the detail panel.*
 
-**[Try the QS map](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0)** · **[Build a map from your own data](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?welcome=0&lang=en)**
+**[Try the QS map](https://me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0)** · **[Build a map from your own data](https://me-interest-globe.netlify.app/?welcome=0&lang=en)**
 
 **Claude Code / Cursor:** [install the `earth` skill](docs/SKILL.md) · **DeepSeek Harness:** [install the `dsh-plugin-my-earth` plugin](https://github.com/junyisunme/dsh-plugin-my-earth#安装) · **Photos + video:** [install `me-agent`](agent/README.md)
 
@@ -61,7 +61,7 @@ node me-agent.mjs build --brief examples/japan-cities/japan-cities.json \
   --out-dir out --package-name japan-cities.mezip --slide
 ```
 
-Open the result in the [ME viewer](https://6afee5d258dcc807bbd5692e--me-interest-globe.netlify.app/?welcome=0) with **打开地图包**. Windows users can then run `node me-agent.mjs desktop --package out/japan-cities.mezip --apply` to set the same map as a Lively wallpaper.
+Open the result in the [ME viewer](https://me-interest-globe.netlify.app/?welcome=0) with **打开地图包**. Windows users can then run `node me-agent.mjs desktop --package out/japan-cities.mezip --apply` to set the same map as a Lively wallpaper.
 
 **[Download the release](https://github.com/junyisunme/me-my-earth/releases/download/v0.3.0/me-agent-0.3.0.zip)** · **[Agent instructions](agent/README.md)** · **[Example](agent/examples/japan-cities/)**
 
@@ -117,21 +117,21 @@ interactive map.
 <table width="100%">
   <tr>
     <td width="50%" valign="top">
-      <a href="https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0"><img src="assets/qs-2027-cover-v2.png" width="100%" alt="QS 2027 globe cover with university counts by country"></a>
+      <a href="https://me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0"><img src="assets/qs-2027-cover-v2.png" width="100%" alt="QS 2027 globe cover with university counts by country"></a>
       <sub><b>QS 2027</b> · World University Top 100</sub>
     </td>
     <td width="50%" valign="top">
-      <a href="https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=0rbCDSfP_OyKwkvhMI6yza9D&lang=en&welcome=0"><img src="assets/ski-resorts-thumb.png" width="100%" alt="Ski resorts globe cover with counts in twelve countries"></a>
+      <a href="https://me-interest-globe.netlify.app/?map=0rbCDSfP_OyKwkvhMI6yza9D&lang=en&welcome=0"><img src="assets/ski-resorts-thumb.png" width="100%" alt="Ski resorts globe cover with counts in twelve countries"></a>
       <sub><b>Ski resorts</b> · twelve countries</sub>
     </td>
   </tr>
   <tr>
     <td width="50%" valign="top">
-      <a href="https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=nMaS9Wsvb0h6-CYdJ9iXUZ3E&lang=en&welcome=0"><img src="assets/oil-regions-thumb.png" width="100%" alt="Oil-producing regions globe cover with country counts"></a>
+      <a href="https://me-interest-globe.netlify.app/?map=nMaS9Wsvb0h6-CYdJ9iXUZ3E&lang=en&welcome=0"><img src="assets/oil-regions-thumb.png" width="100%" alt="Oil-producing regions globe cover with country counts"></a>
       <sub><b>Oil regions</b> · eight geographic entries</sub>
     </td>
     <td width="50%" valign="top">
-      <a href="https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=jfAgs96uMi02v65ipLSfCF4l&lang=en&welcome=0"><img src="assets/guitar-five-thumb.png" width="100%" alt="Cover for five Japanese vintage guitar shops, 3 in Tokyo and 2 in Osaka"></a>
+      <a href="https://me-interest-globe.netlify.app/?map=jfAgs96uMi02v65ipLSfCF4l&lang=en&welcome=0"><img src="assets/guitar-five-thumb.png" width="100%" alt="Cover for five Japanese vintage guitar shops, 3 in Tokyo and 2 in Osaka"></a>
       <sub><b>Guitar shops</b> · 3 Tokyo, 2 Osaka</sub>
     </td>
   </tr>
@@ -167,7 +167,7 @@ Use this full address as-is; a normal share link does not include the wallpaper 
 
 The deck opens the **normal interactive map**, not the wallpaper layout:
 
-<https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0>
+<https://me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0>
 
 **Canva:** upload the PNG as a full-page/cover image, then add the same interactive map link to the image; verify the link inside Canva.
 
@@ -177,7 +177,7 @@ Platform status: the PPTX/PDF link structure is verified (relationships + PDF `/
 
 Start with the five Japanese vintage guitar shops in [`examples/guitar-five.json`](examples/guitar-five.json). The file is public and small enough to inspect. It is the same JSON behind the guitar map on the [example maps](examples/) page.
 
-**[Download the sample JSON](https://raw.githubusercontent.com/junyisunme/me-my-earth/main/examples/guitar-five.json)** · [Open the create page](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?welcome=0&lang=en) and choose **Create map**.
+**[Download the sample JSON](https://raw.githubusercontent.com/junyisunme/me-my-earth/main/examples/guitar-five.json)** · [Open the create page](https://me-interest-globe.netlify.app/?welcome=0&lang=en) and choose **Create map**.
 
 1. **Upload** the JSON.
 2. **Create** the map.
@@ -221,7 +221,7 @@ A text-based agent can submit the same public file without a browser:
 curl -L -o guitar-five.json \
   https://raw.githubusercontent.com/junyisunme/me-my-earth/main/examples/guitar-five.json
 
-curl -X POST "https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/api/maps" \
+curl -X POST "https://me-interest-globe.netlify.app/api/maps" \
   -H "Content-Type: application/json" \
   --data-binary @guitar-five.json
 ```
@@ -243,7 +243,7 @@ The response contains:
 - **`shareUrl`** is the interactive map. It always works even if the cover fails.
 - **`previewImageUrl`** is a public 1200×630 PNG that can be shown directly in a chat reply.
 - If `coverStatus` is `"failed"`, show the map link instead of a broken image; the map has already been saved. Do not resubmit and create a duplicate.
-- A chat assistant that can only produce a file can hand the JSON to the user and use the [web upload page](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?welcome=0&lang=en).
+- A chat assistant that can only produce a file can hand the JSON to the user and use the [web upload page](https://me-interest-globe.netlify.app/?welcome=0&lang=en).
 
 **[Full API fields and sample →](docs/API.md)**
 
@@ -277,9 +277,9 @@ Have a question, found a bad location or want to suggest the next map?
 This is the public product page: the live map links, covers, desktop wallpaper imports, presentation downloads, the example maps, the downloadable first-map example, the `earth` skill and the public API guide. The application source, data pipeline and internal test suite are maintained separately.
 
 - [Example maps](examples/) — QS 2027, ski resorts, oil regions, five guitar shops
-- [QS 2027 map](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0)
-- [Ski resorts map](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=0rbCDSfP_OyKwkvhMI6yza9D&lang=en&welcome=0)
-- [Oil regions map](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=nMaS9Wsvb0h6-CYdJ9iXUZ3E&lang=en&welcome=0)
+- [QS 2027 map](https://me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0)
+- [Ski resorts map](https://me-interest-globe.netlify.app/?map=0rbCDSfP_OyKwkvhMI6yza9D&lang=en&welcome=0)
+- [Oil regions map](https://me-interest-globe.netlify.app/?map=nMaS9Wsvb0h6-CYdJ9iXUZ3E&lang=en&welcome=0)
 - [`earth` skill for Claude Code and Cursor](docs/SKILL.md)
 - [Public API guide](docs/API.md)
 - [Downloadable guitar-shop sample](examples/guitar-five.json)

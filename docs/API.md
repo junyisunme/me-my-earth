@@ -2,8 +2,8 @@
 
 Create and read shareable maps with the same JSON contract used by the ME web uploader. No account, cookie or API key is required on the live preview.
 
-> Preview base: `https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app`  
-> This is a Deploy Preview. The stable site may run an older version.
+> Production base: `https://me-interest-globe.netlify.app`  
+> This production deploy now includes the create-map and open-package entry points. Old Deploy Preview links remain valid snapshots but are not the canonical address.
 
 ## Create a map
 
@@ -18,7 +18,7 @@ Download the working example first:
 curl -L -o guitar-five.json \
   https://raw.githubusercontent.com/junyisunme/me-my-earth/main/examples/guitar-five.json
 
-curl -X POST "https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/api/maps" \
+curl -X POST "https://me-interest-globe.netlify.app/api/maps" \
   -H "Content-Type: application/json" \
   --data-binary @guitar-five.json
 ```

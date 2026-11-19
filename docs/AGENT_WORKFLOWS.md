@@ -36,9 +36,9 @@ curl -L -o ~/.claude/skills/earth/SKILL.md \
 
 示例：
 
-- QS 2027：<https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0>
-- Ski：<https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=0rbCDSfP_OyKwkvhMI6yza9D&lang=en&welcome=0>
-- Oil：<https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=nMaS9Wsvb0h6-CYdJ9iXUZ3E&lang=en&welcome=0>
+- QS 2027：<https://me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0>
+- Ski：<https://me-interest-globe.netlify.app/?map=0rbCDSfP_OyKwkvhMI6yza9D&lang=en&welcome=0>
+- Oil：<https://me-interest-globe.netlify.app/?map=nMaS9Wsvb0h6-CYdJ9iXUZ3E&lang=en&welcome=0>
 
 **边界**：这些是普通互动地图，页头/图例/Index 都在；不是壁纸布局。QS 公开案例是 100 条记录 / 102 所学校 / 21 个展示国家/地区，不是内置 QS 2027 的 50 所专题。
 
@@ -55,8 +55,8 @@ https://6afd84eacabd8cf0c94443a1--me-interest-globe.netlify.app/?map=5_sK-fhDyYp
 - 极简 dock：Board map / Satellite / Index。
 - 3 秒空闲暂停；指针/滚轮/键盘/切主题/resize 唤醒。
 - 拖动松手后 300 ms 内忽略误触，避免拖地球后误进国家。
-- 普通分享链接（不带 `display`）行为不变；旧版 `6afc8b58…` 上的普通互动地图仍用于网页分享和演示。
-- **不要**在旧版 `6afc8b58…` 链接后手动拼接 `&display=wallpaper`；旧版没有本轮的壁纸布局。
+- 普通分享链接（不带 `display`）行为不变；正式站现在同时支持创建地图、打开地图包和旧 QS 分享链接。
+- 旧版 `6afc8b58…` 快照仍可打开，但公开文档和演示统一使用正式站 `https://me-interest-globe.netlify.app/`。
 
 **本次确认支持壁纸模式的固定 Deploy Preview（试用地址，不是生产站）**：
 
@@ -106,7 +106,7 @@ https://6afd84eacabd8cf0c94443a1--me-interest-globe.netlify.app/?map=5_sK-fhDyYp
 
 打开的是**普通互动地图**，不是壁纸模式：
 
-<https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0>
+<https://me-interest-globe.netlify.app/?map=5_sK-fhDyYpuTLldqT3wqvnc&lang=en&welcome=0>
 
 **Canva**：上传 PNG 作为整页/封面图，再给图片加同一个互动地图链接；Canva 内需要再点一次验证。
 
@@ -124,7 +124,7 @@ https://6afd84eacabd8cf0c94443a1--me-interest-globe.netlify.app/?map=5_sK-fhDyYp
 curl -L -o guitar-five.json \
   https://raw.githubusercontent.com/junyisunme/me-my-earth/main/examples/guitar-five.json
 
-curl -X POST "https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/api/maps" \
+curl -X POST "https://me-interest-globe.netlify.app/api/maps" \
   -H "Content-Type: application/json" \
   --data-binary @guitar-five.json
 ```
@@ -147,7 +147,7 @@ curl -X POST "https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/ap
 
 **用户自己的清单**：只说「整理」「生成草稿」「给我 JSON」时，只写本地 JSON，不调用 `POST /api/maps`；明确说「生成公开分享链接」「发布」时才提交一次。提交后地图按链接公开可访问；封面失败也保留 `shareUrl`，不要重复提交。完整命令和 PowerShell 用法见 [`docs/SKILL.md`](SKILL.md)。
 
-现成吉他店地图：<https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=jfAgs96uMi02v65ipLSfCF4l&lang=en&welcome=0>（同一个 JSON，可下载、修改、重新上传，见示例页）。
+现成吉他店地图：<https://me-interest-globe.netlify.app/?map=jfAgs96uMi02v65ipLSfCF4l&lang=en&welcome=0>（同一个 JSON，可下载、修改、重新上传，见示例页）。
 
 **边界**：公开 API 是站点功能；本仓库不包含 `/api` 函数源码，也不负责数据持久化。
 
@@ -205,7 +205,7 @@ curl -X POST "https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/ap
 - 安装与完整说明：[`agent/README.md`](../agent/README.md)
 - 工具下载：[`me-agent-0.3.0.zip`](https://github.com/junyisunme/me-my-earth/releases/download/v0.3.0/me-agent-0.3.0.zip)
 - 示例：[`agent/examples/japan-cities/`](../agent/examples/japan-cities)
-- 查看器：<https://6afee5d258dcc807bbd5692e--me-interest-globe.netlify.app/?welcome=0>
+- 查看器：<https://me-interest-globe.netlify.app/?welcome=0>
 
 最短命令：
 

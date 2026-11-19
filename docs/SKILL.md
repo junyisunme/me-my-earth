@@ -134,7 +134,7 @@ zero exit is only treated as success when the response contains a usable `shareU
 $ErrorActionPreference = "Stop"
 
 $sha  = "da8a6019dd6ee469e9192e88d10b1e4f67bc7fe8"
-$base = "https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app"
+$base = "https://me-interest-globe.netlify.app"
 $work = Join-Path ([System.IO.Path]::GetTempPath()) ("me-earth-" + [guid]::NewGuid().ToString("N"))
 New-Item -ItemType Directory -Path $work | Out-Null
 
@@ -204,7 +204,7 @@ Checked on 2026-11-18 and 2026-11-19 on Windows 11, Windows PowerShell 5.1, Clau
 | Draft / publish split | **Passed** (API side) | draft run sent 0 POSTs; publishing the same draft sent exactly 1 POST |
 | Cover failure | **Passed** | 1 POST, `coverStatus: "failed"`, `previewImageUrl: null`, working `shareUrl`, no resubmit |
 | PowerShell route | **Passed** | Windows PowerShell 5.1: download 404 → exit 1 / 0 POST; POST 400 & 429 → exit 1 with the API body; cover ready & failed → exit 0 with `shareUrl` |
-| Live public API run | **Passed** | map [`UL0F3dsh60WHnMEx6m1aXRK4`](https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=UL0F3dsh60WHnMEx6m1aXRK4&lang=en&welcome=0) · 5 events / 1 country / 2 places · cover `ready` |
+| Live public API run | **Passed** | map [`UL0F3dsh60WHnMEx6m1aXRK4`](https://me-interest-globe.netlify.app/?map=UL0F3dsh60WHnMEx6m1aXRK4&lang=en&welcome=0) · 5 events / 1 country / 2 places · cover `ready` |
 
 ### Regression evidence
 
@@ -245,11 +245,11 @@ The read uses `-Encoding UTF8`; every `curl.exe` call is followed immediately by
 The live run used the exact skill block and a fixed-commit download. It created a separate
 map rather than reusing the curated example:
 
-- Map: <https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=UL0F3dsh60WHnMEx6m1aXRK4&lang=en&welcome=0>
-- Cover: <https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/api/covers/v2/UL0F3dsh60WHnMEx6m1aXRK4.png>
+- Map: <https://me-interest-globe.netlify.app/?map=UL0F3dsh60WHnMEx6m1aXRK4&lang=en&welcome=0>
+- Cover: <https://me-interest-globe.netlify.app/api/covers/v2/UL0F3dsh60WHnMEx6m1aXRK4.png>
 
 The curated site example remains
-<https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/?map=jfAgs96uMi02v65ipLSfCF4l&lang=en&welcome=0>.
+<https://me-interest-globe.netlify.app/?map=jfAgs96uMi02v65ipLSfCF4l&lang=en&welcome=0>.
 
 ## Pending
 
