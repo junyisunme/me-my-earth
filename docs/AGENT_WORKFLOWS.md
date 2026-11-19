@@ -205,7 +205,7 @@ curl -X POST "https://6afc8b581813239311ea1a4d--me-interest-globe.netlify.app/ap
 - 安装与完整说明：[`agent/README.md`](../agent/README.md)
 - 工具下载：[`me-agent-0.3.0.zip`](https://github.com/junyisunme/me-my-earth/releases/download/v0.3.0/me-agent-0.3.0.zip)
 - 示例：[`agent/examples/japan-cities/`](../agent/examples/japan-cities)
-- 查看器：<https://6afedfec73f816580102bd8f--me-interest-globe.netlify.app/?welcome=0>
+- 查看器：<https://6afee5d258dcc807bbd5692e--me-interest-globe.netlify.app/?welcome=0>
 
 最短命令：
 

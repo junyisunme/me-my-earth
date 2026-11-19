@@ -3,7 +3,7 @@
 `me-agent` 把用户选中的照片、短视频和地点记录打包成一个可在 ME 打开的 `.mezip`，并从同一份地图导出 16:9 幻灯片 PNG。它也可以生成并应用 Lively 桌面壁纸项目。
 
 **下载**：[`me-agent-0.3.0.zip`](https://github.com/junyisunme/me-my-earth/releases/download/v0.3.0/me-agent-0.3.0.zip)  
-**查看器**：<https://6afedfec73f816580102bd8f--me-interest-globe.netlify.app/?welcome=0>  
+**查看器**：<https://6afee5d258dcc807bbd5692e--me-interest-globe.netlify.app/?welcome=0>  
 **示例输入**：[`examples/japan-cities/`](examples/japan-cities/)
 
 这个工具只处理本机文件：照片、视频、地点和备注不会上传到 ME 或任何第三方。公开地图链接仍走 ME 现有的 `POST /api/maps`；本工具不会自动发布。
@@ -164,7 +164,7 @@ node me-agent.mjs desktop \
       "videoCount": 1,
       "skipped": [],
       "viewer": {
-        "openUrl": "https://6afedfec73f816580102bd8f--me-interest-globe.netlify.app/?welcome=0",
+        "openUrl": "https://6afee5d258dcc807bbd5692e--me-interest-globe.netlify.app/?welcome=0",
         "howToOpen": "Open the viewer, click 打开地图包, choose japan-cities.mezip"
       }
     },
@@ -245,5 +245,5 @@ node me-agent.mjs desktop \
 ## 版本
 
 - 工具版本：`0.3.0`
-- 查看器：`https://6afedfec73f816580102bd8f--me-interest-globe.netlify.app/`
+- 查看器：`https://6afee5d258dcc807bbd5692e--me-interest-globe.netlify.app/`
 - 示例：`examples/japan-cities/`（合成照片 + MDN CC0 `flower.mp4`）
