@@ -10,36 +10,26 @@
 
 ## 安装
 
-需要 **Node.js 24+**。
+需要 **Node.js 24+**。安装脚本会把程序放到明确的版本目录（例如 `~/me-agent-0.4.0`），先核对公开 ZIP 的 SHA-256，再解压；重复安装不会删除该目录里已有的 `.mezip`、PNG 或素材。
 
 ### Windows
 
 ```powershell
 $ErrorActionPreference = "Stop"
-$version = "0.4.0"
-$zip = Join-Path $env:TEMP "me-agent-$version.zip"
-$dest = Join-Path $env:USERPROFILE "me-agent"
-Invoke-WebRequest -Uri "https://github.com/junyisunme/me-my-earth/releases/download/v$version/me-agent-$version.zip" -OutFile $zip
-if (Test-Path $dest) { Remove-Item $dest -Recurse -Force }
-Expand-Archive -Path $zip -DestinationPath (Split-Path $dest) -Force
-if (Test-Path (Join-Path (Split-Path $dest) "me-agent-$version")) { Move-Item (Join-Path (Split-Path $dest) "me-agent-$version") $dest }
-Push-Location $dest
-npm install
-Pop-Location
-node "$dest\me-agent.mjs" help
+$installer = Join-Path $env:TEMP "me-agent-install.ps1"
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/junyisunme/me-my-earth/main/agent/install.ps1" -OutFile $installer
+& $installer
 ```
 
 ### macOS / Linux
 
 ```bash
-curl -L --fail -o /tmp/me-agent-0.4.0.zip \
-  https://github.com/junyisunme/me-my-earth/releases/download/v0.4.0/me-agent-0.4.0.zip
-rm -rf "$HOME/me-agent" && mkdir -p "$HOME/me-agent"
-unzip -q /tmp/me-agent-0.4.0.zip -d "$HOME/me-agent"
-cd "$HOME/me-agent"
-npm install
-node me-agent.mjs help
+curl -L --fail -o /tmp/me-agent-install.sh \
+  https://raw.githubusercontent.com/junyisunme/me-my-earth/main/agent/install.sh
+bash /tmp/me-agent-install.sh
 ```
+
+`v0.4.0` ZIP 的 SHA-256 是 `2a19fe4c062bf1d4886048c2acb1285127d3ce7d2767e931855d16b72db43eed`；两个脚本都会先核对它，再解压 `me-agent-0.4.0/`，所以复制命令后能找到 `me-agent.mjs`。
 
 `npm install` 会安装 `sharp`、`@zip.js/zip.js` 和 `exifr`。不需要 ME 账号、API key 或 ME 私有源码。
 

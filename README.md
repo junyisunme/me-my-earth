@@ -4,7 +4,7 @@
 
 ME turns a list, a ranking or a field notebook into a globe you can explore. Pick a country, open a marker, and see why that place is on the map — with the original source one tap away.
 
-**[Example maps](examples/)** · **[Agent workflows](docs/AGENT_WORKFLOWS.md)** · **[Desktop wallpaper](#desktop-wallpaper)** · **[Presentation](#presentation)**
+**[Example maps](examples/)** · **[Photos + video](#photos-video-and-slide-exports)** · **[Agent workflows](docs/AGENT_WORKFLOWS.md)** · **[Desktop wallpaper](#desktop-wallpaper)** · **[Presentation](#presentation)**
 
 ## For Agents
 
@@ -53,17 +53,39 @@ The current plugin version is verified against DSH `0.2.2-rc.3`; the tool appear
 
 ## Photos, video and slide exports
 
-[`me-agent`](agent/README.md) turns selected photos, a short video and place records into a local `.mezip`, a 16:9 slide PNG, and a Lively wallpaper project. It runs on the user's machine; media is not uploaded, and a public map link is never created unless the user explicitly asks for one.
+<a id="photo-video-demo"></a>
+<a href="https://github.com/junyisunme/me-my-earth/releases/tag/v0.4.0">
+  <img src="assets/me-agent-japan-demo.gif" width="640" alt="11-second demo from the public me-agent 0.4.0 sample: open Japan, enlarge the Kyoto photo, return to the list, then play the Tokyo video on the globe">
+</a>
+
+*11-second demo from the public `me-agent 0.4.0` sample, recorded in the production viewer: open Japan → enlarge the Kyoto photo → back to the list → play the Tokyo video. Only the public sample package is visible; no private media or desktop files.*
+
+Travel is one example; the same flow works for any set of places with photos and short video.
+
+**Ask your agent:**
+
+> “Turn my Kyoto photos and Tokyo short video into a travel map I can open by place, and give me a 16:9 image for a slide deck.”
+
+**What happens**
+
+1. You choose the photos/videos and the place each belongs to.
+2. The agent runs [`me-agent`](agent/README.md) on your machine and returns an interactive `.mezip` plus a 1600×900 PNG for slides.
+3. The recipient opens the [ME viewer](https://me-interest-globe.netlify.app/?welcome=0), chooses **Open map package**, then the `.mezip`.
+4. ME reads the photos and video locally. A public share link is a separate request; a desktop wallpaper is applied only when you explicitly ask for the desktop.
+
+**Download and setup**
+
+[Download me-agent 0.4.0](https://github.com/junyisunme/me-my-earth/releases/download/v0.4.0/me-agent-0.4.0.zip) · [Agent installation guide](agent/README.md) · [Sample input](agent/examples/japan-cities/)
+
+Already using an agent? Send it the [Agent installation guide](agent/README.md): it contains the brief format, install commands, output contract and privacy rules.
+
+Minimal command after setup (the guide has the full example):
 
 ```bash
-# download me-agent-0.4.0.zip from Releases, then:
-node me-agent.mjs build --brief examples/japan-cities/japan-cities.json \
-  --out-dir out --package-name japan-cities.mezip --slide
+node me-agent.mjs build --brief <brief.json> --out-dir out --slide
 ```
 
 Open the result in the [ME viewer](https://me-interest-globe.netlify.app/?welcome=0) with **打开地图包**. Only when the user explicitly asks for the desktop, Windows users can run `node me-agent.mjs desktop --package out/japan-cities.mezip --apply` to set the same map as a Lively wallpaper.
-
-**[Download the release](https://github.com/junyisunme/me-my-earth/releases/download/v0.4.0/me-agent-0.4.0.zip)** · **[Agent instructions](agent/README.md)** · **[Example](agent/examples/japan-cities/)**
 
 
 <details>
