@@ -6,6 +6,12 @@ Explore ready-made 3D globes of places worth knowing, or ask an agent to turn yo
 | --- | --- | --- |
 | Open the live site and start with the **World stock exchanges** topic. | See a real photo map in the viewer, download it, and follow the exact click path. | Copy one request for your agent, or install the local tool and build a package. |
 
+<img src="assets/travel-seven-demo.gif" width="900" alt="From Suzhou to Chicago: open two travel photos on the ME globe">
+
+From Suzhou to Chicago — open two places on my globe and see the photos I took there.
+
+**[Download this travel map](https://github.com/junyisunme/me-my-earth/raw/main/examples/travel-seven/travel-seven.mezip)** · **[Open the viewer](https://me-interest-globe.netlify.app/?welcome=0&lang=en)**
+
 ## Explore the globe
 
 The **v0.5.0** home page opens on **World stock exchanges**: **18** exchanges or operating companies across **17** city places, each with an official website and a coordinate-precision note (headquarters/trading floor or city level, stated per record). The second built-in topic is **Ski resorts · selected**: **12** resort/village bases in **12** countries and regions, placed at the base rather than the summit.
@@ -17,9 +23,7 @@ Country browsing stays on the 3D globe. Click a country, open a record, then cli
 
 ## Try the travel photo map
 
-<img src="assets/travel-seven/suzhou-demo.png" width="960" alt="ME viewer showing the Suzhou record, its photo and the labelled demo date">
-
-*This is the public travel package opened in the ME viewer: the Suzhou photo, the confirmed caption, and the demo date. The package also contains Shanghai, with its own demo date; the other five records have no date.*
+The GIF above is this same package opened in the ME viewer: Suzhou first, then a real drag across the Pacific to Chicago. The package also contains Shanghai, with its own demo date; the other five records have no date.
 
 **1. Download the seven-photo map**  
 [Download `travel-seven.mezip`](https://github.com/junyisunme/me-my-earth/raw/main/examples/travel-seven/travel-seven.mezip) — 7 records / 7 photos / no video.
