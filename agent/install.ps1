@@ -3,7 +3,7 @@
 
 $ErrorActionPreference = "Stop"
 $version = "0.5.0"
-$expectedSha256 = "d45d0988aa09f557c46cd65ab895cd0a77ca84d3a083268f68496678a6ba6ba1"
+$expectedSha256 = "9247314717631b70484213d4ad147403842391d149886fda033aed7549af5525"
 $dest = Join-Path $env:USERPROFILE "me-agent-$version"
 $zip = Join-Path $env:TEMP "me-agent-$version.zip"
 $url = "https://github.com/junyisunme/me-my-earth/releases/download/v$version/me-agent-$version.zip"

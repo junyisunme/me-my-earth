@@ -67,7 +67,7 @@ I am publishing seven processed copies of my own travel photos as a ME example. 
 `me-agent` packs selected photos, short videos and place records into a portable `.mezip`, and can export a 1600×900 PNG for slides. Media stays on your machine; the tool never uploads it.
 
 **Download:** [`me-agent-0.5.0.zip`](https://github.com/junyisunme/me-my-earth/releases/download/v0.5.0/me-agent-0.5.0.zip)  
-**SHA-256:** `D45D0988AA09F557C46CD65AB895CD0A77CA84D3A083268F68496678A6BA6BA1`  
+**SHA-256:** `9247314717631B70484213D4AD147403842391D149886FDA033AED7549AF5525`  
 **Viewer:** <https://me-interest-globe.netlify.app/?welcome=0>  
 **Guide:** [agent/README.md](agent/README.md) · **Sample:** [agent/examples/japan-cities/](agent/examples/japan-cities/)
 

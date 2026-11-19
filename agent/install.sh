@@ -4,7 +4,7 @@
 set -euo pipefail
 
 VERSION="0.5.0"
-EXPECTED_SHA256="d45d0988aa09f557c46cd65ab895cd0a77ca84d3a083268f68496678a6ba6ba1"
+EXPECTED_SHA256="9247314717631b70484213d4ad147403842391d149886fda033aed7549af5525"
 URL="https://github.com/junyisunme/me-my-earth/releases/download/v${VERSION}/me-agent-${VERSION}.zip"
 DEST="${HOME}/me-agent-${VERSION}"
 TMP="$(mktemp -d)"
