@@ -16,7 +16,10 @@ From Suzhou to Chicago — open two places on my globe and see the photos I took
 
 The **v0.5.0** home page opens on **World stock exchanges**: **18** exchanges or operating companies across **17** city places, each with an official website and a coordinate-precision note (headquarters/trading floor or city level, stated per record). The second built-in topic is **Ski resorts · selected**: **12** resort/village bases in **12** countries and regions, placed at the base rather than the summit.
 
-- [Open World stock exchanges](https://me-interest-globe.netlify.app/?topic=world-exchanges&lang=en&welcome=0)
+<img src="assets/world-exchanges-demo.gif" width="800" alt="World stock exchanges: from the global view into Singapore and the SGX detail">
+
+From the global view into Singapore and the SGX record, with the exchange name and official website visible. [Open the World stock exchanges topic →](https://me-interest-globe.netlify.app/?topic=world-exchanges&lang=en&welcome=0)
+
 - [Open Ski resorts](https://me-interest-globe.netlify.app/?topic=ski-resorts&lang=en&welcome=0)
 
 Country browsing stays on the 3D globe. Click a country, open a record, then click the sea or blank space outside the globe to return to the world view; drag to keep the current country and rotate the sphere. The header has a **中文 / EN** switch.
@@ -87,6 +90,12 @@ out/japan-cities.mezip
 out/japan-cities-slide-16x9.png
 out/japan-cities-report.json
 ```
+
+The `--slide` flag exports a 1600×900 PNG. Here is one from the same seven-place travel map:
+
+<a href="https://github.com/junyisunme/me-my-earth/raw/main/assets/travel-seven-slide-16x9.png"><img src="assets/travel-seven-slide-16x9.png" width="480" alt="A 16:9 slide exported from the seven-place travel map"></a>
+
+*A slide exported from the same seven-place travel map.*
 
 Open `out/japan-cities.mezip` in the [ME viewer](https://me-interest-globe.netlify.app/?welcome=0) with **Open map package**. The Japan sample is only a build test: it has a synthetic Kyoto photo and the CC0 MDN `flower.mp4` test clip (labelled as a test video), not travel footage. The seven-photo `travel-seven.mezip` above is a finished map and needs no build.
 
